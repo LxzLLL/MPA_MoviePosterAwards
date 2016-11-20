@@ -19,6 +19,10 @@
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Genre_Basic_Movie" ManuallyRouted="false" />
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Lang_Basic_Movie" ManuallyRouted="false" />
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Rating_Basic_Movie" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Poster" Width="1.5" PointX="3" PointY="18.875" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Avatar" Width="1.5" PointX="6" PointY="1.75" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

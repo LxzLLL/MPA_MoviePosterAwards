@@ -33,5 +33,7 @@ namespace MPA_MoviePosterAwards.DAL
         public virtual DbSet<Step_Movie_Genre> Step_Movie_Genre { get; set; }
         public virtual DbSet<Step_Movie_Lang> Step_Movie_Lang { get; set; }
         public virtual DbSet<Step_Movie_Rating> Step_Movie_Rating { get; set; }
+        public virtual DbSet<Step_Movie_Poster> Step_Movie_Poster { get; set; }
+        public virtual DbSet<Step_Celeb_Avatar> Step_Celeb_Avatar { get; set; }
     }
 }

@@ -22,5 +22,6 @@ namespace MPA_MoviePosterAwards.Model
         public string Douban { get; set; }
         public string IMDb { get; set; }
         public string Summary { get; set; }
+        public Step_Celeb_Avatar_Info Avatar { get; set; }
     }
 }

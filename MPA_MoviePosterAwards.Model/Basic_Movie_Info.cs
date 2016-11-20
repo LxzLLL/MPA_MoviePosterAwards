@@ -23,9 +23,10 @@ namespace MPA_MoviePosterAwards.Model
         public string IMDb { get; set; }
         public string Summary { get; set; }
 
-        public ICollection<Step_Movie_Country> Countries { get; set; }
-        public ICollection<Step_Movie_Genre> Genres { get; set; }
-        public ICollection<Step_Movie_Lang> Langs { get; set; }
-        public ICollection<Step_Movie_Rating> Rating { get; set; }
+        public ICollection<Step_Movie_Country_Info> Countries { get; set; }
+        public ICollection<Step_Movie_Genre_Info> Genres { get; set; }
+        public ICollection<Step_Movie_Lang_Info> Langs { get; set; }
+        public Step_Movie_Rating_Info Rating { get; set; }
+        public Step_Movie_Poster_Info Poster { get; set; }
     }
 }

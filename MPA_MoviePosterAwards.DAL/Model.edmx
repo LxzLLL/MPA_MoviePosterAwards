@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MoviePosterAwardsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MoviePosterAwardsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Basic_Celebrity">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,7 +56,17 @@
           <Property Name="Cover" Type="nvarchar" MaxLength="200" />
           <Property Name="Limit" Type="bit" />
           <Property Name="Create_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
-          <Property Name="Change_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
+          <Property Name="Change_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity"/>
+        </EntityType>
+        <EntityType Name="Step_Celeb_Avatar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Celeb" Type="uniqueidentifier" />
+          <Property Name="Small" Type="nvarchar" MaxLength="200" />
+          <Property Name="Large" Type="nvarchar" MaxLength="200" />
+          <Property Name="Medium" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Step_Celeb_Movie">
           <Key>
@@ -91,6 +101,16 @@
           <Property Name="Movie" Type="uniqueidentifier" />
           <Property Name="Lang" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="Step_Movie_Poster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Movie" Type="uniqueidentifier" />
+          <Property Name="Small" Type="nvarchar" MaxLength="200" />
+          <Property Name="Large" Type="nvarchar" MaxLength="200" />
+          <Property Name="Medium" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="Step_Movie_Rating">
           <Key>
             <PropertyRef Name="Id" />
@@ -105,6 +125,18 @@
           <Property Name="Star1" Type="varchar" MaxLength="10" />
           <Property Name="Rated_Num" Type="bigint" />
         </EntityType>
+        <Association Name="FK_Step_Celeb_Avatar_Basic_Celebrity">
+          <End Role="Basic_Celebrity" Type="Self.Basic_Celebrity" Multiplicity="0..1" />
+          <End Role="Step_Celeb_Avatar" Type="Self.Step_Celeb_Avatar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Celebrity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step_Celeb_Avatar">
+              <PropertyRef Name="Celeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Step_Celeb_Movie_Basic_Celebrity">
           <End Role="Basic_Celebrity" Type="Self.Basic_Celebrity" Multiplicity="0..1" />
           <End Role="Step_Celeb_Movie" Type="Self.Step_Celeb_Movie" Multiplicity="*" />
@@ -165,6 +197,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Step_Movie_Poster_Basic_Movie">
+          <End Role="Basic_Movie" Type="Self.Basic_Movie" Multiplicity="0..1" />
+          <End Role="Step_Movie_Poster" Type="Self.Step_Movie_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step_Movie_Poster">
+              <PropertyRef Name="Movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Step_Movie_Rating_Basic_Movie">
           <End Role="Basic_Movie" Type="Self.Basic_Movie" Multiplicity="0..1" />
           <End Role="Step_Movie_Rating" Type="Self.Step_Movie_Rating" Multiplicity="*" />
@@ -181,11 +225,17 @@
           <EntitySet Name="Basic_Celebrity" EntityType="Self.Basic_Celebrity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Basic_Movie" EntityType="Self.Basic_Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Basic_User" EntityType="Self.Basic_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Step_Celeb_Avatar" EntityType="Self.Step_Celeb_Avatar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Celeb_Movie" EntityType="Self.Step_Celeb_Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Country" EntityType="Self.Step_Movie_Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Genre" EntityType="Self.Step_Movie_Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Lang" EntityType="Self.Step_Movie_Lang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Step_Movie_Poster" EntityType="Self.Step_Movie_Poster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Rating" EntityType="Self.Step_Movie_Rating" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Step_Celeb_Avatar_Basic_Celebrity" Association="Self.FK_Step_Celeb_Avatar_Basic_Celebrity">
+            <End Role="Basic_Celebrity" EntitySet="Basic_Celebrity" />
+            <End Role="Step_Celeb_Avatar" EntitySet="Step_Celeb_Avatar" />
+          </AssociationSet>
           <AssociationSet Name="FK_Step_Celeb_Movie_Basic_Celebrity" Association="Self.FK_Step_Celeb_Movie_Basic_Celebrity">
             <End Role="Basic_Celebrity" EntitySet="Basic_Celebrity" />
             <End Role="Step_Celeb_Movie" EntitySet="Step_Celeb_Movie" />
@@ -206,13 +256,16 @@
             <End Role="Basic_Movie" EntitySet="Basic_Movie" />
             <End Role="Step_Movie_Lang" EntitySet="Step_Movie_Lang" />
           </AssociationSet>
+          <AssociationSet Name="FK_Step_Movie_Poster_Basic_Movie" Association="Self.FK_Step_Movie_Poster_Basic_Movie">
+            <End Role="Basic_Movie" EntitySet="Basic_Movie" />
+            <End Role="Step_Movie_Poster" EntitySet="Step_Movie_Poster" />
+          </AssociationSet>
           <AssociationSet Name="FK_Step_Movie_Rating_Basic_Movie" Association="Self.FK_Step_Movie_Rating_Basic_Movie">
             <End Role="Basic_Movie" EntitySet="Basic_Movie" />
             <End Role="Step_Movie_Rating" EntitySet="Step_Movie_Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MoviePosterAwardsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -235,6 +288,7 @@
           <Property Name="IMDb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Step_Celeb_Movie" Relationship="Self.FK_Step_Celeb_Movie_Basic_Celebrity" FromRole="Basic_Celebrity" ToRole="Step_Celeb_Movie" />
+          <NavigationProperty Name="Step_Celeb_Avatar" Relationship="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity" FromRole="Basic_Celebrity" ToRole="Step_Celeb_Avatar" />
         </EntityType>
         <EntityType Name="Basic_Movie">
           <Key>
@@ -259,6 +313,7 @@
           <NavigationProperty Name="Step_Movie_Genre" Relationship="Self.FK_Step_Movie_Genre_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Genre" />
           <NavigationProperty Name="Step_Movie_Lang" Relationship="Self.FK_Step_Movie_Lang_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Lang" />
           <NavigationProperty Name="Step_Movie_Rating" Relationship="Self.FK_Step_Movie_Rating_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Rating" />
+          <NavigationProperty Name="Step_Movie_Poster" Relationship="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Poster" />
         </EntityType>
         <EntityType Name="Basic_User">
           <Key>
@@ -433,7 +488,63 @@
             <End Role="Basic_Movie" EntitySet="Basic_Movie" />
             <End Role="Step_Movie_Rating" EntitySet="Step_Movie_Rating" />
           </AssociationSet>
+          <EntitySet Name="Step_Movie_Poster" EntityType="MoviePosterAwardsModel.Step_Movie_Poster" />
+          <AssociationSet Name="FK_Step_Movie_Poster_Basic_Movie" Association="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie">
+            <End Role="Basic_Movie" EntitySet="Basic_Movie" />
+            <End Role="Step_Movie_Poster" EntitySet="Step_Movie_Poster" />
+          </AssociationSet>
+          <EntitySet Name="Step_Celeb_Avatar" EntityType="MoviePosterAwardsModel.Step_Celeb_Avatar" />
+          <AssociationSet Name="FK_Step_Celeb_Avatar_Basic_Celebrity" Association="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity">
+            <End Role="Basic_Celebrity" EntitySet="Basic_Celebrity" />
+            <End Role="Step_Celeb_Avatar" EntitySet="Step_Celeb_Avatar" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Step_Movie_Poster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Movie" Type="Guid" />
+          <Property Name="Small" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Large" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Medium" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basic_Movie" Relationship="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" FromRole="Step_Movie_Poster" ToRole="Basic_Movie" />
+        </EntityType>
+        <Association Name="FK_Step_Movie_Poster_Basic_Movie">
+          <End Type="MoviePosterAwardsModel.Basic_Movie" Role="Basic_Movie" Multiplicity="0..1" />
+          <End Type="MoviePosterAwardsModel.Step_Movie_Poster" Role="Step_Movie_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step_Movie_Poster">
+              <PropertyRef Name="Movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Step_Celeb_Avatar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Celeb" Type="Guid" />
+          <Property Name="Small" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Large" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Medium" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basic_Celebrity" Relationship="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity" FromRole="Step_Celeb_Avatar" ToRole="Basic_Celebrity" />
+        </EntityType>
+        <Association Name="FK_Step_Celeb_Avatar_Basic_Celebrity">
+          <End Type="MoviePosterAwardsModel.Basic_Celebrity" Role="Basic_Celebrity" Multiplicity="0..1" />
+          <End Type="MoviePosterAwardsModel.Step_Celeb_Avatar" Role="Step_Celeb_Avatar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Celebrity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step_Celeb_Avatar">
+              <PropertyRef Name="Celeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -545,6 +656,28 @@
                 <ScalarProperty Name="Star2" ColumnName="Star2" />
                 <ScalarProperty Name="Star1" ColumnName="Star1" />
                 <ScalarProperty Name="Rated_Num" ColumnName="Rated_Num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Step_Movie_Poster">
+            <EntityTypeMapping TypeName="MoviePosterAwardsModel.Step_Movie_Poster">
+              <MappingFragment StoreEntitySet="Step_Movie_Poster">
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="Large" ColumnName="Large" />
+                <ScalarProperty Name="Small" ColumnName="Small" />
+                <ScalarProperty Name="Movie" ColumnName="Movie" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Step_Celeb_Avatar">
+            <EntityTypeMapping TypeName="MoviePosterAwardsModel.Step_Celeb_Avatar">
+              <MappingFragment StoreEntitySet="Step_Celeb_Avatar">
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="Large" ColumnName="Large" />
+                <ScalarProperty Name="Small" ColumnName="Small" />
+                <ScalarProperty Name="Celeb" ColumnName="Celeb" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

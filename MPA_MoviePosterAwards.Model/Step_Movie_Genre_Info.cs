@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MPA_MoviePosterAwards.Model
 {
-    public class Step_Movie_Country
+    public class Step_Movie_Genre_Info
     {
         public Guid Id { get; set; }
         public Guid Movie { get; set; }
-        public string Country { get; set; }
+        public string Genre { get; set; }
     }
 }

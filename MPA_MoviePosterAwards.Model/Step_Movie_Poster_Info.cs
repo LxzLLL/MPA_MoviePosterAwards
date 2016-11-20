@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace MPA_MoviePosterAwards.Model
 {
-    public class Step_Celeb_Movie
+    public class Step_Movie_Poster_Info
     {
         public Guid Id { get; set; }
         public Guid Movie { get; set; }
-        public Guid Celeb { get; set; }
-        public string Position { get; set; }
+        public string Small { get; set; }
+        public string Large { get; set; }
+        public string Medium { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPA_MoviePosterAwards.Model
 {
-    public class Step_Movie_Rating
+    public class Step_Movie_Rating_Info
     {
         public Guid Id { get; set; }
         public double Score { get; set; }
