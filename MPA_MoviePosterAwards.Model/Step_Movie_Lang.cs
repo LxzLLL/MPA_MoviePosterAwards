@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MPA_MoviePosterAwards.Model
 {
-    public class Class1
+    public class Step_Movie_Lang
     {
+        public Guid Id { get; set; }
+        public Guid Movie { get; set; }
+        public string Lang { get; set; }
     }
 }

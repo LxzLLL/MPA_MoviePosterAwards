@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c696d9a8873409b9b675416dc7f8f4c" Name="Diagram1">
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Celebrity" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Movie" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Movie" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Country" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Genre" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Lang" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Rating" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Celebrity" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Country_Basic_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Genre_Basic_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Lang_Basic_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Rating_Basic_Movie" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

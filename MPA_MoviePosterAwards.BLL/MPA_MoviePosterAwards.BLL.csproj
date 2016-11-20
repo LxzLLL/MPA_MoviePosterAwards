@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>e6d73d94-adfa-439e-b79e-4682c15d13b5</ProjectGuid>
+    <ProjectGuid>{E6D73D94-ADFA-439E-B79E-4682C15D13B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MPA_MoviePosterAwards.BLL</RootNamespace>
@@ -30,24 +30,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AccountManager.cs" />
+    <Compile Include="Basic_User_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MPA_MoviePosterAwards.Common\MPA_MoviePosterAwards.Common.csproj">
+      <Project>{fc84fb45-0bfe-421d-b3a9-06ec43168d38}</Project>
+      <Name>MPA_MoviePosterAwards.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPA_MoviePosterAwards.DAL\MPA_MoviePosterAwards.DAL.csproj">
+      <Project>{622c4338-eded-4984-815e-0b2a8649b6d7}</Project>
+      <Name>MPA_MoviePosterAwards.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPA_MoviePosterAwards.Model\MPA_MoviePosterAwards.Model.csproj">
+      <Project>{9365956b-6909-4647-a481-4686aae14e33}</Project>
+      <Name>MPA_MoviePosterAwards.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -57,5 +66,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
- </Project>
+</Project>
