@@ -18,10 +18,9 @@ namespace MPA_MoviePosterAwards.DAL
 
                 return ToModel(result);
             }
-
         }
 
-        public Basic_Movie_Info GetSingleByDouban(string douban)
+        public Basic_Movie_Info GetSingle(string douban)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -29,14 +28,13 @@ namespace MPA_MoviePosterAwards.DAL
 
                 return ToModel(result);
             }
-
         }
 
         public List<Basic_Movie_Info> GetList(string condition)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                var result = database.Basic_Movie.SqlQuery("select * from Basic_Movie where " + condition);
+                var result = database.Basic_Movie.SqlQuery("SELECT * FROM Basic_Movie WHERE " + condition);
                 List<Basic_Movie_Info> infos = new List<Basic_Movie_Info>();
                 foreach (var item in result)
                 {
@@ -46,7 +44,7 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
-        public bool HasItem(Guid id)
+        public bool Exist(Guid id)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -54,7 +52,7 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
-        public bool HasItem(string douban)
+        public bool Exist(string douban)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -256,16 +254,19 @@ namespace MPA_MoviePosterAwards.DAL
             info.Poster = Step_Movie_Poster_DAL.ToModel(movie.Step_Movie_Poster.FirstOrDefault());
             info.Rating = Step_Movie_Rating_DAL.ToModel(movie.Step_Movie_Rating.FirstOrDefault());
 
+            //info.Countries = new List<Step_Movie_Country_Info>();
             foreach (var item in movie.Step_Movie_Country)
             {
                 info.Countries.Add(Step_Movie_Country_DAL.ToModel(item));
             }
 
+            //info.Genres = new List<Step_Movie_Genre_Info>();
             foreach (var item in movie.Step_Movie_Genre)
             {
                 info.Genres.Add(Step_Movie_Genre_DAL.ToModel(item));
             }
 
+            //info.Langs = new List<Step_Movie_Lang_Info>();
             foreach (var item in movie.Step_Movie_Lang)
             {
                 info.Langs.Add(Step_Movie_Lang_DAL.ToModel(item));

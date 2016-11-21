@@ -28,5 +28,14 @@ namespace MPA_MoviePosterAwards.Model
         public ICollection<Step_Movie_Lang_Info> Langs { get; set; }
         public Step_Movie_Rating_Info Rating { get; set; }
         public Step_Movie_Poster_Info Poster { get; set; }
+
+        public Basic_Movie_Info()
+        {
+            Countries = new List<Step_Movie_Country_Info>();
+            Genres = new List<Step_Movie_Genre_Info>();
+            Langs = new List<Step_Movie_Lang_Info>();
+            Rating = new Step_Movie_Rating_Info();
+            Poster = new Step_Movie_Poster_Info();
+        }
     }
 }

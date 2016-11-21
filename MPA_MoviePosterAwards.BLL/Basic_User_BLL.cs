@@ -11,13 +11,23 @@ namespace MPA_MoviePosterAwards.BLL
 {
     public class Basic_User_BLL
     {
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <returns></returns>
         public static Basic_User_Info GetSingleById(Guid id)
         {
             Basic_User_DAL _Basic_User = new Basic_User_DAL();
             return _Basic_User.GetSingle(id);
         }
 
-        public static Basic_User_Info GetSingleByAccount(string account)
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="account">用户名</param>
+        /// <returns></returns>
+        public static Basic_User_Info GetSingle(string account)
         {
             Basic_User_DAL _Basic_User = new Basic_User_DAL();
             return _Basic_User.GetSingleByAccount(account);

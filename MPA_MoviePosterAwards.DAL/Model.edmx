@@ -55,7 +55,7 @@
           <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
           <Property Name="Cover" Type="nvarchar" MaxLength="200" />
           <Property Name="Limit" Type="bit" />
-          <Property Name="Create_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
+          <Property Name="Create_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity"/>
           <Property Name="Change_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity"/>
         </EntityType>
         <EntityType Name="Step_Celeb_Avatar">
@@ -76,6 +76,7 @@
           <Property Name="Movie" Type="uniqueidentifier" />
           <Property Name="Celeb" Type="uniqueidentifier" />
           <Property Name="Position" Type="nvarchar" MaxLength="200" />
+          <Property Name="Order" Type="tinyint" />
         </EntityType>
         <EntityType Name="Step_Movie_Country">
           <Key>
@@ -340,6 +341,7 @@
           <Property Name="Position" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Basic_Celebrity" Relationship="Self.FK_Step_Celeb_Movie_Basic_Celebrity" FromRole="Step_Celeb_Movie" ToRole="Basic_Celebrity" />
           <NavigationProperty Name="Basic_Movie" Relationship="Self.FK_Step_Celeb_Movie_Basic_Movie" FromRole="Step_Celeb_Movie" ToRole="Basic_Movie" />
+          <Property Name="Order" Type="Byte" />
         </EntityType>
         <EntityType Name="Step_Movie_Country">
           <Key>
@@ -610,6 +612,7 @@
           <EntitySetMapping Name="Step_Celeb_Movie">
             <EntityTypeMapping TypeName="MoviePosterAwardsModel.Step_Celeb_Movie">
               <MappingFragment StoreEntitySet="Step_Celeb_Movie">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Movie" ColumnName="Movie" />
                 <ScalarProperty Name="Celeb" ColumnName="Celeb" />

@@ -165,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +244,10 @@
     <ProjectReference Include="..\MPA_MoviePosterAwards.Common\MPA_MoviePosterAwards.Common.csproj">
       <Project>{fc84fb45-0bfe-421d-b3a9-06ec43168d38}</Project>
       <Name>MPA_MoviePosterAwards.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPA_MoviePosterAwards.Model\MPA_MoviePosterAwards.Model.csproj">
+      <Project>{9365956b-6909-4647-a481-4686aae14e33}</Project>
+      <Name>MPA_MoviePosterAwards.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

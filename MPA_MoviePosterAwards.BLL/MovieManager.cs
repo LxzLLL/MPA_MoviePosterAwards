@@ -13,28 +13,21 @@ namespace MPA_MoviePosterAwards.BLL
 {
     public class MovieManager
     {
+        #region 获取电影
         public static void GetMovie(string id)
         {
-            Basic_Movie_DAL _movie_dal = new Basic_Movie_DAL();
-            Step_Celeb_Movie_DAL _celeb_movie_dal = new Step_Celeb_Movie_DAL();
-
-            if (_movie_dal.HasItem(id))
+            if (Basic_Movie_BLL.Exist(id))
             {
                 return;
             }
 
-            Basic_Movie_Info tblMovie = new Basic_Movie_Info();
-            tblMovie.Genres = new List<Step_Movie_Genre_Info>();
-            tblMovie.Countries = new List<Step_Movie_Country_Info>();
-            tblMovie.Langs = new List<Step_Movie_Lang_Info>();
-            tblMovie.Poster = new Step_Movie_Poster_Info();
-            tblMovie.Rating = new Step_Movie_Rating_Info();
+            Basic_Movie_Info _basic_movie = new Basic_Movie_Info();
 
-            List<Step_Celeb_Movie_Info> tblCelebMovies = new List<Step_Celeb_Movie_Info>();
+            List<Step_Celeb_Movie_Info> _step_celeb_movies = new List<Step_Celeb_Movie_Info>();
 
-            tblMovie.Douban = id;
-            tblMovie.Id = Guid.NewGuid();
-            GetMovieFromJson(ref tblMovie);
+            _basic_movie.Douban = id;
+            _basic_movie.Id = Guid.NewGuid();
+            GetMovieFromJson(ref _basic_movie);
 
             string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/subject/{0}/", id));
             if (strhtml.IsBlank())
@@ -45,21 +38,21 @@ namespace MPA_MoviePosterAwards.BLL
 
             try
             {
-                if (tblMovie.Title.IsBlank())
+                if (_basic_movie.Title.IsBlank())
                 {
-                    tblMovie.Title = html.CssSelect("Title").FirstOrDefault().InnerText.Replace("(豆瓣)", "").Trim();
+                    _basic_movie.Title = html.CssSelect("Title").FirstOrDefault().InnerText.Replace("(豆瓣)", "").Trim();
                 }
-                if (tblMovie.Title_En.IsBlank())
+                if (_basic_movie.Title_En.IsBlank())
                 {
-                    tblMovie.Title_En = html.CssSelect("a.nbgnbg']").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("alt").FirstOrDefault().Value;
+                    _basic_movie.Title_En = html.CssSelect("a.nbgnbg']").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("alt").FirstOrDefault().Value;
                 }
-                if (tblMovie.Year > 0)
+                if (_basic_movie.Year > 0)
                 {
-                    tblMovie.Year = short.Parse(html.CssSelect("span.year").FirstOrDefault().InnerText.Replace("(", "").Replace(")", "").Trim());
+                    _basic_movie.Year = short.Parse(html.CssSelect("span.year").FirstOrDefault().InnerText.Replace("(", "").Replace(")", "").Trim());
                 }
-                if (tblMovie.Poster.Large.Length == 0)
+                if (_basic_movie.Poster.Large.Length == 0)
                 {
-                    tblMovie.Poster.Large = html.CssSelect("div#mainpic").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
+                    _basic_movie.Poster.Large = html.CssSelect("div#mainpic").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
                 }
 
                 foreach (var item in html.CssSelect("div#info").FirstOrDefault().InnerHtml.Split('\n'))
@@ -71,6 +64,7 @@ namespace MPA_MoviePosterAwards.BLL
                     if (hnInfo.InnerHtml.Contains(">导演<"))
                     {
                         var dires = hnInfo.CssSelect("a");
+                        byte order = 0;
                         foreach (var dir in dires)
                         {
                             if (dir.ChildAttributes("href").FirstOrDefault().Value.Contains("/search/"))
@@ -80,18 +74,20 @@ namespace MPA_MoviePosterAwards.BLL
 
                             if (workguid != Guid.Empty)
                             {
-                                Step_Celeb_Movie_Info celebwork = new Step_Celeb_Movie_Info();
-                                celebwork.Id = Guid.NewGuid();
-                                celebwork.Celeb = workguid;
-                                celebwork.Movie = tblMovie.Id;
-                                celebwork.Position = "导演";
-                                tblCelebMovies.Add(celebwork);
+                                Step_Celeb_Movie_Info celeb_movie = new Step_Celeb_Movie_Info();
+                                celeb_movie.Id = Guid.NewGuid();
+                                celeb_movie.Celeb = workguid;
+                                celeb_movie.Movie = _basic_movie.Id;
+                                celeb_movie.Position = "导演";
+                                celeb_movie.Order = order++;
+                                _step_celeb_movies.Add(celeb_movie);
                             }
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">编剧<"))
                     {
                         var dires = hnInfo.CssSelect("a");
+                        byte order = 0;
                         foreach (var dir in dires)
                         {
                             if (dir.ChildAttributes("href").FirstOrDefault().Value.Contains("/search/"))
@@ -101,18 +97,20 @@ namespace MPA_MoviePosterAwards.BLL
 
                             if (workguid != Guid.Empty)
                             {
-                                Step_Celeb_Movie_Info celebwork = new Step_Celeb_Movie_Info();
-                                celebwork.Id = Guid.NewGuid();
-                                celebwork.Celeb = workguid;
-                                celebwork.Movie = tblMovie.Id;
-                                celebwork.Position = "编剧";
-                                tblCelebMovies.Add(celebwork);
+                                Step_Celeb_Movie_Info celeb_movie = new Step_Celeb_Movie_Info();
+                                celeb_movie.Id = Guid.NewGuid();
+                                celeb_movie.Celeb = workguid;
+                                celeb_movie.Movie = _basic_movie.Id;
+                                celeb_movie.Position = "编剧";
+                                celeb_movie.Order = order++;
+                                _step_celeb_movies.Add(celeb_movie);
                             }
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">主演<"))
                     {
                         var dires = hnInfo.CssSelect("a");
+                        byte order = 0;
                         foreach (var dir in dires)
                         {
                             if (dir.ChildAttributes("href").FirstOrDefault().Value.Contains("/search/"))
@@ -122,12 +120,13 @@ namespace MPA_MoviePosterAwards.BLL
 
                             if (workguid != Guid.Empty)
                             {
-                                Step_Celeb_Movie_Info celebwork = new Step_Celeb_Movie_Info();
-                                celebwork.Id = Guid.NewGuid();
-                                celebwork.Celeb = workguid;
-                                celebwork.Movie = tblMovie.Id;
-                                celebwork.Position = "主演";
-                                tblCelebMovies.Add(celebwork);
+                                Step_Celeb_Movie_Info celeb_movie = new Step_Celeb_Movie_Info();
+                                celeb_movie.Id = Guid.NewGuid();
+                                celeb_movie.Celeb = workguid;
+                                celeb_movie.Movie = _basic_movie.Id;
+                                celeb_movie.Position = "主演";
+                                celeb_movie.Order = order++;
+                                _step_celeb_movies.Add(celeb_movie);
                             }
                         }
                     }
@@ -137,20 +136,20 @@ namespace MPA_MoviePosterAwards.BLL
                         var dires = hnInfo.CssSelect("span[property='v:genre']");
                         foreach (var dir in dires)
                         {
-                            tblMovie.Genres.Add(new Step_Movie_Genre_Info() { Genre = dir.InnerText.Trim(), Id = Guid.NewGuid(), Movie = tblMovie.Id });
+                            _basic_movie.Genres.Add(new Step_Movie_Genre_Info() { Genre = dir.InnerText.Trim(), Id = Guid.NewGuid(), Movie = _basic_movie.Id });
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">官方网站:<"))
                     {
                         var dires = hnInfo.CssSelect("a").FirstOrDefault();
-                        tblMovie.Website = dires.ChildAttributes("href").FirstOrDefault().Value;
+                        _basic_movie.Website = dires.ChildAttributes("href").FirstOrDefault().Value;
                     }
                     if (hnInfo.InnerHtml.Contains(">制片国家/地区:<"))
                     {
                         var dires = hnInfo.InnerText.Replace("制片国家/地区:", "").Split('/');
                         foreach (var dir in dires)
                         {
-                            tblMovie.Countries.Add(new Step_Movie_Country_Info() { Country = dir.Trim(), Id = Guid.NewGuid(), Movie = tblMovie.Id });
+                            _basic_movie.Countries.Add(new Step_Movie_Country_Info() { Country = dir.Trim(), Id = Guid.NewGuid(), Movie = _basic_movie.Id });
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">语言:<"))
@@ -158,7 +157,7 @@ namespace MPA_MoviePosterAwards.BLL
                         var dires = hnInfo.InnerText.Replace("语言:", "").Split('/');
                         foreach (var dir in dires)
                         {
-                            tblMovie.Langs.Add(new Step_Movie_Lang_Info() { Lang = dir.Trim(), Id = Guid.NewGuid(), Movie = tblMovie.Id });
+                            _basic_movie.Langs.Add(new Step_Movie_Lang_Info() { Lang = dir.Trim(), Id = Guid.NewGuid(), Movie = _basic_movie.Id });
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">上映日期:<") || hnInfo.InnerHtml.Contains(">首播:<"))
@@ -169,39 +168,39 @@ namespace MPA_MoviePosterAwards.BLL
                         {
                             str.Add(dir.InnerText.Trim());
                         }
-                        tblMovie.Pubdate = string.Join("/", str);
+                        _basic_movie.Pubdate = string.Join("/", str);
                     }
-                    if (hnInfo.InnerHtml.Contains(">季数:<") && (tblMovie.Season_Count < 0 || tblMovie.Current_Season < 0))
+                    if (hnInfo.InnerHtml.Contains(">季数:<") && (_basic_movie.Season_Count < 0 || _basic_movie.Current_Season < 0))
                     {
                         var dires = hnInfo.CssSelect("option");
                         if (dires.Count() > 0)
                         {
-                            if (tblMovie.Current_Season < 0)
+                            if (_basic_movie.Current_Season < 0)
                             {
                                 foreach (var dir in dires)
                                 {
                                     if (dir.ChildAttributes("selected").Count() > 0 && dir.ChildAttributes("selected").FirstOrDefault().Value == "selected")
                                     {
-                                        tblMovie.Current_Season = (short)(dires.ToList().IndexOf(dir) + 1);
+                                        _basic_movie.Current_Season = (short)(dires.ToList().IndexOf(dir) + 1);
                                     }
                                 }
                             }
-                            if (tblMovie.Season_Count < 0)
+                            if (_basic_movie.Season_Count < 0)
                             {
-                                tblMovie.Season_Count = (short)(dires.Count());
+                                _basic_movie.Season_Count = (short)(dires.Count());
                             }
                         }
                         else
                         {
-                            if (tblMovie.Current_Season < 0)
+                            if (_basic_movie.Current_Season < 0)
                             {
-                                tblMovie.Current_Season = short.Parse(hnInfo.InnerText.Replace("季数:", "").Trim());
+                                _basic_movie.Current_Season = short.Parse(hnInfo.InnerText.Replace("季数:", "").Trim());
                             }
                         }
                     }
-                    if (hnInfo.InnerHtml.Contains(">集数:<") && tblMovie.Episode_Count < 0)
+                    if (hnInfo.InnerHtml.Contains(">集数:<") && _basic_movie.Episode_Count < 0)
                     {
-                        tblMovie.Episode_Count = short.Parse(hnInfo.InnerText.Replace("集数:", "").Trim());
+                        _basic_movie.Episode_Count = short.Parse(hnInfo.InnerText.Replace("集数:", "").Trim());
                     }
                     if (hnInfo.InnerHtml.Contains(">片长:<") || hnInfo.InnerHtml.Contains(">单集片长:<"))
                     {
@@ -213,11 +212,11 @@ namespace MPA_MoviePosterAwards.BLL
                             {
                                 str.Add(dir.InnerText.Trim());
                             }
-                            tblMovie.Duration = string.Join("/", str);
+                            _basic_movie.Duration = string.Join("/", str);
                         }
                         else
                         {
-                            tblMovie.Duration = hnInfo.InnerText.Replace("片长:", "").Replace("单集", "").Trim();
+                            _basic_movie.Duration = hnInfo.InnerText.Replace("片长:", "").Replace("单集", "").Trim();
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">又名:<"))
@@ -227,50 +226,50 @@ namespace MPA_MoviePosterAwards.BLL
                         foreach (var dir in dires)
                         {
                             str.Add(dir.Trim());
-                            tblMovie.Aka = string.Join("/", str);
+                            _basic_movie.Aka = string.Join("/", str);
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">IMDb链接:<"))
                     {
-                        tblMovie.IMDb = hnInfo.CssSelect("a").FirstOrDefault().InnerText.Trim();
+                        _basic_movie.IMDb = hnInfo.CssSelect("a").FirstOrDefault().InnerText.Trim();
                     }
                 }
 
                 if (html.CssSelect("span.all.hidden").Count() > 0)
                 {
-                    tblMovie.Summary = html.CssSelect("span.all.hidden").FirstOrDefault().InnerText.TrimAll();
+                    _basic_movie.Summary = html.CssSelect("span.all.hidden").FirstOrDefault().InnerText.TrimAll();
                 }
                 else if (html.CssSelect("span[property='v:summary']").Count() > 0)
                 {
-                    tblMovie.Summary = html.CssSelect("span[property='v:summary']").FirstOrDefault().InnerText.TrimAll();
+                    _basic_movie.Summary = html.CssSelect("span[property='v:summary']").FirstOrDefault().InnerText.TrimAll();
                 }
-                
+
                 var ratingNode = html.CssSelect("div#interest_sectl");
                 if (ratingNode.CssSelect("strong.rating_num").FirstOrDefault().InnerText.Length > 0)
                 {
-                    tblMovie.Rating.Score = double.Parse(ratingNode.CssSelect("strong.rating_num").FirstOrDefault().InnerText);
+                    _basic_movie.Rating.Score = double.Parse(ratingNode.CssSelect("strong.rating_num").FirstOrDefault().InnerText);
                 }
                 if (ratingNode.CssSelect("span[property='v:votes']").Count() > 0)
                 {
-                    tblMovie.Rating.Rated_Num = int.Parse(ratingNode.CssSelect("span[property='v:votes']").FirstOrDefault().InnerText);
+                    _basic_movie.Rating.Rated_Num = int.Parse(ratingNode.CssSelect("span[property='v:votes']").FirstOrDefault().InnerText);
                 }
                 var ratingpers = ratingNode.CssSelect("span.rating_per");
                 if (ratingNode.CssSelect("span.rating_per").Count() > 0)
                 {
-                    tblMovie.Rating.Star5 = ratingpers.First().InnerText.Trim();
-                    tblMovie.Rating.Star4 = ratingpers.ToList()[1].InnerText.Trim();
-                    tblMovie.Rating.Star3 = ratingpers.ToList()[1].InnerText.Trim();
-                    tblMovie.Rating.Star2 = ratingpers.ToList()[1].InnerText.Trim();
-                    tblMovie.Rating.Star1 = ratingpers.Last().InnerText.Trim();
+                    _basic_movie.Rating.Star5 = ratingpers.First().InnerText.Trim();
+                    _basic_movie.Rating.Star4 = ratingpers.ToList()[1].InnerText.Trim();
+                    _basic_movie.Rating.Star3 = ratingpers.ToList()[1].InnerText.Trim();
+                    _basic_movie.Rating.Star2 = ratingpers.ToList()[1].InnerText.Trim();
+                    _basic_movie.Rating.Star1 = ratingpers.Last().InnerText.Trim();
                 }
-                tblMovie.Rating.Id = Guid.NewGuid();
-                tblMovie.Rating.Movie = tblMovie.Id;
+                _basic_movie.Rating.Id = Guid.NewGuid();
+                _basic_movie.Rating.Movie = _basic_movie.Id;
 
-                tblMovie.Poster.Id = Guid.NewGuid();
-                tblMovie.Poster.Movie = tblMovie.Id;
+                _basic_movie.Poster.Id = Guid.NewGuid();
+                _basic_movie.Poster.Movie = _basic_movie.Id;
 
-                _movie_dal.Insert(tblMovie);
-                _celeb_movie_dal.Insert(tblCelebMovies);
+                Basic_Movie_BLL.Insert(_basic_movie);
+                Step_Celeb_Movie_BLL.Insert(_step_celeb_movies);
             }
             catch (System.IO.InvalidDataException dataExp)
             {
@@ -278,65 +277,63 @@ namespace MPA_MoviePosterAwards.BLL
             }
             catch (Exception)
             {
-                Console.WriteLine(tblMovie.Douban + "电影源代码解析失败");
+                Console.WriteLine(_basic_movie.Douban + "电影源代码解析失败");
             }
         }
 
-        static void GetMovieFromJson(ref Basic_Movie_Info tblMovie)
+        static void GetMovieFromJson(ref Basic_Movie_Info _basic_movie)
         {
-            string strjson = HtmlHelper.GetHtmlCode(string.Format("http://api.douban.com/v2/movie/subject/{0}", tblMovie.Douban));
+            string strjson = HtmlHelper.GetHtmlCode(string.Format("http://api.douban.com/v2/movie/subject/{0}", _basic_movie.Douban));
             if (strjson.IsBlank())
                 return;
             MovieJson movie = JsonHelper.DeserializeJsonToObject<MovieJson>(strjson);
 
-            tblMovie.Title = movie.title;
-            tblMovie.Title_En = movie.original_title;
-            tblMovie.Douban = movie.id;
-            tblMovie.Summary = movie.summary;
-            
-            tblMovie.Poster.Large = movie.images.large;
-            tblMovie.Poster.Medium = movie.images.medium;
-            tblMovie.Poster.Small = movie.images.small;
+            _basic_movie.Title = movie.title;
+            _basic_movie.Title_En = movie.original_title;
+            _basic_movie.Douban = movie.id;
+            _basic_movie.Summary = movie.summary;
+
+            _basic_movie.Poster.Large = movie.images.large;
+            _basic_movie.Poster.Medium = movie.images.medium;
+            _basic_movie.Poster.Small = movie.images.small;
             if (!movie.year.IsBlank())
-                tblMovie.Year = short.Parse(movie.year);
+                _basic_movie.Year = short.Parse(movie.year);
             if (!movie.current_season.IsBlank())
-                tblMovie.Current_Season = short.Parse(movie.current_season);
+                _basic_movie.Current_Season = short.Parse(movie.current_season);
             if (!movie.seasons_count.IsBlank())
-                tblMovie.Season_Count = short.Parse(movie.seasons_count);
+                _basic_movie.Season_Count = short.Parse(movie.seasons_count);
             if (!movie.episodes_count.IsBlank())
-                tblMovie.Episode_Count = short.Parse(movie.episodes_count);
+                _basic_movie.Episode_Count = short.Parse(movie.episodes_count);
         }
+        #endregion
 
-
-        static Guid GetCeleb(string id)
+        #region 获取影人
+        static Guid GetCeleb(string douban)
         {
-            //MovieResShareEntities _db = new MovieResShareEntities();
-            Basic_Celebrity_DAL _celeb_dal = new Basic_Celebrity_DAL();
-
-            if (_celeb_dal.HasItem(id))
+            if (Basic_Celebrity_BLL.Exist(douban))
             {
-                return _celeb_dal.GetSingleByDouban(id).Id; ;
+                return Basic_Celebrity_BLL.GetSingle(douban).Id;
             }
 
-            Basic_Celebrity_Info tblCeleb = new Basic_Celebrity_Info();
-            tblCeleb.Douban = id;
-            GetCelebFromJson(ref tblCeleb);
+            Basic_Celebrity_Info _basic_celeb = new Basic_Celebrity_Info();
+            _basic_celeb.Douban = douban;
+            GetCelebFromJson(ref _basic_celeb);
 
-            string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/celebrity/{0}/", id));
+            string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/celebrity/{0}/", douban));
             HtmlDocument hdoc = new HtmlDocument();
             hdoc.LoadHtml(strhtml);
             HtmlNode html = hdoc.DocumentNode;
 
             try
             {
-                if (tblCeleb.Name.IsBlank())
-                    tblCeleb.Name = html.CssSelect("Title").FirstOrDefault().InnerText.Replace("(豆瓣)", "").Trim();
-                if (tblCeleb.Name_En.IsBlank())
-                    tblCeleb.Name_En = html.CssSelect("div#content").FirstOrDefault().CssSelect("h1").FirstOrDefault().InnerText.Replace(tblCeleb.Name, "").Trim();
-                if (tblCeleb.Avatar.Large.IsBlank())
-                    tblCeleb.Avatar.Large = html.CssSelect("a.nbg").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value;
-                if (tblCeleb.Avatar.Medium.IsBlank())
-                    tblCeleb.Avatar.Medium = html.CssSelect("a.nbg").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
+                if (_basic_celeb.Name.IsBlank())
+                    _basic_celeb.Name = html.CssSelect("Title").FirstOrDefault().InnerText.Replace("(豆瓣)", "").Trim();
+                if (_basic_celeb.Name_En.IsBlank())
+                    _basic_celeb.Name_En = html.CssSelect("div#content").FirstOrDefault().CssSelect("h1").FirstOrDefault().InnerText.Replace(_basic_celeb.Name, "").Trim();
+                if (_basic_celeb.Avatar.Large.IsBlank())
+                    _basic_celeb.Avatar.Large = html.CssSelect("a.nbg").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value;
+                if (_basic_celeb.Avatar.Medium.IsBlank())
+                    _basic_celeb.Avatar.Medium = html.CssSelect("a.nbg").FirstOrDefault().CssSelect("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
 
                 foreach (var item in html.CssSelect("div#headline").FirstOrDefault().CssSelect("div.info").FirstOrDefault().CssSelect("li"))
                 {
@@ -346,93 +343,96 @@ namespace MPA_MoviePosterAwards.BLL
 
                     if (item.InnerHtml.Contains(">性别"))
                     {
-                        tblCeleb.Gender = item.InnerText.Replace("性别:", "").Trim() == "男";
+                        _basic_celeb.Gender = item.InnerText.Replace("性别:", "").Trim() == "男";
                     }
                     if (item.InnerHtml.Contains(">出生日期"))
                     {
-                        tblCeleb.Birth_Date = item.InnerText.Replace("出生日期:", "").Trim();
+                        _basic_celeb.Birth_Date = item.InnerText.Replace("出生日期:", "").Trim();
                     }
                     if (item.InnerHtml.Contains(">生卒日期"))
                     {
-                        tblCeleb.Birth_Date = item.InnerText.Replace("生卒日期:", "").Split('至')[0].Trim();
-                        tblCeleb.Death_Date = item.InnerText.Replace("生卒日期:", "").Split('至')[1].Trim();
+                        _basic_celeb.Birth_Date = item.InnerText.Replace("生卒日期:", "").Split('至')[0].Trim();
+                        _basic_celeb.Death_Date = item.InnerText.Replace("生卒日期:", "").Split('至')[1].Trim();
                     }
-                    if (item.InnerHtml.Contains(">出生地") && tblCeleb.Born_Place.IsBlank())
+                    if (item.InnerHtml.Contains(">出生地") && _basic_celeb.Born_Place.IsBlank())
                     {
-                        tblCeleb.Born_Place = item.InnerText.Replace("出生地:", "").Trim();
+                        _basic_celeb.Born_Place = item.InnerText.Replace("出生地:", "").Trim();
                     }
-                    if (item.InnerHtml.Contains(">职业") && tblCeleb.Profession.IsBlank())
+                    if (item.InnerHtml.Contains(">职业") && _basic_celeb.Profession.IsBlank())
                     {
-                        tblCeleb.Profession = item.InnerText.Replace("职业:", "").TrimSplit();
+                        _basic_celeb.Profession = item.InnerText.Replace("职业:", "").TrimSplit();
                     }
-                    if (item.InnerHtml.Contains(">更多外文名") && tblCeleb.Aka_En.IsBlank())
+                    if (item.InnerHtml.Contains(">更多外文名") && _basic_celeb.Aka_En.IsBlank())
                     {
-                        tblCeleb.Aka_En = item.InnerText.Replace("更多外文名:", "").TrimSplit();
+                        _basic_celeb.Aka_En = item.InnerText.Replace("更多外文名:", "").TrimSplit();
                     }
-                    if (item.InnerHtml.Contains(">更多中文名") && tblCeleb.Aka.IsBlank())
+                    if (item.InnerHtml.Contains(">更多中文名") && _basic_celeb.Aka.IsBlank())
                     {
-                        tblCeleb.Aka = item.InnerText.Replace("更多中文名:", "").TrimSplit();
+                        _basic_celeb.Aka = item.InnerText.Replace("更多中文名:", "").TrimSplit();
                     }
                     if (item.InnerHtml.Contains(">家庭成员"))
                     {
-                        tblCeleb.Family = item.InnerText.Replace("家庭成员:", "").TrimSplit();
+                        _basic_celeb.Family = item.InnerText.Replace("家庭成员:", "").TrimSplit();
                     }
                     if (item.InnerHtml.Contains(">imdb编号"))
                     {
-                        tblCeleb.IMDb = item.CssSelect("a").FirstOrDefault().InnerText.Trim();
+                        _basic_celeb.IMDb = item.CssSelect("a").FirstOrDefault().InnerText.Trim();
                     }
                 }
 
 
                 if (html.CssSelect("span.all.hidden").Count() > 0)
                 {
-                    tblCeleb.Summary = html.CssSelect("span.all.hidden").FirstOrDefault().InnerText.Replace("　　", "\n").TrimAll();
+                    _basic_celeb.Summary = html.CssSelect("span.all.hidden").FirstOrDefault().InnerText.Replace("　　", "\n").TrimAll();
                     System.Diagnostics.Debug.WriteLine(html.CssSelect("span.all.hidden").FirstOrDefault().InnerText);
                 }
                 else if (html.CssSelect("div#intro").FirstOrDefault().CssSelect("div.bd").Count() > 0)
                 {
-                    tblCeleb.Summary = html.CssSelect("div#intro").FirstOrDefault().CssSelect("div.bd").FirstOrDefault().InnerText.Replace("　　", "\n").TrimAll();
+                    _basic_celeb.Summary = html.CssSelect("div#intro").FirstOrDefault().CssSelect("div.bd").FirstOrDefault().InnerText.Replace("　　", "\n").TrimAll();
                 }
 
 
-                tblCeleb.Id = Guid.NewGuid();
-                //tblCeleb.Create_User = UserGuid;
+                _basic_celeb.Id = Guid.NewGuid();
 
-                tblCeleb.Avatar.Id = Guid.NewGuid();
-                tblCeleb.Avatar.Celeb = tblCeleb.Id;
+                _basic_celeb.Avatar.Id = Guid.NewGuid();
+                _basic_celeb.Avatar.Celeb = _basic_celeb.Id;
 
-                _celeb_dal.Insert(tblCeleb);
+                Basic_Celebrity_BLL.Insert(_basic_celeb);
 
-                return tblCeleb.Id;
+                return _basic_celeb.Id;
             }
             catch (Exception)
             {
-                Console.WriteLine(tblCeleb.Id + "影人源代码解析失败");
+                Console.WriteLine(_basic_celeb.Id + "影人源代码解析失败");
 
                 return Guid.Empty;
             }
         }
 
-        static void GetCelebFromJson(ref Basic_Celebrity_Info tblCeleb)//, ref Step_Celeb_Avatar_Info tblAvatar)
+        static void GetCelebFromJson(ref Basic_Celebrity_Info _basic_celeb)
         {
-            string strjson = HtmlHelper.GetHtmlCode(string.Format("http://api.douban.com/v2/movie/celebrity/{0}", tblCeleb.Douban));
+            string strjson = HtmlHelper.GetHtmlCode(string.Format("http://api.douban.com/v2/movie/celebrity/{0}", _basic_celeb.Douban));
             if (strjson.IsBlank())
                 return;
             CelebJson celeb = JsonHelper.DeserializeJsonToObject<CelebJson>(strjson);
 
-            tblCeleb.Name = celeb.name;
-            tblCeleb.Name_En = celeb.name_en;
-            tblCeleb.Douban = celeb.id;
-            tblCeleb.Aka = string.Join("/", celeb.aka);
-            tblCeleb.Aka_En = string.Join("/", celeb.aka_en);
-            tblCeleb.Gender = (celeb.gender == "男") ? true : false;
-            tblCeleb.Born_Place = celeb.born_place;
-
-            tblCeleb.Avatar = new Step_Celeb_Avatar_Info();
-            tblCeleb.Avatar.Large = celeb.avatars.large;
-            tblCeleb.Avatar.Medium = celeb.avatars.medium;
-            tblCeleb.Avatar.Small = celeb.avatars.small;
+            _basic_celeb.Name = celeb.name;
+            _basic_celeb.Name_En = celeb.name_en;
+            _basic_celeb.Douban = celeb.id;
+            _basic_celeb.Aka = string.Join("/", celeb.aka);
+            _basic_celeb.Aka_En = string.Join("/", celeb.aka_en);
+            _basic_celeb.Gender = (celeb.gender == "男") ? true : false;
+            _basic_celeb.Born_Place = celeb.born_place;
+            
+            _basic_celeb.Avatar.Large = celeb.avatars.large;
+            _basic_celeb.Avatar.Medium = celeb.avatars.medium;
+            _basic_celeb.Avatar.Small = celeb.avatars.small;
         }
+        #endregion
+
+        #region 帮助方法
+
+        #endregion
     }
 
 

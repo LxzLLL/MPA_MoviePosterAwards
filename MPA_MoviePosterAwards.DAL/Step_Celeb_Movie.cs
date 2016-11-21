@@ -18,6 +18,7 @@ namespace MPA_MoviePosterAwards.DAL
         public Nullable<System.Guid> Movie { get; set; }
         public Nullable<System.Guid> Celeb { get; set; }
         public string Position { get; set; }
+        public Nullable<byte> Order { get; set; }
     
         public virtual Basic_Celebrity Basic_Celebrity { get; set; }
         public virtual Basic_Movie Basic_Movie { get; set; }

@@ -11,7 +11,7 @@ namespace MPA_MoviePosterAwards.ConsoleTest
     {
         static void Main(string[] args)
         {
-            MovieManager.GetMovie("1307847");
+            MovieManager.GetMovie("1294433");
         }
     }
 }

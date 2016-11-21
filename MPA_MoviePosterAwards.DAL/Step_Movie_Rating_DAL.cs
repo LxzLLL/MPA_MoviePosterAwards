@@ -16,7 +16,7 @@ namespace MPA_MoviePosterAwards.DAL
             info.Id = rating.Id;
             info.Movie = (Guid)rating.Movie;
             info.Rated_Num = (long)rating.Rated_Num;
-            info.Score = (long)rating.Rated_Num;
+            info.Score = (double)rating.Score;
             info.Star1 = rating.Star1;
             info.Star2 = rating.Star2;
             info.Star3 = rating.Star3;

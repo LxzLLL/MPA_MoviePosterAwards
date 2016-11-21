@@ -12,8 +12,7 @@ namespace MPA_MoviePosterAwards.Common
     {
         public static void SetHeaderValue(WebHeaderCollection header, string name, string value)
         {
-            var property = typeof(WebHeaderCollection).GetProperty("InnerCollection",
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            var property = typeof(WebHeaderCollection).GetProperty("InnerCollection", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             if (property != null)
             {
                 var collection = property.GetValue(header, null) as System.Collections.Specialized.NameValueCollection;
@@ -29,7 +28,7 @@ namespace MPA_MoviePosterAwards.Common
                 req.Method = "GET";
                 SetHeaderValue(req.Headers, "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                 SetHeaderValue(req.Headers, "Accept-Language", "zh-CN,zh;q=0.8");
-                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=SXzIrzYyibM; _vwo_uuid_v2=411549EE6A39D1D75DE4EF70B19F5C19|6e2274c180190b436c520fac4baa2b9c; gr_user_id=3fef1e6d-1788-4f01-8bb6-30680ba3a770; ue=\"390266249@qq.com\"; dbcl2=\"63063997:MuwrBIoaDFA\"; ct=y; ap=1; __utmt=1; ck=eN8_; push_noty_num=0; push_doumail_num=0; __utma=30149280.947188865.1473772136.1477281412.1477313577.173; __utmb=30149280.54.10.1477313577; __utmc=30149280; __utmz=30149280.1477065035.166.10.utmcsr=bttiantang99.com|utmccn=(referral)|utmcmd=referral|utmcct=/movie/35157.html; __utmv=30149280.6306; __utma=223695111.1337641447.1477283425.1477283425.1477313577.2; __utmb=223695111.0.10.1477313577; __utmc=223695111; __utmz=223695111.1477283425.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)");
+                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=uEzTF1SP5RA; ps=y; ue=\"390266249@qq.com\"; dbcl2=\"63063997:VtVHs / FswIw\"; gr_user_id=03fc3590-700d-47a7-8865-7656455e4721; ap=1; ck=8P4R; push_noty_num=0; push_doumail_num=0; __utma=30149280.1833743162.1479219754.1479731250.1479738117.22; __utmb=30149280.0.10.1479738117; __utmc=30149280; __utmz=30149280.1479650747.18.4.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmv=30149280.6306; __utma=223695111.840018483.1479616913.1479731250.1479738117.7; __utmb=223695111.0.10.1479738117; __utmc=223695111; __utmz=223695111.1479616913.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _vwo_uuid_v2=050A0BECDBE34E35C996F3A6D7A0B42F|68a974f5e63ee16650102a0821969c90; _pk_id.100001.4cf6=e6ac8b4ef4397ede.1479616913.7.1479741951.1479731770.; _pk_ses.100001.4cf6=*; _ga=GA1.2.1833743162.1479219754; _gat=1");
                 SetHeaderValue(req.Headers, "Host", "movie.douban.com");
                 SetHeaderValue(req.Headers, "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
@@ -41,7 +40,7 @@ namespace MPA_MoviePosterAwards.Common
                 sr.Close();
                 return fullhtml;
             }
-            catch (WebException)
+            catch (WebException e)
             {
                 Console.WriteLine(url + "获取源码失败");
                 return string.Empty;

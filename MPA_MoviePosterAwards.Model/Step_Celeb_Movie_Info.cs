@@ -12,5 +12,6 @@ namespace MPA_MoviePosterAwards.Model
         public Guid Movie { get; set; }
         public Guid Celeb { get; set; }
         public string Position { get; set; }
+        public byte Order { get; set; }
     }
 }

@@ -18,10 +18,23 @@ namespace MPA_MoviePosterAwards.DAL
 
                 return ToModel(result);
             }
-
         }
 
-        public bool HasItem(Guid id)
+        public List<Step_Celeb_Movie_Info> GetList(string condition)
+        {
+            using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
+            {
+                var result = database.Step_Celeb_Movie.SqlQuery("SELECT * FROM Step_Celeb_Movie WHERE " + condition + " ORDER BY Order");
+                List<Step_Celeb_Movie_Info> infos = new List<Step_Celeb_Movie_Info>();
+                foreach (var item in result)
+                {
+                    infos.Add(ToModel(item));
+                }
+                return infos;
+            }
+        }
+
+        public bool Exist(Guid id)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -105,8 +118,8 @@ namespace MPA_MoviePosterAwards.DAL
             {
                 try
                 {
-                    var sigin = database.Step_Celeb_Movie.FirstOrDefault(p => p.Id == id);
-                    database.Step_Celeb_Movie.Remove(sigin);
+                    var celeb_movie = database.Step_Celeb_Movie.FirstOrDefault(p => p.Id == id);
+                    database.Step_Celeb_Movie.Remove(celeb_movie);
                     database.SaveChanges();
                     return true;
                 }
@@ -118,28 +131,30 @@ namespace MPA_MoviePosterAwards.DAL
         }
         #endregion end增删改
 
-        public static Step_Celeb_Movie_Info ToModel(Step_Celeb_Movie sigin)
+        public static Step_Celeb_Movie_Info ToModel(Step_Celeb_Movie celeb_movie)
         {
             Step_Celeb_Movie_Info info = new Step_Celeb_Movie_Info();
 
-            info.Id = sigin.Id;
-            info.Movie = (Guid)sigin.Movie;
-            info.Celeb = (Guid)sigin.Celeb;
-            info.Position = sigin.Position;
+            info.Id = celeb_movie.Id;
+            info.Movie = (Guid)celeb_movie.Movie;
+            info.Celeb = (Guid)celeb_movie.Celeb;
+            info.Position = celeb_movie.Position;
+            info.Order = (byte)celeb_movie.Order;
 
             return info;
         }
 
         public static Step_Celeb_Movie ToDatabase(Step_Celeb_Movie_Info info)
         {
-            Step_Celeb_Movie sigin = new Step_Celeb_Movie();
+            Step_Celeb_Movie celeb_movie = new Step_Celeb_Movie();
 
-            sigin.Id = info.Id;
-            sigin.Movie = info.Movie;
-            sigin.Celeb = info.Celeb;
-            sigin.Position = info.Position;
+            celeb_movie.Id = info.Id;
+            celeb_movie.Movie = info.Movie;
+            celeb_movie.Celeb = info.Celeb;
+            celeb_movie.Position = info.Position;
+            celeb_movie.Order = info.Order;
 
-            return sigin;
+            return celeb_movie;
         }
     }
 }

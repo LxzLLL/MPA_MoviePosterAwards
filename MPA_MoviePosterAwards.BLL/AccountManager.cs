@@ -19,7 +19,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns>登录状态</returns>
         public static RequestResult SignInWithPassword(string account, string password)
         {
-            var user = Basic_User_BLL.GetSingleByAccount(account);
+            var user = Basic_User_BLL.GetSingle(account);
 
             if (user == null)
             {
@@ -73,7 +73,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns>成功 or 失败，错误信息</returns>
         public static RequestResult Create(string account, string password)
         {
-            if (Basic_User_BLL.GetSingleByAccount(account) != null)
+            if (Basic_User_BLL.GetSingle(account) != null)
                 return new RequestResult() { Succeeded = false, Error = "用户名已存在" };
             Basic_User_Info user = new Basic_User_Info();
             user.Account = account;
@@ -94,7 +94,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns>成功 or 失败，错误信息</returns>
         public static RequestResult ValidateEmail(string account, string email)
         {
-            var user = Basic_User_BLL.GetSingleByAccount(account);
+            var user = Basic_User_BLL.GetSingle(account);
             if (user == null)
             {
                 return new RequestResult() { Succeeded = false, Error = "用户名不存在" };
@@ -117,7 +117,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns>成功 or 失败，错误信息</returns>
         public static RequestResult ResetPassword(string account, string password)
         {
-            var user = Basic_User_BLL.GetSingleByAccount(account);
+            var user = Basic_User_BLL.GetSingle(account);
             password = password.DESEncryption();
             Dictionary<string, string> changes = new Dictionary<string, string>();
             changes.Add("password", password);

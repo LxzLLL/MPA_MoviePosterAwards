@@ -18,10 +18,9 @@ namespace MPA_MoviePosterAwards.DAL
 
                 return ToModel(result);
             }
-
         }
 
-        public Basic_Celebrity_Info GetSingleByDouban(string douban)
+        public Basic_Celebrity_Info GetSingle(string douban)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -29,10 +28,37 @@ namespace MPA_MoviePosterAwards.DAL
 
                 return ToModel(result);
             }
-
         }
 
-        public bool HasItem(Guid id)
+        public List<Basic_Celebrity_Info> GetList(string condition)
+        {
+            using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
+            {
+                var result = database.Basic_Celebrity.SqlQuery("SELECT * FROM Basic_Celebrity WHERE 1=1" + condition);
+                List<Basic_Celebrity_Info> infos = new List<Basic_Celebrity_Info>();
+                foreach (var item in result)
+                {
+                    infos.Add(ToModel(item));
+                }
+                return infos;
+            }
+        }
+
+        public List<Basic_Celebrity_Info> GetList(Guid movie, string position)
+        {
+            using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
+            {
+                var result = database.Basic_Celebrity.SqlQuery(string.Format(@"SELECT A.*,B.Position FROM Basic_Celebrity A LEFT JOIN Step_Celeb_Movie B ON  A.Id=B.Celeb WHERE B.Movie='{0}' AND B.Position='{1}' ORDER BY B.[Order]", movie.ToString(), position));
+                List<Basic_Celebrity_Info> infos = new List<Basic_Celebrity_Info>();
+                foreach (var item in result)
+                {
+                    infos.Add(ToModel(item));
+                }
+                return infos;
+            }
+        }
+
+        public bool Exist(Guid id)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
@@ -40,7 +66,7 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
-        public bool HasItem(string douban)
+        public bool Exist(string douban)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
