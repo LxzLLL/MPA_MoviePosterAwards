@@ -10,19 +10,19 @@ using System.Web.Mvc;
 
 namespace MPA_MoviePosterAwards.Web.Controllers
 {
-    public class MovieController : Controller
+    public class CelebController : Controller
     {
-        // GET: Movie
+        // GET: Celeb
         public ActionResult Index(string id)
         {
             if (id.IsBlank())
                 return null;
-            if (!Basic_Movie_BLL.Exist(Guid.Parse(id)))
+            if (!Basic_Celebrity_BLL.Exist(Guid.Parse(id)))
             {
                 return HttpNotFound();
             }
-            Basic_Movie_Info _basic_movie = Basic_Movie_BLL.GetSingle(Guid.Parse(id));
-            MovieViewModel movie = new MovieViewModel(_basic_movie);
+            Basic_Celebrity_Info _basic_celeb = Basic_Celebrity_BLL.GetSingle(Guid.Parse(id));
+            CelebViewModel movie = new CelebViewModel(_basic_celeb);
             return View(movie);
         }
     }

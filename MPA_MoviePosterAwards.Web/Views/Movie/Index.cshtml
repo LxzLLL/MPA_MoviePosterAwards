@@ -1,0 +1,119 @@
+﻿@using MPA_MoviePosterAwards.Common
+@model MPA_MoviePosterAwards.Web.Models.MovieViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<style type="text/css">
+    img {
+        width: 99px;
+    }
+
+    div > span {
+        font-size: 0.8em;
+        color: #666666;
+    }
+</style>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <img src="@Model.Avatar" />
+</div>
+<div><span>片名:</span> @Model.Title (@Model.Year)</div>
+@if (!Model.Title_En.IsBlank())
+{
+    <div><span>原名:</span> @Model.Title_En</div>
+}
+@if (Model.Directors.Count > 0)
+{
+    <div>
+        <span> 导演:</span>
+        @foreach (var item in Model.Directors)
+        {
+            <a href="@item.Url" target="_blank">@item.Title</a>
+            if (Model.Directors.IndexOf(item) != Model.Directors.Count - 1)
+            {
+                <b> / </b>
+            }
+        }
+    </div>
+}
+@if (Model.Writers.Count > 0)
+{
+    <div>
+        <span>编剧:</span>
+        @foreach (var item in Model.Writers)
+        {
+            <a href="@item.Url" target="_blank">@item.Title</a>
+            if (Model.Writers.IndexOf(item) != Model.Writers.Count - 1)
+            {
+                <b> / </b>
+            }
+        }
+    </div>
+}
+@if (Model.Directors.Count > 0)
+{
+    <div>
+        <span>主演:</span>
+        @foreach (var item in Model.Casts)
+        {
+            <a href="@item.Url" target="_blank">@item.Title</a>
+            if (Model.Casts.IndexOf(item) != Model.Casts.Count - 1)
+            {
+                <b> / </b>
+            }
+        }
+    </div>
+}
+@if (Model.Genres.Length > 0)
+{
+    <div><span>类型:</span> @Model.Genres</div>
+}
+@if (Model.Website.Length > 0)
+{
+    <div>
+        <span>官方网站:</span>
+        <a href="@Model.Website" target="_blank">@Model.Website</a>
+    </div>
+}
+@if (Model.Countries.Length > 0)
+{
+    <div><span>制片国家/地区:</span> @Model.Countries</div>
+}
+@if (Model.Languages.Length > 0)
+{
+    <div><span>语言:</span> @Model.Languages</div>
+}
+@if (Model.Pubdates.Length > 0)
+{
+    <div><span>上映日期:</span> @Model.Pubdates</div>
+}
+@if (Model.Durations.Length > 0)
+{
+    <div><span>片长:</span> @Model.Durations</div>
+}
+@if (Model.Aka.Length > 0)
+{
+    <div><span>又名:</span> @Model.Aka</div>
+}
+@if (!Model.Douban.IsBlank())
+{
+    <div>
+        <span>豆瓣编号:</span>
+        <a href="https://movie.douban.com/subject/@Model.Douban" target="_blank">@Model.Douban</a>
+    </div>
+}
+@if (Model.IMDb.Length > 0)
+{
+    <div>
+        <span>IMDb编号:</span>
+        <a href="http://www.imdb.com/title/@Model.IMDb" target="_blank">@Model.IMDb</a>
+    </div>
+}
+@if (Model.Summary.Length > 0)
+{
+    <div><span>剧情简介:</span> @Model.Summary</div>
+}
+

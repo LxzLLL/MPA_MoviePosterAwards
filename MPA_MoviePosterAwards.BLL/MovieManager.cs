@@ -168,7 +168,7 @@ namespace MPA_MoviePosterAwards.BLL
                         {
                             str.Add(dir.InnerText.Trim());
                         }
-                        _basic_movie.Pubdate = string.Join("/", str);
+                        _basic_movie.Pubdate = string.Join(" / ", str);
                     }
                     if (hnInfo.InnerHtml.Contains(">季数:<") && (_basic_movie.Season_Count < 0 || _basic_movie.Current_Season < 0))
                     {
@@ -212,7 +212,7 @@ namespace MPA_MoviePosterAwards.BLL
                             {
                                 str.Add(dir.InnerText.Trim());
                             }
-                            _basic_movie.Duration = string.Join("/", str);
+                            _basic_movie.Duration = string.Join(" / ", str);
                         }
                         else
                         {
@@ -226,7 +226,7 @@ namespace MPA_MoviePosterAwards.BLL
                         foreach (var dir in dires)
                         {
                             str.Add(dir.Trim());
-                            _basic_movie.Aka = string.Join("/", str);
+                            _basic_movie.Aka = string.Join(" / ", str);
                         }
                     }
                     if (hnInfo.InnerHtml.Contains(">IMDb链接:<"))
@@ -419,8 +419,8 @@ namespace MPA_MoviePosterAwards.BLL
             _basic_celeb.Name = celeb.name;
             _basic_celeb.Name_En = celeb.name_en;
             _basic_celeb.Douban = celeb.id;
-            _basic_celeb.Aka = string.Join("/", celeb.aka);
-            _basic_celeb.Aka_En = string.Join("/", celeb.aka_en);
+            _basic_celeb.Aka = string.Join(" / ", celeb.aka);
+            _basic_celeb.Aka_En = string.Join(" / ", celeb.aka_en);
             _basic_celeb.Gender = (celeb.gender == "男") ? true : false;
             _basic_celeb.Born_Place = celeb.born_place;
             

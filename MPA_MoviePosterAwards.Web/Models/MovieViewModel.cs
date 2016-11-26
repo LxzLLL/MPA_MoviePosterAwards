@@ -1,4 +1,5 @@
 ﻿using MPA_MoviePosterAwards.BLL;
+using MPA_MoviePosterAwards.Common;
 using MPA_MoviePosterAwards.Model;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MPA_MoviePosterAwards.Web.Models
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public string TitleEn { get; set; }
+        public string Title_En { get; set; }
         public string Aka { get; set; }
         public List<LinkItem> Directors { get; set; }
         public List<LinkItem> Casts { get; set; }
@@ -22,6 +23,7 @@ namespace MPA_MoviePosterAwards.Web.Models
         public int Current_Season { get; set; }
         public int Season_Count { get; set; }
         public string Durations { get; set; }
+        public string Website { get; set; }
         public string Genres { get; set; }
         public string Languages { get; set; }
         public string Countries { get; set; }
@@ -36,11 +38,12 @@ namespace MPA_MoviePosterAwards.Web.Models
         {
             Id = movie.Id.ToString();
             Title = movie.Title;
-            TitleEn = movie.Title_En;
+            Title_En = movie.Title_En;
             Aka = movie.Aka;
             Pubdates = movie.Pubdate;
             Year = movie.Year;
             Durations = movie.Duration;
+            Website = movie.Website;
             Episode_Count = movie.Episode_Count;
             Current_Season = movie.Current_Season;
             Season_Count = movie.Season_Count;
