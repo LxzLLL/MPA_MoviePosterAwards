@@ -59,6 +59,10 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Basic_Movie_DAL.cs" />
+    <Compile Include="Basic_Poster.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Basic_Poster_DAL.cs" />
     <Compile Include="Basic_User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

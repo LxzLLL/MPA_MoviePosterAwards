@@ -43,6 +43,18 @@
           <Property Name="IMDb" Type="nvarchar" MaxLength="50" />
           <Property Name="Summary" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Basic_Poster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Movie" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="User" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Poster" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Poster_S" Type="nvarchar" MaxLength="200" />
+          <Property Name="Poster_XS" Type="nvarchar" MaxLength="200" />
+          <Property Name="Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="Basic_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -126,6 +138,30 @@
           <Property Name="Star1" Type="varchar" MaxLength="10" />
           <Property Name="Rated_Num" Type="bigint" />
         </EntityType>
+        <Association Name="FK_Basic_Poster_Basic_Movie">
+          <End Role="Basic_Movie" Type="Self.Basic_Movie" Multiplicity="1" />
+          <End Role="Basic_Poster" Type="Self.Basic_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basic_Poster">
+              <PropertyRef Name="Movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basic_Poster_Basic_User">
+          <End Role="Basic_User" Type="Self.Basic_User" Multiplicity="1" />
+          <End Role="Basic_Poster" Type="Self.Basic_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basic_Poster">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Step_Celeb_Avatar_Basic_Celebrity">
           <End Role="Basic_Celebrity" Type="Self.Basic_Celebrity" Multiplicity="0..1" />
           <End Role="Step_Celeb_Avatar" Type="Self.Step_Celeb_Avatar" Multiplicity="*" />
@@ -225,6 +261,7 @@
         <EntityContainer Name="MoviePosterAwardsModelStoreContainer">
           <EntitySet Name="Basic_Celebrity" EntityType="Self.Basic_Celebrity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Basic_Movie" EntityType="Self.Basic_Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Basic_Poster" EntityType="Self.Basic_Poster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Basic_User" EntityType="Self.Basic_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Celeb_Avatar" EntityType="Self.Step_Celeb_Avatar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Celeb_Movie" EntityType="Self.Step_Celeb_Movie" Schema="dbo" store:Type="Tables" />
@@ -233,6 +270,14 @@
           <EntitySet Name="Step_Movie_Lang" EntityType="Self.Step_Movie_Lang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Poster" EntityType="Self.Step_Movie_Poster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step_Movie_Rating" EntityType="Self.Step_Movie_Rating" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Basic_Poster_Basic_Movie" Association="Self.FK_Basic_Poster_Basic_Movie">
+            <End Role="Basic_Movie" EntitySet="Basic_Movie" />
+            <End Role="Basic_Poster" EntitySet="Basic_Poster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basic_Poster_Basic_User" Association="Self.FK_Basic_Poster_Basic_User">
+            <End Role="Basic_User" EntitySet="Basic_User" />
+            <End Role="Basic_Poster" EntitySet="Basic_Poster" />
+          </AssociationSet>
           <AssociationSet Name="FK_Step_Celeb_Avatar_Basic_Celebrity" Association="Self.FK_Step_Celeb_Avatar_Basic_Celebrity">
             <End Role="Basic_Celebrity" EntitySet="Basic_Celebrity" />
             <End Role="Step_Celeb_Avatar" EntitySet="Step_Celeb_Avatar" />
@@ -315,6 +360,7 @@
           <NavigationProperty Name="Step_Movie_Lang" Relationship="Self.FK_Step_Movie_Lang_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Lang" />
           <NavigationProperty Name="Step_Movie_Rating" Relationship="Self.FK_Step_Movie_Rating_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Rating" />
           <NavigationProperty Name="Step_Movie_Poster" Relationship="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" FromRole="Basic_Movie" ToRole="Step_Movie_Poster" />
+          <NavigationProperty Name="Basic_Poster" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" FromRole="Basic_Movie" ToRole="Basic_Poster" />
         </EntityType>
         <EntityType Name="Basic_User">
           <Key>
@@ -330,6 +376,7 @@
           <Property Name="Limit" Type="Boolean" />
           <Property Name="Create_Time" Type="DateTime" Precision="7" />
           <Property Name="Change_Time" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Basic_Poster" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" FromRole="Basic_User" ToRole="Basic_Poster" />
         </EntityType>
         <EntityType Name="Step_Celeb_Movie">
           <Key>
@@ -500,6 +547,15 @@
             <End Role="Basic_Celebrity" EntitySet="Basic_Celebrity" />
             <End Role="Step_Celeb_Avatar" EntitySet="Step_Celeb_Avatar" />
           </AssociationSet>
+          <EntitySet Name="Basic_Poster" EntityType="MoviePosterAwardsModel.Basic_Poster" />
+          <AssociationSet Name="FK_Basic_Poster_Basic_Movie" Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie">
+            <End Role="Basic_Movie" EntitySet="Basic_Movie" />
+            <End Role="Basic_Poster" EntitySet="Basic_Poster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basic_Poster_Basic_User" Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User">
+            <End Role="Basic_User" EntitySet="Basic_User" />
+            <End Role="Basic_Poster" EntitySet="Basic_Poster" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Step_Movie_Poster">
           <Key>
@@ -544,6 +600,44 @@
             </Principal>
             <Dependent Role="Step_Celeb_Avatar">
               <PropertyRef Name="Celeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Basic_Poster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Movie" Type="Guid" Nullable="false" />
+          <Property Name="User" Type="Guid" Nullable="false" />
+          <Property Name="Poster" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Poster_S" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Poster_XS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Basic_Movie" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" FromRole="Basic_Poster" ToRole="Basic_Movie" />
+          <NavigationProperty Name="Basic_User" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" FromRole="Basic_Poster" ToRole="Basic_User" />
+        </EntityType>
+        <Association Name="FK_Basic_Poster_Basic_Movie">
+          <End Type="MoviePosterAwardsModel.Basic_Movie" Role="Basic_Movie" Multiplicity="1" />
+          <End Type="MoviePosterAwardsModel.Basic_Poster" Role="Basic_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basic_Poster">
+              <PropertyRef Name="Movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basic_Poster_Basic_User">
+          <End Type="MoviePosterAwardsModel.Basic_User" Role="Basic_User" Multiplicity="1" />
+          <End Type="MoviePosterAwardsModel.Basic_Poster" Role="Basic_Poster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basic_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basic_Poster">
+              <PropertyRef Name="User" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -680,6 +774,19 @@
                 <ScalarProperty Name="Large" ColumnName="Large" />
                 <ScalarProperty Name="Small" ColumnName="Small" />
                 <ScalarProperty Name="Celeb" ColumnName="Celeb" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basic_Poster">
+            <EntityTypeMapping TypeName="MoviePosterAwardsModel.Basic_Poster">
+              <MappingFragment StoreEntitySet="Basic_Poster">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Poster_XS" ColumnName="Poster_XS" />
+                <ScalarProperty Name="Poster_S" ColumnName="Poster_S" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Movie" ColumnName="Movie" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

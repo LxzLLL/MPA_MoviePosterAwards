@@ -58,6 +58,11 @@ namespace MPA_MoviePosterAwards.Common
             return str.Length == 0 ? string.Empty : str.Remove(str.Length - 1, 1).ToString();
         }
 
+        /// <summary>
+        /// DES加密
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string DESEncryption(this string s)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
@@ -75,6 +80,24 @@ namespace MPA_MoviePosterAwards.Common
             }
             ret.ToString();
             return ret.ToString();
+        }
+
+        /// <summary>
+        /// 判断字符串中是否包含中文字符
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static bool HasChinese(this string s)
+        {
+            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex(@"[\u4e00-\u9fa5]");//正则表达式
+            if (reg.IsMatch(s))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

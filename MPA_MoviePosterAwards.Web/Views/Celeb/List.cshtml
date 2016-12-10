@@ -1,0 +1,37 @@
+﻿@model List<MPA_MoviePosterAwards.Web.Models.CelebViewModel>
+
+@{
+    ViewBag.Title = "所有影人";
+}
+
+<h2>所有影人</h2>
+<table class="table table-striped">
+    <tr>
+        <td>序号</td>
+        <td>姓名</td>
+        <td>出生日期</td>
+        <td>去世日期</td>
+        <td>出生地</td>
+        <td>职业</td>
+        <td>豆瓣编号</td>
+        <td>操作</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Model.IndexOf(item)</td>
+            <td>
+                <a href="/Celeb/Index?id=@item.Id">@item.Name</a>
+            </td>
+            <td>@item.Birth_Date</td>
+            <td>@item.Death_Date</td>
+            <td>@item.Born_Place</td>
+            <td>@item.Profession</td>
+            <td>
+                <a href="https://movie.douban.com/celebrity/@item.Douban">@item.Douban</a>
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,54 @@
+﻿@model MPA_MoviePosterAwards.Web.Models.PosterCreateViewModel
+
+@{
+    ViewBag.Title = "新增海报";
+}
+
+<h2>新增海报</h2>
+
+@using (Html.BeginForm("Create", "Poster", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.HiddenFor(model => model.Movie)
+        <input type="file" name="file" class="form-control" placeholder="请选择图片" onchange="loadImageFile()" id="inputImg" />
+        @Html.ValidationMessageFor(model => model.Poster, "", new { @class = "text-danger" })
+    </div>
+
+    <div style="padding-top:15px; padding-bottom:15px;">
+        <div>
+            <label class="control-label">已选择的图片</label>
+        </div>
+        <img class="img-thumbnail" id="imgDisplay" style="max-width:147px;min-width:64px; max-height:147px;" />
+    </div>
+
+    <div class="full-width">
+        <input type="submit" value="确认更改头像" class="btn btn-primary" />
+    </div>
+}
+
+<script type="text/javascript">
+    var loadImageFile = (function () {
+        if (window.FileReader) {
+            var oPreviewImg = null, oFReader = new window.FileReader(),
+            rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+            oFReader.onload = function (oFREvent) {
+                var newPreview = document.getElementById("imgDisplay");
+                newPreview.setAttribute("src", oFREvent.target.result);
+            };
+            return function () {
+                var aFiles = document.getElementById("inputImg").files;
+                if (aFiles.length === 0) { return; }
+                if (!rFilter.test(aFiles[0].type)) { alert("You must select a valid image file!"); return; }
+                oFReader.readAsDataURL(aFiles[0]);
+            }
+        }
+        if (navigator.appName === "Microsoft Internet Explorer") {
+            return function () {
+                alert(document.getElementById("inputImg").value);
+                document.getElementById("imgDisplay").src = document.getElementById("inputImg").value;
+            }
+        }
+    })();
+</script>
+

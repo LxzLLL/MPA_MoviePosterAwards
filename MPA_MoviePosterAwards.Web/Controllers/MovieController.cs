@@ -25,5 +25,17 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             MovieViewModel movie = new MovieViewModel(_basic_movie);
             return View(movie);
         }
+
+        // GET: Movie/List
+        public ActionResult List()
+        {
+            List<MovieViewModel> movies = new List<MovieViewModel>();
+            foreach (var item in Basic_Movie_BLL.GetList(string.Empty))
+            {
+                MovieViewModel movie = new MovieViewModel(item);
+                movies.Add(movie);
+            }
+            return View(movies);
+        }
     }
 }

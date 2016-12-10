@@ -159,6 +159,7 @@
     <Compile Include="Controllers\CelebController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\PosterController.cs" />
     <Compile Include="Filters\Logon.cs" />
     <Compile Include="Filters\ResetPwd.cs" />
     <Compile Include="Filters\SignedIn.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CelebViewModel.cs" />
     <Compile Include="Models\MovieViewModel.cs" />
+    <Compile Include="Models\PosterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,9 +233,14 @@
     <Content Include="Views\Account\ResetPwd.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Celeb\Index.cshtml" />
+    <Content Include="Views\Movie\List.cshtml" />
+    <Content Include="Views\Celeb\List.cshtml" />
+    <Content Include="Views\Poster\Index.cshtml" />
+    <Content Include="Views\Poster\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

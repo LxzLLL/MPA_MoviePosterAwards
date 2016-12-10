@@ -34,7 +34,7 @@ namespace MPA_MoviePosterAwards.DAL
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                var result = database.Basic_Movie.SqlQuery("SELECT * FROM Basic_Movie WHERE " + condition);
+                var result = database.Basic_Movie.SqlQuery("SELECT * FROM Basic_Movie WHERE 1=1" + condition);
                 List<Basic_Movie_Info> infos = new List<Basic_Movie_Info>();
                 foreach (var item in result)
                 {
@@ -56,7 +56,7 @@ namespace MPA_MoviePosterAwards.DAL
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                System.Diagnostics.Debug.Write(database.Basic_Movie.Where(p => p.Douban == douban).Count());
+                //System.Diagnostics.Debug.Write(database.Basic_Movie.Where(p => p.Douban == douban).Count());
                 return database.Basic_Movie.FirstOrDefault(p => p.Douban == douban) != null ? true : false;
             }
         }

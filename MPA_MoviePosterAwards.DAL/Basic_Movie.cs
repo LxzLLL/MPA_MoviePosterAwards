@@ -23,6 +23,7 @@ namespace MPA_MoviePosterAwards.DAL
             this.Step_Movie_Lang = new HashSet<Step_Movie_Lang>();
             this.Step_Movie_Rating = new HashSet<Step_Movie_Rating>();
             this.Step_Movie_Poster = new HashSet<Step_Movie_Poster>();
+            this.Basic_Poster = new HashSet<Basic_Poster>();
         }
     
         public System.Guid Id { get; set; }
@@ -52,5 +53,7 @@ namespace MPA_MoviePosterAwards.DAL
         public virtual ICollection<Step_Movie_Rating> Step_Movie_Rating { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Step_Movie_Poster> Step_Movie_Poster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Basic_Poster> Basic_Poster { get; set; }
     }
 }

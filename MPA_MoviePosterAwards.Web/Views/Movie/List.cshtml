@@ -1,0 +1,42 @@
+﻿@model List<MPA_MoviePosterAwards.Web.Models.MovieViewModel>
+
+@{
+    ViewBag.Title = "所有电影";
+}
+
+<h2>所有电影</h2>
+<table class="table table-striped">
+    <tr>
+        <td>序号</td>
+        <td>电影名</td>
+        <td>年份</td>
+        <td>类型</td>
+        <td>制片国家/地区</td>
+        <td>语言</td>
+        <td>上映日期</td>
+        <td>时长</td>
+        <td>豆瓣编号</td>
+        <td>操作</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Model.IndexOf(item)</td>
+            <td>
+                <a href="/Movie/Index?id=@item.Id">@item.Title</a>
+            </td>
+            <td>@item.Year</td>
+            <td>@item.Genres</td>
+            <td>@item.Countries</td>
+            <td>@item.Languages</td>
+            <td>@item.Pubdates</td>
+            <td>@item.Durations</td>
+            <td>
+                <a href="https://movie.douban.com/subject/@item.Douban">@item.Douban</a>
+            </td>
+            <td>
+                <a href="/Poster/Create?movie=@item.Id"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            </td>
+        </tr>
+    }
+</table>

@@ -38,12 +38,12 @@ namespace MPA_MoviePosterAwards.Web.Models
         {
             Id = movie.Id.ToString();
             Title = movie.Title;
-            Title_En = movie.Title_En;
-            Aka = movie.Aka;
-            Pubdates = movie.Pubdate;
+            Title_En = movie.Title_En.IsBlank() ? string.Empty : movie.Title_En;
+            Aka = movie.Aka.IsBlank() ? string.Empty : movie.Aka;
+            Pubdates = movie.Pubdate.IsBlank() ? string.Empty : movie.Pubdate;
             Year = movie.Year;
-            Durations = movie.Duration;
-            Website = movie.Website;
+            Durations = movie.Duration.IsBlank() ? string.Empty : movie.Duration;
+            Website = movie.Website.IsBlank() ? string.Empty : movie.Website;
             Episode_Count = movie.Episode_Count;
             Current_Season = movie.Current_Season;
             Season_Count = movie.Season_Count;
@@ -71,10 +71,10 @@ namespace MPA_MoviePosterAwards.Web.Models
 
             Rating = movie.Rating.Score.ToString();
             //RatingCount = movie.Rating.Rated_Num.ToString();
-            Avatar = movie.Poster.Large;
-            Summary = movie.Summary;
-            Douban = movie.Douban;
-            IMDb = movie.IMDb;
+            Avatar = !movie.Poster.Large.IsBlank() ? movie.Poster.Large : !movie.Poster.Medium.IsBlank() ? movie.Poster.Medium : !movie.Poster.Small.IsBlank() ? movie.Poster.Small : string.Empty;
+            Summary = movie.Summary.IsBlank() ? string.Empty : movie.Summary;
+            Douban = movie.Douban.IsBlank() ? string.Empty : movie.Douban;
+            IMDb = movie.IMDb.IsBlank() ? string.Empty : movie.IMDb;
 
             Directors = new List<LinkItem>();
             var directors = Basic_Celebrity_BLL.GetList(Guid.Parse(Id), "导演");

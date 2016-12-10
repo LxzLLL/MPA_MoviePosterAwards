@@ -14,9 +14,9 @@ namespace MPA_MoviePosterAwards.BLL
     public class MovieManager
     {
         #region 获取电影
-        public static void GetMovie(string id)
+        public static void GetMovie(string douban)
         {
-            if (Basic_Movie_BLL.Exist(id))
+            if (Basic_Movie_BLL.Exist(douban))
             {
                 return;
             }
@@ -25,11 +25,11 @@ namespace MPA_MoviePosterAwards.BLL
 
             List<Step_Celeb_Movie_Info> _step_celeb_movies = new List<Step_Celeb_Movie_Info>();
 
-            _basic_movie.Douban = id;
+            _basic_movie.Douban = douban;
             _basic_movie.Id = Guid.NewGuid();
             GetMovieFromJson(ref _basic_movie);
 
-            string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/subject/{0}/", id));
+            string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/subject/{0}/", douban));
             if (strhtml.IsBlank())
                 return;
             HtmlDocument hdoc = new HtmlDocument();
@@ -384,7 +384,7 @@ namespace MPA_MoviePosterAwards.BLL
                 if (html.CssSelect("span.all.hidden").Count() > 0)
                 {
                     _basic_celeb.Summary = html.CssSelect("span.all.hidden").FirstOrDefault().InnerText.Replace("　　", "\n").TrimAll();
-                    System.Diagnostics.Debug.WriteLine(html.CssSelect("span.all.hidden").FirstOrDefault().InnerText);
+                    //System.Diagnostics.Debug.WriteLine(html.CssSelect("span.all.hidden").FirstOrDefault().InnerText);
                 }
                 else if (html.CssSelect("div#intro").FirstOrDefault().CssSelect("div.bd").Count() > 0)
                 {

@@ -25,5 +25,17 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             CelebViewModel movie = new CelebViewModel(_basic_celeb);
             return View(movie);
         }
+
+        // GET: Celeb/List
+        public ActionResult List()
+        {
+            List<CelebViewModel> celebs = new List<CelebViewModel>();
+            foreach (var item in Basic_Celebrity_BLL.GetList(string.Empty))
+            {
+                CelebViewModel celeb = new CelebViewModel(item);
+                celebs.Add(celeb);
+            }
+            return View(celebs);
+        }
     }
 }

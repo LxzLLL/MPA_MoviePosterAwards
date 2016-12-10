@@ -31,10 +31,10 @@
         <span> 导演:</span>
         @foreach (var item in Model.Directors)
         {
-            <a href="@item.Url" target="_blank">@item.Title</a>
+            <a href="@item.Url">@item.Title</a>
             if (Model.Directors.IndexOf(item) != Model.Directors.Count - 1)
             {
-                <b> / </b>
+                <span> / </span>
             }
         }
     </div>
@@ -45,10 +45,10 @@
         <span>编剧:</span>
         @foreach (var item in Model.Writers)
         {
-            <a href="@item.Url" target="_blank">@item.Title</a>
+            <a href="@item.Url">@item.Title</a>
             if (Model.Writers.IndexOf(item) != Model.Writers.Count - 1)
             {
-                <b> / </b>
+                <span> / </span>
             }
         }
     </div>
@@ -59,10 +59,10 @@
         <span>主演:</span>
         @foreach (var item in Model.Casts)
         {
-            <a href="@item.Url" target="_blank">@item.Title</a>
+            <a href="@item.Url">@item.Title</a>
             if (Model.Casts.IndexOf(item) != Model.Casts.Count - 1)
             {
-                <b> / </b>
+                <span> / </span>
             }
         }
     </div>
