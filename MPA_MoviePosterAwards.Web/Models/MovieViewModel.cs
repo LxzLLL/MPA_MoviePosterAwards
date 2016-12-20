@@ -34,6 +34,8 @@ namespace MPA_MoviePosterAwards.Web.Models
         public string Summary { get; set; }
         public string Avatar { get; set; }
 
+        public List<string> Posters { get; set; }
+
         public MovieViewModel(Basic_Movie_Info movie)
         {
             Id = movie.Id.ToString();
@@ -96,6 +98,13 @@ namespace MPA_MoviePosterAwards.Web.Models
             {
                 Casts.Add(new LinkItem() { Url = "/Celeb/Index?id=" + item.Id, Title = item.Name });
             }
+
+            Posters = new List<string>();
+            var posters = Basic_Poster_BLL.GetList(Guid.Parse(Id));
+            foreach (var item in posters)
+            {
+                Posters.Add(item.Poster);
+            }
         }
     }
 
@@ -103,5 +112,9 @@ namespace MPA_MoviePosterAwards.Web.Models
     {
         public string Url { get; set; }
         public string Title { get; set; }
+    }
+
+    public class PosterItem
+    {
     }
 }

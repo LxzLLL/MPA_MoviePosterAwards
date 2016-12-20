@@ -28,6 +28,7 @@ namespace MPA_MoviePosterAwards.Model
         public ICollection<Step_Movie_Lang_Info> Langs { get; set; }
         public Step_Movie_Rating_Info Rating { get; set; }
         public Step_Movie_Poster_Info Poster { get; set; }
+        public List<Step_Celeb_Movie_Info> Celebs { get; set; }
 
         public Basic_Movie_Info()
         {
@@ -36,6 +37,7 @@ namespace MPA_MoviePosterAwards.Model
             Langs = new List<Step_Movie_Lang_Info>();
             Rating = new Step_Movie_Rating_Info();
             Poster = new Step_Movie_Poster_Info();
+            Celebs = new List<Step_Celeb_Movie_Info>();
         }
     }
 }

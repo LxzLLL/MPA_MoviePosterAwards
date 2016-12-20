@@ -20,11 +20,25 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
+        public List<Step_Celeb_Movie_Info> GetList(Guid movie)
+        {
+            using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
+            {
+                var result = database.Step_Celeb_Movie.Where(q => q.Movie == movie);
+                List<Step_Celeb_Movie_Info> infos = new List<Step_Celeb_Movie_Info>();
+                foreach (var item in result)
+                {
+                    infos.Add(ToModel(item));
+                }
+                return infos;
+            }
+        }
+
         public List<Step_Celeb_Movie_Info> GetList(string condition)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                var result = database.Step_Celeb_Movie.SqlQuery("SELECT * FROM Step_Celeb_Movie WHERE " + condition + " ORDER BY Order");
+                var result = database.Step_Celeb_Movie.SqlQuery("SELECT * FROM Step_Celeb_Movie WHERE 1=1" + condition + " ORDER BY Order");
                 List<Step_Celeb_Movie_Info> infos = new List<Step_Celeb_Movie_Info>();
                 foreach (var item in result)
                 {

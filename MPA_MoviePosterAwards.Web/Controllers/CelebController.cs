@@ -26,7 +26,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             return View(movie);
         }
 
-        // GET: Celeb/List
+        // GET: Celeb/List/
         public ActionResult List()
         {
             List<CelebViewModel> celebs = new List<CelebViewModel>();
@@ -36,6 +36,23 @@ namespace MPA_MoviePosterAwards.Web.Controllers
                 celebs.Add(celeb);
             }
             return View(celebs);
+        }
+
+        // GET: Celeb/Update/
+        public ActionResult Update(string id, string returnurl)
+        {
+            Basic_Celebrity_Info celeb = Basic_Celebrity_BLL.GetSingle(Guid.Parse(id));
+            Basic_Celebrity_BLL.Delete(celeb.Id);
+            MovieManager.InsertCeleb(celeb.Douban, celeb.Id);
+            return Redirect(returnurl);
+        }
+
+        // GET: Celeb/Delete/
+        public ActionResult Delete(string id, string returnurl)
+        {
+            Basic_Celebrity_Info celeb = Basic_Celebrity_BLL.GetSingle(Guid.Parse(id));
+            Basic_Celebrity_BLL.Delete(celeb.Id);
+            return Redirect(returnurl);
         }
     }
 }

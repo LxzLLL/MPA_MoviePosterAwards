@@ -116,4 +116,10 @@
 {
     <div><span>剧情简介:</span> @Model.Summary</div>
 }
+<div>
+    @foreach (var item in Model.Posters)
+    {
+        <img src="../../Resources/Poster/@item" style="height:256px; width:auto;"/>
+    }
+</div>
 

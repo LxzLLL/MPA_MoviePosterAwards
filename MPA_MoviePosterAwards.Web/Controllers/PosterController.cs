@@ -19,7 +19,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             return View();
         }
 
-        // GET: Poster/Create
+        // GET: Poster/Create/
         public ActionResult Create(string movie)
         {
             PosterCreateViewModel poster = new PosterCreateViewModel();
@@ -27,7 +27,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             return View(poster);
         }
 
-        // POST: Poster/Create
+        // POST: Poster/Create/
         [HttpPost]
         public ActionResult Create(PosterCreateViewModel model, HttpPostedFileBase file)
         {
@@ -39,17 +39,17 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             if (file != null && file.ContentLength > 0)
             {
                 string filename = PosterManager.GetPosterName(model.Movie);
-                var poster = Path.Combine(Request.MapPath("~/Resources/"), filename + Path.GetExtension(file.FileName));
-                var poster_s = Path.Combine(Request.MapPath("~/Resources/"), filename + "_S.jpg");
-                var poster_xs = Path.Combine(Request.MapPath("~/Resources/"), filename + "_XS.jpg");
+                var poster = Path.Combine(Request.MapPath("~/Resources/Poster/"), filename + Path.GetExtension(file.FileName));
+                var poster_s = Path.Combine(Request.MapPath("~/Resources/Poster_s/"), filename + "_s.jpg");
+                var poster_xs = Path.Combine(Request.MapPath("~/Resources/Poster_xs/"), filename + "_xs.jpg");
                 file.SaveAs(poster);
                 model.Poster = Path.GetFileName(poster);
                 model.Poster_S = Path.GetFileName(poster_s);
                 model.Poster_XS = Path.GetFileName(poster_xs);
 
                 Bitmap bmpSrc = new Bitmap(poster);
-                Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 300), 300, poster_s);
-                Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 100), 100, poster_xs);
+                Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 400), 400, poster_s);
+                Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 200), 200, poster_xs);
                 PosterManager.Create(model.Movie, model.Poster, model.Poster_S, model.Poster_XS);
             }
             else

@@ -16,7 +16,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
-        public static Basic_User_Info GetSingleById(Guid id)
+        public static Basic_User_Info GetSingle(Guid id)
         {
             Basic_User_DAL _Basic_User = new Basic_User_DAL();
             return _Basic_User.GetSingle(id);

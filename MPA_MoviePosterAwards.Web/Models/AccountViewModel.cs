@@ -37,6 +37,28 @@ namespace MPA_MoviePosterAwards.Web.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangePwdViewModel
+    {
+        [Display(Name = "用户名")]
+        public string Account { get; set; }
+
+        [Required(ErrorMessage = "请输入 旧密码。")]
+        [DataType(DataType.Password)]
+        [Display(Name = "旧密码")]
+        public string OldPassword { get; set; }
+
+        [Required(ErrorMessage = "请输入 新密码。")]
+        [RegularExpression(@"^(?=.*\d.*)(?=.*[a-zA-Z].*).{6,}$", ErrorMessage = "密码 必须包括字符和数字，且长度不小于6")]
+        [DataType(DataType.Password)]
+        [Display(Name = "新密码")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "确认密码")]
+        [Compare("Password", ErrorMessage = "两次输入的密码不一致。")]
+        public string ConfirmPassword { get; set; }
+    }
+
     public class ForgotPwdViewModel
     {
         [Required(ErrorMessage = "请输入 用户名。")]

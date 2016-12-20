@@ -24,6 +24,12 @@ namespace MPA_MoviePosterAwards.BLL
             return _Celeb_Movie.GetList(condition);
         }
 
+        public static List<Step_Celeb_Movie_Info> GetList(Guid movie)
+        {
+            Step_Celeb_Movie_DAL _Celeb_Movie = new Step_Celeb_Movie_DAL();
+            return _Celeb_Movie.GetList(movie);
+        }
+
         public static bool Exist(Guid id)
         {
             Step_Celeb_Movie_DAL _Celeb_Movie = new Step_Celeb_Movie_DAL();
@@ -51,6 +57,14 @@ namespace MPA_MoviePosterAwards.BLL
             if (!_Celeb_Movie.Exist(id))
                 return false;
             return _Celeb_Movie.Delete(id);
+        }
+
+        public static void DeleteList(Guid movie)
+        {
+            foreach (var item in GetList(movie))
+            {
+                Delete(item.Id);
+            }
         }
     }
 }

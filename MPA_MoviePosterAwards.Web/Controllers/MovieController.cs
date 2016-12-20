@@ -26,7 +26,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             return View(movie);
         }
 
-        // GET: Movie/List
+        // GET: Movie/List/
         public ActionResult List()
         {
             List<MovieViewModel> movies = new List<MovieViewModel>();
@@ -36,6 +36,42 @@ namespace MPA_MoviePosterAwards.Web.Controllers
                 movies.Add(movie);
             }
             return View(movies);
+        }
+
+        // GET: Movie/Create/
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Movie/Create/
+        [HttpPost]
+        public ActionResult Create(string douban)
+        {
+            foreach (var item in douban.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ").Split(' '))
+            {
+                var result = MovieManager.InsertMovie(item);
+
+                ModelState.AddModelError("", result.Error);
+            }
+            return View();
+        }
+
+        // GET: Movie/Update/
+        public ActionResult Update(string id, string returnurl)
+        {
+            Basic_Movie_Info movie = Basic_Movie_BLL.GetSingle(Guid.Parse(id));
+            Basic_Movie_BLL.Delete(movie.Id);
+            MovieManager.InsertMovie(movie.Douban, movie.Id);
+            return Redirect(returnurl);
+        }
+
+        // GET: Movie/Delete/
+        public ActionResult Delete(string id, string returnurl)
+        {
+            Basic_Movie_Info movie = Basic_Movie_BLL.GetSingle(Guid.Parse(id));
+            Basic_Movie_BLL.Delete(movie.Id);
+            return Redirect(returnurl);
         }
     }
 }

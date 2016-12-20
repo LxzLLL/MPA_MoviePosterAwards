@@ -132,6 +132,24 @@ namespace MPA_MoviePosterAwards.BLL
         }
         #endregion
 
+        #region 修改密码
+        public static RequestResult ChangePassword(Guid id, string password)
+        {
+            var user = Basic_User_BLL.GetSingle(id);
+            password = password.DESEncryption();
+            Dictionary<string, string> changes = new Dictionary<string, string>();
+            changes.Add("password", password);
+            if (Basic_User_BLL.Update(user.Id, changes))
+            {
+                return new RequestResult() { Succeeded = true };
+            }
+            else
+            {
+                return new RequestResult() { Succeeded = false, Error = "修改密码失败,请重试。。。" };
+            }
+        }
+        #endregion
+
         /// <summary>
         /// 检查当前登录用户是否是管理员
         /// </summary>
@@ -147,7 +165,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns></returns>
         public static bool CheckAdmin(string id)
         {
-            var user = Basic_User_BLL.GetSingleById(Guid.Parse(id));
+            var user = Basic_User_BLL.GetSingle(Guid.Parse(id));
             if (user == null)
                 return false;
             else
@@ -161,7 +179,7 @@ namespace MPA_MoviePosterAwards.BLL
         /// <returns>存在true，不存在false</returns>
         public static bool Exist(string id)
         {
-            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id) || Basic_User_BLL.GetSingleById(Guid.Parse(id)) == null)
+            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id) || Basic_User_BLL.GetSingle(Guid.Parse(id)) == null)
             {
                 return false;
             }

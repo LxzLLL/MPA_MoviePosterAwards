@@ -25,25 +25,46 @@ namespace MPA_MoviePosterAwards.Common
             try
             {
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+
                 req.Method = "GET";
                 SetHeaderValue(req.Headers, "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                 SetHeaderValue(req.Headers, "Accept-Language", "zh-CN,zh;q=0.8");
-                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=uEzTF1SP5RA; ps=y; ue=\"390266249@qq.com\"; dbcl2=\"63063997:VtVHs / FswIw\"; gr_user_id=03fc3590-700d-47a7-8865-7656455e4721; ap=1; ck=8P4R; push_noty_num=0; push_doumail_num=0; __utma=30149280.1833743162.1479219754.1479731250.1479738117.22; __utmb=30149280.0.10.1479738117; __utmc=30149280; __utmz=30149280.1479650747.18.4.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmv=30149280.6306; __utma=223695111.840018483.1479616913.1479731250.1479738117.7; __utmb=223695111.0.10.1479738117; __utmc=223695111; __utmz=223695111.1479616913.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _vwo_uuid_v2=050A0BECDBE34E35C996F3A6D7A0B42F|68a974f5e63ee16650102a0821969c90; _pk_id.100001.4cf6=e6ac8b4ef4397ede.1479616913.7.1479741951.1479731770.; _pk_ses.100001.4cf6=*; _ga=GA1.2.1833743162.1479219754; _gat=1");
+                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=hrf76zZ0qZY; ps=y; ct=y; ap=1; ue=\"390266249@qq.com\"; dbcl2=\"63063997:jl / SIxJurKY\"; ck=Bmj6; push_noty_num=0; push_doumail_num=0; __utma=30149280.1685418604.1480697741.1481436383.1481438476.30; __utmb=30149280.0.10.1481438476; __utmc=30149280; __utmz=30149280.1480746573.4.2.utmcsr=subhd.com|utmccn=(referral)|utmcmd=referral|utmcct=/a/328513; __utmv=30149280.6306; __utma=223695111.1104703353.1481436506.1481436506.1481438476.2; __utmb=223695111.0.10.1481438476; __utmc=223695111; __utmz=223695111.1481436506.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _pk_id.100001.4cf6=46c660172a6d11a7.1481436505.2.1481438478.1481436505.; _pk_ses.100001.4cf6=*; _vwo_uuid_v2=893DB0C4FED41ADA954E3859037B57F8|aeb1a7d0e2a6165da60b078d0dd2e3f4");
                 SetHeaderValue(req.Headers, "Host", "movie.douban.com");
                 SetHeaderValue(req.Headers, "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                 if (resp.StatusCode != HttpStatusCode.OK)
                     GetHtmlCode(url);
                 StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8);
-                string fullhtml = sr.ReadToEnd().Replace("&#39;", "'").Replace("&#34;", "\"").Replace("&quot;", "\"").Replace("&lt;", "<").Replace("&gt;", ">").Trim();
+                //System.Diagnostics.Debug.WriteLine(System.Web.HttpUtility.HtmlDecode("&#39;&#34;&quot;"));
+                //string fullhtml = sr.ReadToEnd().Replace("&#39;", "'").Replace("&#34;", "\"").Replace("&quot;", "\"").Replace("&lt;", "<").Replace("&gt;", ">").Trim();
+                string fullhtml = System.Web.HttpUtility.HtmlDecode(sr.ReadToEnd());
                 resp.Close();
                 sr.Close();
                 return fullhtml;
             }
             catch (WebException e)
             {
-                Console.WriteLine(url + "获取源码失败");
-                return string.Empty;
+                try
+                {
+                    WebClient wc = new WebClient();
+                    wc.Credentials = CredentialCache.DefaultCredentials;
+
+                    Stream resStream = wc.OpenRead(url);
+                    Encoding enc = Encoding.GetEncoding("UTF-8");
+                    StreamReader sr = new StreamReader(resStream, enc);
+                    //string fullhtml = sr.ReadToEnd().Replace("&#39;", "'").Replace("&#34;", "\"").Replace("&quot;", "\"").Replace("&lt;", "<").Replace("&gt;", ">").Trim();
+                    string fullhtml = System.Web.HttpUtility.HtmlDecode(sr.ReadToEnd());
+                    resStream.Close();
+
+                    wc.Dispose();
+                    return fullhtml;
+                }
+                catch (WebException e2)
+                {
+                    Console.WriteLine(url + "获取源码失败");
+                    return string.Empty;
+                }
             }
         }
     }

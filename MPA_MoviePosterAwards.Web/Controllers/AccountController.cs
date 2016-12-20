@@ -14,7 +14,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
     {
         #region 登录
         //
-        // GET: /Account/Login/
+        // GET: Account/Login/
         [AllowAnonymous]
         [LogonAttribute]
         public ActionResult Login(string returnUrl)
@@ -24,7 +24,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
 
         //
-        // POST: /Account/Login/
+        // POST: Account/Login/
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -57,7 +57,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
 
         #region 注册
         //
-        // GET: /Account/Register/
+        // GET: Account/Register/
         [AllowAnonymous]
         public ActionResult Register(string returnurl)
         {
@@ -66,7 +66,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
 
         //
-        // POST: /Account/Register/
+        // POST: Account/Register/
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -101,7 +101,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
 
         #region 注销
         //
-        // POST: /Account/LogOff/
+        // POST: Account/LogOff/
         [HttpPost]
         [SignedIn]
         [ValidateAntiForgeryToken]
@@ -112,10 +112,59 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
         #endregion
 
+        #region 修改密码
+        //
+        // GET: Account/ChangePwd/
+        [AllowAnonymous]
+        public ActionResult ChangePwd()
+        {
+            return View();
+        }
+
+        //
+        // POST: Account/ChangePwd/
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePwd(ChangePwdViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = Basic_User_BLL.GetSingle(Guid.Parse(CookieHelper.GetCookie("userid").ToString()));
+
+            if (user.Password != model.OldPassword.DESEncryption())
+            {
+                ModelState.AddModelError("", "旧密码错误");
+                return View(model);
+            }
+            if (model.Password == model.OldPassword)
+            {
+                ModelState.AddModelError("", "新旧密码不能相同");
+                return View(model);
+            }
+
+            var result = AccountManager.ChangePassword(user.Id, model.Password);
+            if (result.Succeeded)
+            {
+                user = Basic_User_BLL.GetSingle(Guid.Parse(CookieHelper.GetCookie("userid").ToString()));
+                AccountManager.SignInWithPassword(user.Account, user.Password);
+                return RedirectToAction("ChangePwd", "Account");
+            }
+            else
+            {
+                ModelState.AddModelError("", result.Error);
+                return View(model);
+            }
+        }
+        #endregion
+
 
         #region 忘记密码
         //
-        // GET: /Account/ForgotPwd/
+        // GET: Account/ForgotPwd/
         [AllowAnonymous]
         public ActionResult ForgotPwd()
         {
@@ -123,7 +172,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
 
         //
-        // POST: /Account/ForgotPwd/
+        // POST: Account/ForgotPwd/
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -151,7 +200,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
 
         #region 重置密码
         //
-        // GET: /Account/ResetPwd/
+        // GET: Account/ResetPwd/
         [AllowAnonymous]
         [ResetPwd]
         public ActionResult ResetPwd()
@@ -160,7 +209,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
 
         //
-        // POST: /Account/ResetPwd/
+        // POST: Account/ResetPwd/
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

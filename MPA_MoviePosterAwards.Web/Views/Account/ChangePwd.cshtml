@@ -1,7 +1,7 @@
-﻿@model MPA_MoviePosterAwards.Web.Models.ResetPwdViewModel
+﻿@model MPA_MoviePosterAwards.Web.Models.ChangePwdViewModel
 
 @{
-    ViewBag.Title = "Reset Password!";
+    ViewBag.Title = "Change Password!";
     ViewBag.PageType = 2;
 }
 
@@ -11,16 +11,26 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>重置你的密码>></strong>
+        <strong>修改你的密码>></strong>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("ResetPwd", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("ChangePwd", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             <div class="input-group col-sm-offset-3 col-sm-6">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
             @Html.HiddenFor(model => model.Account)
+
+            <div class="col-sm-offset-3 col-sm-6" style="margin-bottom:15px;">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control", placeholder = "旧密码" })
+                </div>
+                @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "text-danger" })
+            </div>
 
             <div class="col-sm-offset-3 col-sm-6" style="margin-bottom:15px;">
                 <div class="input-group">
@@ -43,8 +53,9 @@
             </div>
 
             <div class="col-sm-offset-3 col-sm-6">
-                <input type="submit" class="btn btn-primary btn-block" value="重置" />
+                <input type="submit" class="btn btn-primary btn-block" value="修改" />
             </div>
         }
     </div>
 </div>
+

@@ -221,6 +221,9 @@ namespace MPA_MoviePosterAwards.DAL
                     var lang = database.Step_Movie_Lang.Where(p => p.Movie == id);
                     database.Step_Movie_Lang.RemoveRange(lang);
 
+                    var celeb = database.Step_Celeb_Movie.Where(p => p.Movie == id);
+                    database.Step_Celeb_Movie.RemoveRange(celeb);
+
                     database.SaveChanges();
                     return true;
                 }

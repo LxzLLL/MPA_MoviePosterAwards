@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "新增电影";
+}
+
+<h2>新增电影</h2>
+
+@using (Html.BeginForm("Create", "Movie", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div>
+        @Html.Label("豆瓣编号")
+        @Html.TextArea("douban", "", new { @class = "form-control" })
+    </div>
+
+    <div>
+        <input type="submit" value="提交" class="btn btn-primary" />
+    </div>
+}

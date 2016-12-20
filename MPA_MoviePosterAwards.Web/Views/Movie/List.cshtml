@@ -5,6 +5,7 @@
 }
 
 <h2>所有电影</h2>
+@Html.ActionLink("新建电影", "Create", "Movie")
 <table class="table table-striped">
     <tr>
         <td>序号</td>
@@ -36,6 +37,8 @@
             </td>
             <td>
                 <a href="/Poster/Create?movie=@item.Id"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a href="/Movie/Delete?id=@item.Id&returnurl=@Request.Url.ToString()"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="/Movie/Update?id=@item.Id&returnurl=@Request.Url.ToString()"><span class="glyphicon glyphicon-refresh"></span></a>
             </td>
         </tr>
     }

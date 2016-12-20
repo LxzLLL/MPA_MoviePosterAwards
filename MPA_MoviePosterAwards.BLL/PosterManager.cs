@@ -22,6 +22,11 @@ namespace MPA_MoviePosterAwards.BLL
             Basic_Poster_BLL.Insert(_basic_poster);
         }
 
+        /// <summary>
+        /// 为新添加的海报生成文件名称
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         public static string GetPosterName(string movie)
         {
             Basic_Movie_Info movieinfo = Basic_Movie_BLL.GetSingle(Guid.Parse(movie));

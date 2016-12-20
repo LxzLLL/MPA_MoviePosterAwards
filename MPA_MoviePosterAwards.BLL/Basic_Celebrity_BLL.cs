@@ -28,14 +28,14 @@ namespace MPA_MoviePosterAwards.BLL
 
         public static List<Basic_Celebrity_Info> GetList(string condition)
         {
-            Basic_Celebrity_DAL _Basic_User = new Basic_Celebrity_DAL();
-            return _Basic_User.GetList(condition);
+            Basic_Celebrity_DAL _Basic_Celeb = new Basic_Celebrity_DAL();
+            return _Basic_Celeb.GetList(condition);
         }
 
         public static List<Basic_Celebrity_Info> GetList(Guid movie, string position)
         {
-            Basic_Celebrity_DAL _Basic_User = new Basic_Celebrity_DAL();
-            return _Basic_User.GetList(movie, position);
+            Basic_Celebrity_DAL _Basic_Celeb = new Basic_Celebrity_DAL();
+            return _Basic_Celeb.GetList(movie, position);
         }
 
         public static bool Exist(Guid id)
