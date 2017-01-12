@@ -1,0 +1,170 @@
+﻿body {
+    font-family: 'Microsoft JhengHei','Microsoft YaHei',Arial;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+a,
+input,
+button,
+textarea {
+    outline: none;
+    text-decoration: none;
+}
+
+    a:hover, a:focus,
+    input:hover, input:focus,
+    button:hover, button:focus,
+    textarea:hover, textarea:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
+    /*input[type=text] {
+        padding: 0.5em;
+        border-radius: 2px;
+        border: 1px solid #999999;
+    }
+
+        input[type=text]:focus {
+            border: 1px solid #242424;
+        }*/
+
+    button.ms-button,
+    input[type=button].ms-button {
+        background-color: #393939;
+        border: 1px solid #393939;
+        border-radius: 2px;
+        padding: 0.5em 1em;
+        color: #F1F1F1;
+        z-index: 0;
+        overflow: hidden;
+        transition: all 0.25s ease;
+    }
+
+        button.ms-button:hover,
+        input[type=button].ms-button:hover {
+            background-color: #282828;
+            color: #F1F1F1;
+        }
+
+    button.ms-button {
+        position: relative;
+    }
+
+        button.ms-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 33%;
+            opacity: 0;
+            z-index: -1;
+            background-color: #666666;
+            transform: skewX(-30deg);
+            transition: inherit;
+        }
+
+        button.ms-button:hover:before {
+            opacity: 1;
+            left: 120%;
+        }
+
+
+    a.link-text {
+        color: #383838;
+        padding: 1px 2px;
+        border-radius: 2px;
+        margin: 0;
+        transition: all 0.25s ease;
+    }
+
+        a.link-text:hover,
+        a.link-text:focus {
+            color: #F1F1F1;
+            background-color: #FF6600;
+        }
+
+    a.link-button {
+        display: inline-block; /*解决a标签高度和button,input[type=button]的高度不同*/
+        background-color: #383838;
+        border: 1px solid #383838;
+        border-radius: 2px;
+        padding: 0.5em 1em;
+        color: #F1F1F1;
+        transition: all 0.25s ease;
+    }
+
+        a.link-button:hover,
+        a.link-button:focus {
+            background-color: #282828;
+            color: #F1F1F1;
+        }
+
+.ms-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 750px;
+}
+
+@media (min-width:767px) {
+    .ms-container {
+        width: 750px;
+    }
+}
+
+@media (min-width:995px) {
+    .ms-container {
+        width: 970px;
+    }
+}
+
+@media (min-width:1199px) {
+    .ms-container {
+        width: 1120px;
+    }
+}
+
+@media (min-width:1439px) {
+    .ms-container {
+        width: 1280px;
+    }
+}
+
+@font-face {
+    font-family: 'KhangXi';
+    src: url('fonts/TpldKhangXiDictTrial.otf') format('opentype');
+}
+
+@font-face {
+    font-family: '古典明朝体';
+    src: url('fonts/WenYue-GuDianMingChaoTi-NC-W5.otf') format('opentype');
+}
+
+@font-face {
+    font-family: '方正清刻本悦宋简体';
+    src: url('fonts/方正清刻本悦宋简体.TTF') format('truetype');
+}
+
+.ms-table {
+    border-collapse: collapse;
+}
+
+    .ms-table tr td:first-child {
+        text-align: right;
+    }
+
+    .ms-table tr td {
+        padding: 5px;
+    }
+
+.spliter {
+    height: 5px;
+    width: 100%;
+    background-color: #FF6600;
+    margin: 20px 0;
+}

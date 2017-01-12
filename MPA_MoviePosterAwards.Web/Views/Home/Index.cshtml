@@ -1,6 +1,61 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/ms-banner.css" rel="stylesheet" />
+<script src="~/Content/ms-banner.js"></script>
+<div class="ms-banner">
+    <div class="ms-banner-background">
+        <span style="color: white; display: block; position: absolute; bottom: 1em; right: 1em;">图片：Ciao大榴莲！</span>
+    </div>
+    <div class="ms-banner-contents">
+        <div style="text-align: center; margin: 0 auto;">
+            <div style="font-family: '古典明朝体'; font-size: 4.2em;">程序包管理控制台</div>
+            <div class="ms-input-group">
+                <input type="text" placeholder="请输入你想输入的内容..." />
+                <span class="fa fa-search"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ms-input-group {
+        color: #FFFFFF;
+        font-size: 16px;
+        overflow: hidden;
+        background-color: transparent;
+        display: inline-block;
+        border: 1px solid #FFFFFF;
+        border-radius: 2px;
+        padding: 0.5em;
+        transition: all 0.25s ease;
+    }
+
+        .ms-input-group > input {
+            background-color: transparent;
+            border: none;
+            width: 360px;
+        }
+
+        .ms-input-group > span {
+            background-color: transparent;
+            border: none;
+        }
+
+        .ms-input-group:hover {
+            background-color: rgba(0,0,0,0.25);
+        }
+</style>
+
+<div class="ms-container" style="background-color: #DDDDDD; height: 100%; padding-top: 20px;">
+
+    <p style="height: 3000px;"></p>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.ms-navbar').removeClass('ms-navbar-default').addClass('ms-navbar-transparent')
+    })
+</script>
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>

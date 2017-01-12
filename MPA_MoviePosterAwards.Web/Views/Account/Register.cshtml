@@ -1,9 +1,11 @@
 ﻿@model MPA_MoviePosterAwards.Web.Models.RegisterViewModel
 
-    @{
-        ViewBag.Title = "Register";
-    }
+@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    ViewBag.Title = "Register";
+}
 
+@*
     @using (Html.BeginForm("Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -52,4 +54,29 @@
 
     <div class="panel panel-body center-horizon panel-login font-larger">
         已有账号？&nbsp;&nbsp;@Html.ActionLink(linkText: "点此登录. ", actionName: "Login", routeValues: null, htmlAttributes: new { @class = "link-text" })
+    </div>*@
+
+
+@using (Html.BeginForm("Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="ms-signin-form-signin active">
+        @Html.TextBoxFor(m => m.Account, new { placeholder = "用户名", style = "margin-top: 25px;" })
+        @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
+        @Html.PasswordFor(m => m.Password, new { placeholder = "密码", style = "margin-top: 20px;" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+        <input type="submit" value="注册" class="ms-button-signin" style="margin-top: 20px;" onclick="loading()" />
+        <div class="ms-signin-spliter"><span>or</span></div>
+        <input type="button" value="已有账号？登录" class="ms-button-signup" onclick="login()" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     </div>
+}
+<script>
+    function login() {
+        window.location.href = "/Account/Login";
+    }
+    function loading() {
+        $('.ms-signin-loading').addClass('active');
+    }
+</script>

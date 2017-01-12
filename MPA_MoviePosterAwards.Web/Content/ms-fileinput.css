@@ -1,0 +1,67 @@
+﻿
+
+.ms-fileinput {
+    /*background-color: #FF3300;
+    border: 3px solid #FF6600;
+    display: inline;*/
+}
+
+    .ms-fileinput > input[type=file] {
+        opacity: 0;
+        height: 0px;
+        width: 0px;
+    }
+
+
+    .ms-fileinput > label {
+        position: relative;
+        background-color: #393939;
+        color: #F1F1F1;
+        border: 1px solid #393939;
+        border-radius: 2px;
+        padding: 0.5em 1em;
+        z-index: 0;
+        overflow: hidden;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+        .ms-fileinput > label:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 20%;
+            border-radius: 2px;
+            z-index: -1;
+            opacity: 0;
+            transform: skewX(-30deg);
+            transition: inherit;
+            background-color: #666666;
+        }
+
+        .ms-fileinput > label > span {
+            font-size: 0.8em;
+            color: #BBBBBB;
+            margin-left: 1em;
+            transition: inherit;
+        }
+
+        .ms-fileinput > label:hover,
+        .ms-fileinput > label:focus {
+            /*color: #F1F1F1;*/
+            /*border: 1px solid #FF3300;*/
+            background-color: #282828;
+        }
+
+            .ms-fileinput > label:hover > span,
+            .ms-fileinput > label:focus > span {
+                color: inherit;
+            }
+
+            .ms-fileinput > label:hover:before,
+            .ms-fileinput > label:focus:before {
+                opacity: 1;
+                left: 120%;
+            }

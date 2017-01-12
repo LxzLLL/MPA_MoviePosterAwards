@@ -1,0 +1,51 @@
+﻿
+.ms-squeezebox {
+    margin: 0 auto;
+    padding: 5px;
+    background-color: #FFFFFF;
+}
+
+    .ms-squeezebox > ul {
+        list-style: none;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        overflow: hidden;
+        background-color: transparent;
+        /*background: linear-gradient(90deg, #EEEEEE 0, #BBBBBB 100%);*/
+    }
+
+        .ms-squeezebox > ul li {
+            width: 25%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            box-shadow: 0 0 15px #000000;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+            .ms-squeezebox > ul li > .front {
+                display: block;
+            }
+
+            .ms-squeezebox > ul li.squeeze > .front {
+                display: block;
+            }
+
+            .ms-squeezebox > ul li.spread > .front {
+                display: none;
+            }
+
+            .ms-squeezebox > ul li > .back {
+                display: none;
+            }
+
+            .ms-squeezebox > ul li.squeeze > .back {
+                display: none;
+            }
+
+            .ms-squeezebox > ul li.spread > .back {
+                display: block;
+            }

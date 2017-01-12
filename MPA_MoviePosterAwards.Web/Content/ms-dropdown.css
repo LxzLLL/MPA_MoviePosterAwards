@@ -1,0 +1,106 @@
+﻿
+.ms-dropdown,
+.ms-hoverdown {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 364px;
+    color: #F1F1F1;
+}
+
+    .ms-dropdown > span,
+    .ms-hoverdown > span {
+        position: relative;
+        display: block;
+        background-color: #393939;
+        padding: 1em;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+
+        .ms-dropdown > span:hover,
+        .ms-hoverdown > span:hover {
+            background: #282828;
+        }
+
+        .ms-dropdown > span:after,
+        .ms-hoverdown > span:after {
+            position: absolute;
+            right: 1em;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'FontAwesome';
+            content: '\f078';
+            z-index: 5;
+        }
+
+    .ms-dropdown.open > span:after,
+    .ms-hoverdown.open > span:after {
+        content: '\f077';
+    }
+
+    .ms-dropdown > ul,
+    .ms-hoverdown > ul {
+        opacity: 0;
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        background: #FFFFFF;
+        border-radius: 2px;
+        top: 100%;
+        left: 0;
+        list-style: none;
+        padding: 0;
+        visibility: hidden;
+        margin: 0;
+        transform-origin: top;
+        transition: all 0.25s linear;
+        z-index: 10;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.2);
+    }
+
+        .ms-dropdown > ul.slideopen,
+        .ms-hoverdown > ul.slideopen {
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.25s ease;
+            animation: slideopen 0.25s ease;
+        }
+
+        .ms-dropdown > ul.slideclose,
+        .ms-hoverdown > ul.slideclose {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.1s ease;
+            transform: scale(0.25,0.25);
+        }
+
+        .ms-dropdown > ul li,
+        .ms-hoverdown > ul li {
+            text-align: left;
+            padding: 0.8em 1em 0.8em 1em;
+            color: #787878;
+            cursor: pointer;
+            transition: inherit;
+        }
+
+            .ms-dropdown > ul li:hover,
+            .ms-hoverdown > ul li:hover {
+                background: #FF6600;
+                color: #F1F1F1;
+            }
+
+@keyframes slideopen {
+    from {
+        transform: scale(0.25,0.25);
+    }
+
+    80% {
+        transform: scale(1.1,1.1);
+    }
+
+    to {
+        transform: scale(1.0,1.0);
+    }
+}

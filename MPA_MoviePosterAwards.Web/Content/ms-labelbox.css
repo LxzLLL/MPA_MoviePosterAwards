@@ -1,0 +1,47 @@
+﻿
+.ms-labelbox {
+    background-color: #666666;
+    color: #F1F1F1;
+    border-radius: 2px;
+    padding: 0.5em 0.8em;
+    cursor: pointer;
+    z-index: 0;
+    transition: all 0.25s ease;
+}
+
+    .ms-labelbox > span.checkbox {
+        display: inline-block;
+        margin: 0;
+        padding: 0.3em;
+        border-radius: 2px;
+        border: 1px solid #FFFFFF;
+        background-color: transparent;
+    }
+
+    .ms-labelbox > span.radiobutton {
+        display: inline-block;
+        margin: 0;
+        padding: 0.3em;
+        border-radius: 50%;
+        border: 1px solid #FFFFFF;
+        background-color: transparent;
+    }
+
+    .ms-labelbox > input {
+        display: none;
+    }
+
+    .ms-labelbox.checked {
+        color: #F1F1F1;
+        background-color: #FF6600;
+    }
+
+        .ms-labelbox.checked > span.checkbox {
+            background-color: white;
+            display: inline-block;
+        }
+
+        .ms-labelbox.checked > span.radiobutton {
+            background-color: white;
+            display: inline-block;
+        }

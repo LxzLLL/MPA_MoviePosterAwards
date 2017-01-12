@@ -173,14 +173,37 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Common.css" />
+    <Content Include="Content\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\imgs\6045e9965505b85837ddcd619833f7faeb88e9e8101dfa.jpg" />
+    <Content Include="Content\imgs\back竖直.jpg" />
+    <Content Include="Content\imgs\p2363503306.jpg" />
+    <Content Include="Content\jquery.js" />
+    <Content Include="Content\js-plugin.js" />
+    <Content Include="Content\ms-banner.css" />
+    <Content Include="Content\ms-banner.js" />
+    <Content Include="Content\ms-dropdown.css" />
+    <Content Include="Content\ms-dropdown.js" />
+    <Content Include="Content\ms-fileinput.css" />
+    <Content Include="Content\ms-fileinput.js" />
+    <Content Include="Content\ms-labelbox.css" />
+    <Content Include="Content\ms-labelbox.js" />
+    <Content Include="Content\ms-loader.css" />
+    <Content Include="Content\ms-navbar.css" />
+    <Content Include="Content\ms-navbar.js" />
+    <Content Include="Content\ms-popup.css" />
+    <Content Include="Content\ms-popup.js" />
+    <Content Include="Content\ms-squeezebox.css" />
+    <Content Include="Content\ms-squeezebox.js" />
+    <Content Include="Content\ms-waterfall.css" />
+    <Content Include="Content\ms-waterfall.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -188,12 +211,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\TpldKhangXiDictTrial.otf" />
+    <Content Include="Content\fonts\WenYue-GuDianMingChaoTi-NC-W5.otf" />
+    <Content Include="Content\fonts\方正清刻本悦宋简体.TTF" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -239,6 +269,7 @@
     <Content Include="Views\Poster\Create.cshtml" />
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Account\ChangePwd.cshtml" />
+    <Content Include="Views\Shared\_LayoutAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

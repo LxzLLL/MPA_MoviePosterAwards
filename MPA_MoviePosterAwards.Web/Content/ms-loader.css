@@ -1,0 +1,161 @@
+﻿
+.ms-loader-ball-scale {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    background-color: transparent;
+}
+
+    .ms-loader-ball-scale:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,66,0,0.5);
+        border-radius: 50%;
+        animation: ball-scale-outter 0.8s linear infinite;
+    }
+
+    .ms-loader-ball-scale:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,66,0,1.0);
+        border-radius: 50%;
+        animation: ball-scale-inner 0.8s linear infinite;
+    }
+
+@keyframes ball-scale-outter {
+    from {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1.0);
+    }
+}
+
+@keyframes ball-scale-inner {
+    from {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(0);
+    }
+}
+
+.ms-loader-ball-clip {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    background-color: transparent;
+}
+
+    .ms-loader-ball-clip:before {
+        position: absolute;
+        content: '';
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #FF6600 transparent #FF6600 transparent;
+        animation: ball-clip-outter 2s ease infinite;
+    }
+
+    .ms-loader-ball-clip:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,66,0,1.0);
+        border-radius: 50%;
+        border-color: transparent;
+        animation: ball-clip-inner 1s ease-in-out infinite;
+    }
+
+@keyframes ball-clip-outter {
+    from {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(180deg);
+    }
+
+    50% {
+        transform: rotate(360deg);
+    }
+
+    75% {
+        transform: rotate(540deg);
+    }
+
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes ball-clip-inner {
+    from {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(0.4);
+    }
+
+    to {
+        transform: scale(0);
+    }
+}
+
+.ms-loader-square-spin {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #FF6600;
+    animation: square-spin 2s ease infinite;
+}
+
+@keyframes square-spin {
+    from {
+        transform: perspective(100px) rotateX(0) rotateY(0);
+    }
+
+    25% {
+        transform: perspective(100px) rotateX(180deg) rotateY(0);
+    }
+
+    50% {
+        transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    }
+
+    75% {
+        transform: perspective(100px) rotateX(0) rotateY(180deg);
+    }
+
+    to {
+        transform: perspective(100px) rotateX(0) rotateY(360deg);
+    }
+}
