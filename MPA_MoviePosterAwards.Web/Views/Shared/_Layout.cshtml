@@ -18,11 +18,11 @@
         <div class="ms-container ms-navbar-bg">
             <a class="ms-navbar-brand" href="/Home/Index">海报</a>
             <ul class="ms-nav ms-navbar-nav">
-                <li class="active">@Html.ActionLink("首页", "Index", "Home")</li>
-                <li>@Html.ActionLink("电影", "List", "Movie")</li>
-                <li>@Html.ActionLink("影人", "List", "Celeb")</li>
-                <li>@Html.ActionLink("关于", "About", "Home")</li>
-                <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                <li class="nav-home">@Html.ActionLink("首页", "Index", "Home")</li>
+                <li class="nav-movie">@Html.ActionLink("电影", "List", "Movie")</li>
+                <li class="nav-celeb">@Html.ActionLink("影人", "List", "Celeb")</li>
+                <li class="nav-about">@Html.ActionLink("关于", "About", "Home")</li>
+                <li class="nav-contact">@Html.ActionLink("联系方式", "Contact", "Home")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
