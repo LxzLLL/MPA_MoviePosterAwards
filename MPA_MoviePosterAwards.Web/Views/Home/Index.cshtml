@@ -3,20 +3,6 @@
 }
 <link href="~/Content/ms-banner.css" rel="stylesheet" />
 <script src="~/Content/ms-banner.js"></script>
-<div class="ms-banner">
-    <div class="ms-banner-background">
-        <span style="color: white; display: block; position: absolute; bottom: 1em; right: 1em;">图片：Ciao大榴莲！</span>
-    </div>
-    <div class="ms-banner-contents">
-        <div style="text-align: center; margin: 0 auto;">
-            <div style="font-family: '古典明朝体'; font-size: 4.2em;">程序包管理控制台</div>
-            <div class="ms-input-group">
-                <input type="text" placeholder="请输入你想输入的内容..." />
-                <span class="fa fa-search"></span>
-            </div>
-        </div>
-    </div>
-</div>
 <style>
     .ms-input-group {
         color: #FFFFFF;
@@ -25,8 +11,8 @@
         background-color: transparent;
         display: inline-block;
         border: 1px solid #FFFFFF;
-        border-radius: 2px;
-        padding: 0.5em;
+        border-radius: 0px;
+        padding: 0.5em 1em;
         transition: all 0.25s ease;
     }
 
@@ -36,21 +22,36 @@
             width: 360px;
         }
 
+            .ms-input-group > input::-webkit-input-placeholder {
+                color: #CCCCCC !important;
+                font-style: italic;
+            }
+
         .ms-input-group > span {
             background-color: transparent;
             border: none;
+            margin-left: 0.5em;
         }
 
         .ms-input-group:hover {
             background-color: rgba(0,0,0,0.25);
         }
 </style>
-
-<div class="ms-container" style="background-color: #DDDDDD; height: 100%; padding-top: 20px;">
-
-    <p style="height: 3000px;"></p>
+<div class="ms-banner">
+    <div class="ms-banner-background">
+        <span style="color: white; display: block; position: absolute; bottom: 1em; right: 1em;">@@材料物理_</span>
+    </div>
+    <div class="ms-banner-contents">
+        <div style="text-align: center; margin: 0 auto;">
+            <div style="font-family: '古典明朝体'; font-size: 4.2em; margin-bottom:10px;">民生各有所乐兮</div>
+            <div class="ms-input-group">
+                <input type="text" placeholder="Find your pix..." />
+                <span class="fa fa-search"></span>
+            </div>
+            <div>热搜：xxx,xx,xxxx,xxxx,x,xx</div>
+        </div>
+    </div>
 </div>
-
 <script>
     $(document).ready(function () {
         $('.ms-navbar').removeClass('ms-navbar-default').addClass('ms-navbar-transparent');
@@ -58,31 +59,166 @@
         $('.nav-home').addClass('active');
     });
 </script>
+<style>
+    .ms-picture-canvas {
+        margin: 0 -10px;
+    }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    .ms-picture-box {
+        height: 256.6666666666667px;
+        width: 256.6666666666667px;
+        display: inline-block;
+        float: left;
+    }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        .ms-picture-box > div {
+            height: 236.6666666666667px;
+            width: 236.6666666666667px;
+            margin: 10px 0 0 10px;
+            background-color: #999999;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+            .ms-picture-box > div .ms-picture-box-back {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-image: url('../../Resources/Poster/Hacksaw_Ridge_1_4baa193f96804f9bb872d346be5e69e8.jpg');
+                background-position: center;
+                background-size: cover;
+            }
+
+            .ms-picture-box > div .ms-picture-box-cover {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+                background-color: rgba(44,44,44,0.4);
+                transition: inherit;
+            }
+
+            .ms-picture-box > div .ms-picture-box-banner {
+                position: absolute;
+                left: 0;
+                bottom: -15%;
+                height: 20%;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+                background-color: rgba(44,44,44,0.4);
+                color: #F1F1F1;
+                padding: 5px 20px;
+                transition: inherit;
+            }
+
+                .ms-picture-box > div .ms-picture-box-banner > span {
+                    display: block;
+                    line-height: 26px;
+                }
+
+        .ms-picture-box.active > div .ms-picture-box-cover {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ms-picture-box.active > div .ms-picture-box-banner {
+            opacity: 1;
+            bottom: 0;
+            visibility: visible;
+        }
+
+    @@media (min-width:767px) {
+        .ms-picture-box {
+            height: 256.6666666666667px;
+            width: 256.6666666666667px;
+        }
+
+            .ms-picture-box > div {
+                height: 236.6666666666667px;
+                width: 236.6666666666667px;
+            }
+    }
+
+    @@media (min-width:995px) {
+        .ms-picture-box {
+            height: 330px;
+            width: 330px;
+        }
+
+            .ms-picture-box > div {
+                height: 310px;
+                width: 310px;
+            }
+    }
+
+    @@media (min-width:1199px) {
+        .ms-picture-box {
+            height: 285px;
+            width: 285px;
+        }
+
+            .ms-picture-box > div {
+                height: 265px;
+                width: 265px;
+            }
+    }
+
+    @@media (min-width:1439px) {
+        .ms-picture-box {
+            height: 325px;
+            width: 325px;
+        }
+
+            .ms-picture-box > div {
+                height: 305px;
+                width: 305px;
+            }
+    }
+</style>
+<div class="ms-container" style="padding:0px;">
+    <div class="clearfix" style="margin:30px 0 15px 0;">
+        <span style="display:inline-block; width:42%; border-bottom: 1px solid #E0E0E0; height:15px; float:left;"></span>
+        <span style="display:inline-block; width:16%; height:30px; text-align:center; float:left; line-height:30px; font-size:22px;">最近更新</span>
+        <span style="display:inline-block; width:42%; border-bottom: 1px solid #E0E0E0; height:15px; float:left;"></span>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="clearfix ms-picture-canvas">
+        @for (int i = 0; i < 20; i++)
+        {
+            <div class="ms-picture-box">
+                <div>
+                    <div class="ms-picture-box-back"></div>
+                    <a href="#" title="血战钢锯岭">
+                        <div class="ms-picture-box-cover"></div>
+                    </a>
+                    <div class="ms-picture-box-banner">
+                        <span>血战钢锯岭</span>
+                        <span>2017-03-02 08:07:08</span>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
+<script>
+    $('.ms-picture-box').mouseover(function () {
+        $(this).addClass('active');
+    });
+    $('.ms-picture-box').mouseleave(function () {
+        $(this).removeClass('active');
+    });
+
+    $('.ms-picture-box').click(function () {
+        console.log('box click');
+    });
+    $('.ms-picture-box > div > .ms-picture-box-banner').click(function (event) {
+        console.log('banner click');
+        event.stopPropagation();
+    });
+</script>
