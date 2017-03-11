@@ -12,6 +12,7 @@ namespace MPA_MoviePosterAwards.Model
         public Guid Movie { get; set; }
         public Guid User { get; set; }
         public string Poster { get; set; }
+        public string Poster_M { get; set; }
         public string Poster_S { get; set; }
         public string Poster_XS { get; set; }
         public DateTime Time { get; set; }

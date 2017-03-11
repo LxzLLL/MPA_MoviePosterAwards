@@ -14,61 +14,62 @@
         color: #666666;
     }
 </style>
+<div class="ms-container">
+    <h2>@Model.Name</h2>
 
-<h2>@Model.Name</h2>
-
-<div>
-    <img src="@Model.Avatar" />
+    <div>
+        <img src="@Model.Avatar" />
+    </div>
+    <div><span>姓名:</span> @Model.Name</div>
+    @if (!Model.Name_En.IsBlank())
+    {
+        <div><span>原名:</span> @Model.Name_En</div>
+    }
+    <div><span>性别:</span> @Model.Gender</div>
+    @if (!Model.Birth_Date.IsBlank())
+    {
+        <div><span>出生日期:</span> @Model.Birth_Date</div>
+    }
+    @if (!Model.Death_Date.IsBlank())
+    {
+        <div><span>去世日期:</span> @Model.Death_Date</div>
+    }
+    @if (!Model.Born_Place.IsBlank())
+    {
+        <div><span>出生地:</span> @Model.Born_Place</div>
+    }
+    @if (!Model.Profession.IsBlank())
+    {
+        <div><span>职业:</span> @Model.Profession</div>
+    }
+    @if (!Model.Aka.IsBlank())
+    {
+        <div><span>更多中文名:</span> @Model.Aka</div>
+    }
+    @if (!Model.Aka_En.IsBlank())
+    {
+        <div><span>更多外文名:</span> @Model.Aka_En</div>
+    }
+    @if (!Model.Family.IsBlank())
+    {
+        <div><span>家庭成员:</span> @Model.Family</div>
+    }
+    @if (!Model.Douban.IsBlank())
+    {
+        <div>
+            <span>豆瓣编号:</span>
+            <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
+        </div>
+    }
+    @if (!Model.IMDb.IsBlank())
+    {
+        <div>
+            <span>IMDb编号:</span>
+            <a href="http://www.imdb.com/name/@Model.IMDb" target="_blank">@Model.IMDb</a>
+        </div>
+    }
+    @if (!Model.Summary.IsBlank())
+    {
+        <div><span>影人简介:</span> @Model.Summary</div>
+    }
 </div>
-<div><span>姓名:</span> @Model.Name</div>
-@if (!Model.Name_En.IsBlank())
-{
-    <div><span>原名:</span> @Model.Name_En</div>
-}
-<div><span>性别:</span> @Model.Gender</div>
-@if (!Model.Birth_Date.IsBlank())
-{
-    <div><span>出生日期:</span> @Model.Birth_Date</div>
-}
-@if (!Model.Death_Date.IsBlank())
-{
-    <div><span>去世日期:</span> @Model.Death_Date</div>
-}
-@if (!Model.Born_Place.IsBlank())
-{
-    <div><span>出生地:</span> @Model.Born_Place</div>
-}
-@if (!Model.Profession.IsBlank())
-{
-    <div><span>职业:</span> @Model.Profession</div>
-}
-@if (!Model.Aka.IsBlank())
-{
-    <div><span>更多中文名:</span> @Model.Aka</div>
-}
-@if (!Model.Aka_En.IsBlank())
-{
-    <div><span>更多外文名:</span> @Model.Aka_En</div>
-}
-@if (!Model.Family.IsBlank())
-{
-    <div><span>家庭成员:</span> @Model.Family</div>
-}
-@if (!Model.Douban.IsBlank())
-{
-    <div>
-        <span>豆瓣编号:</span>
-        <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
-    </div>
-}
-@if (!Model.IMDb.IsBlank())
-{
-    <div>
-        <span>IMDb编号:</span>
-        <a href="http://www.imdb.com/name/@Model.IMDb" target="_blank">@Model.IMDb</a>
-    </div>
-}
-@if (!Model.Summary.IsBlank())
-{
-    <div><span>影人简介:</span> @Model.Summary</div>
-}

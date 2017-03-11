@@ -30,10 +30,10 @@ namespace MPA_MoviePosterAwards.BLL
             return _Basic_Poster.GetList(movie);
         }
 
-        public static bool Exist(Guid movie)
+        public static bool Exist(Guid id)
         {
             Basic_Poster_DAL _Basic_Poster = new Basic_Poster_DAL();
-            return _Basic_Poster.Exist(movie);
+            return _Basic_Poster.Exist(id);
         }
 
         public static bool Insert(Basic_Poster_Info info)

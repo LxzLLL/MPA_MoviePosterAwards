@@ -1,6 +1,9 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<MPA_MoviePosterAwards.Web.Models.NewestPosterViewModel>
+
+@{
+    ViewBag.Title = System.Configuration.ConfigurationManager.AppSettings["WebsiteTitle"];
 }
+
 <link href="~/Content/ms-banner.css" rel="stylesheet" />
 <script src="~/Content/ms-banner.js"></script>
 <style>
@@ -43,7 +46,7 @@
     </div>
     <div class="ms-banner-contents">
         <div style="text-align: center; margin: 0 auto;">
-            <div style="font-family: '古典明朝体'; font-size: 4.2em; margin-bottom:10px;">民生各有所乐兮</div>
+            <div style="font-family: '古典明朝体'; font-size: 4.2em; margin-bottom:10px;">@System.Configuration.ConfigurationManager.AppSettings["WebsiteSubTitle"]</div>
             <div class="ms-input-group">
                 <input type="text" placeholder="Find your pix..." />
                 <span class="fa fa-search"></span>
@@ -78,7 +81,7 @@
             background-color: #999999;
             overflow: hidden;
             position: relative;
-            transition: all 0.5s ease;
+            transition: all 0.8s ease;
         }
 
             .ms-picture-box > div .ms-picture-box-back {
@@ -90,6 +93,7 @@
                 background-image: url('../../Resources/Poster/Hacksaw_Ridge_1_4baa193f96804f9bb872d346be5e69e8.jpg');
                 background-position: center;
                 background-size: cover;
+                transition: all 0.6s ease;
             }
 
             .ms-picture-box > div .ms-picture-box-cover {
@@ -100,28 +104,39 @@
                 width: 100%;
                 opacity: 0;
                 visibility: hidden;
-                background-color: rgba(44,44,44,0.4);
-                transition: inherit;
+                background-color: rgba(44,44,44,0.6);
+                transition: all 0.6s ease;
             }
 
             .ms-picture-box > div .ms-picture-box-banner {
                 position: absolute;
                 left: 0;
-                bottom: -15%;
-                height: 20%;
+                bottom: -40px;
+                height: 50px;
                 width: 100%;
                 opacity: 0;
                 visibility: hidden;
-                background-color: rgba(44,44,44,0.4);
+                background-color: #FF6600;
                 color: #F1F1F1;
-                padding: 5px 20px;
-                transition: inherit;
+                padding: 0px 20px;
+                transition: all 0.6s ease;
             }
 
                 .ms-picture-box > div .ms-picture-box-banner > span {
                     display: block;
-                    line-height: 26px;
+                    font-size: 12px;
+                    margin-top: 4px;
                 }
+
+                    .ms-picture-box > div .ms-picture-box-banner > span > a {
+                        color: #F1F1F1;
+                        font-size: 15px;
+                        text-decoration: underline;
+                    }
+
+        .ms-picture-box.active > div .ms-picture-box-back {
+            transform: scale(0.9);
+        }
 
         .ms-picture-box.active > div .ms-picture-box-cover {
             opacity: 1;
@@ -182,6 +197,9 @@
             }
     }
 </style>
+
+
+
 <div class="ms-container" style="padding:0px;">
     <div class="clearfix" style="margin:30px 0 15px 0;">
         <span style="display:inline-block; width:42%; border-bottom: 1px solid #E0E0E0; height:15px; float:left;"></span>
@@ -189,17 +207,17 @@
         <span style="display:inline-block; width:42%; border-bottom: 1px solid #E0E0E0; height:15px; float:left;"></span>
     </div>
     <div class="clearfix ms-picture-canvas">
-        @for (int i = 0; i < 20; i++)
+        @foreach (var item in Model)
         {
             <div class="ms-picture-box">
                 <div>
-                    <div class="ms-picture-box-back"></div>
-                    <a href="#" title="血战钢锯岭">
+                    <div class="ms-picture-box-back" style="background-image: url('../../Resources/Poster_M/@item.Url');"></div>
+                    <a href="/Poster/Index?id=@item.ID" title="@item.MovieTite">
                         <div class="ms-picture-box-cover"></div>
                     </a>
                     <div class="ms-picture-box-banner">
-                        <span>血战钢锯岭</span>
-                        <span>2017-03-02 08:07:08</span>
+                        <span><a href="/Movie/Index?id=@item.MovieID" title="@item.MovieTite">@item.MovieTite</a></span>
+                        <span>@item.Time</span>
                     </div>
                 </div>
             </div>

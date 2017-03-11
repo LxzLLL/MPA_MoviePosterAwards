@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MoviePosterAwardsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MoviePosterAwardsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Basic_Celebrity">
           <Key>
             <PropertyRef Name="Id" />
@@ -51,6 +51,7 @@
           <Property Name="Movie" Type="uniqueidentifier" Nullable="false" />
           <Property Name="User" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Poster" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Poster_M" Type="nvarchar" MaxLength="200" />
           <Property Name="Poster_S" Type="nvarchar" MaxLength="200" />
           <Property Name="Poster_XS" Type="nvarchar" MaxLength="200" />
           <Property Name="Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
@@ -67,8 +68,8 @@
           <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
           <Property Name="Cover" Type="nvarchar" MaxLength="200" />
           <Property Name="Limit" Type="bit" />
-          <Property Name="Create_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity"/>
-          <Property Name="Change_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity"/>
+          <Property Name="Create_Time" Type="datetime2" Precision="7"  StoreGeneratedPattern="Identity"/>
+          <Property Name="Change_Time" Type="datetime2" Precision="7"  StoreGeneratedPattern="Identity"/>
         </EntityType>
         <EntityType Name="Step_Celeb_Avatar">
           <Key>
@@ -311,7 +312,8 @@
             <End Role="Step_Movie_Rating" EntitySet="Step_Movie_Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MoviePosterAwardsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -616,6 +618,7 @@
           <Property Name="Time" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Basic_Movie" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" FromRole="Basic_Poster" ToRole="Basic_Movie" />
           <NavigationProperty Name="Basic_User" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" FromRole="Basic_Poster" ToRole="Basic_User" />
+          <Property Name="Poster_M" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Basic_Poster_Basic_Movie">
           <End Type="MoviePosterAwardsModel.Basic_Movie" Role="Basic_Movie" Multiplicity="1" />
@@ -781,6 +784,7 @@
           <EntitySetMapping Name="Basic_Poster">
             <EntityTypeMapping TypeName="MoviePosterAwardsModel.Basic_Poster">
               <MappingFragment StoreEntitySet="Basic_Poster">
+                <ScalarProperty Name="Poster_M" ColumnName="Poster_M" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Poster_XS" ColumnName="Poster_XS" />
                 <ScalarProperty Name="Poster_S" ColumnName="Poster_S" />

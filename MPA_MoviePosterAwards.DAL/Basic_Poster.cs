@@ -21,6 +21,7 @@ namespace MPA_MoviePosterAwards.DAL
         public string Poster_S { get; set; }
         public string Poster_XS { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
+        public string Poster_M { get; set; }
     
         public virtual Basic_Movie Basic_Movie { get; set; }
         public virtual Basic_User Basic_User { get; set; }

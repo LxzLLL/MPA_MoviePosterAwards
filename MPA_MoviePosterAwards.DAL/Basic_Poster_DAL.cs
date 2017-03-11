@@ -48,11 +48,11 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
-        public bool Exist(Guid movie)
+        public bool Exist(Guid id)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                return database.Basic_Poster.Where(p => p.Movie == movie).Count() > 0 ? true : false;
+                return database.Basic_Poster.Where(p => p.Id == id).Count() > 0 ? true : false;
             }
         }
         #endregion end查
@@ -103,6 +103,7 @@ namespace MPA_MoviePosterAwards.DAL
             info.Movie = poster.Movie;
             info.User = poster.User;
             info.Poster = poster.Poster;
+            info.Poster_M = poster.Poster_M;
             info.Poster_S = poster.Poster_S;
             info.Poster_XS = poster.Poster_XS;
             info.Time = (DateTime)poster.Time;
@@ -118,6 +119,7 @@ namespace MPA_MoviePosterAwards.DAL
             poster.Movie = info.Movie;
             poster.User = info.User;
             poster.Poster = info.Poster;
+            poster.Poster_M = info.Poster_M;
             poster.Poster_S = info.Poster_S;
             poster.Poster_XS = info.Poster_XS;
             poster.Time = info.Time;

@@ -10,11 +10,12 @@ namespace MPA_MoviePosterAwards.BLL
 {
     public class PosterManager
     {
-        public static void Create(string movie, string poster, string posters, string posterxs)
+        public static void Create(string movie, string poster, string posterm, string posters, string posterxs)
         {
             Basic_Poster_Info _basic_poster = new Basic_Poster_Info();
             _basic_poster.Movie = Guid.Parse(movie);
             _basic_poster.Poster = poster;
+            _basic_poster.Poster_M = posterm;
             _basic_poster.Poster_S = posters;
             _basic_poster.Poster_XS = posterxs;
             _basic_poster.Id = Guid.NewGuid();
@@ -35,7 +36,7 @@ namespace MPA_MoviePosterAwards.BLL
             string postername = string.Empty;
 
             if (!movieinfo.Title_En.HasChinese())
-                postername = string.Join("_", movieinfo.Title_En.Split(' '));
+                postername = string.Join("_", movieinfo.Title_En.Split(' ', ':'));
             else
             {
                 string data = movieinfo.Title;

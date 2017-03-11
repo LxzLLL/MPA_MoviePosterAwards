@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title>@ViewBag.Title - @System.Configuration.ConfigurationManager.AppSettings["WebsiteSubTitle"]</title>
     <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/Common.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 <body>
     <nav class="ms-navbar ms-navbar-default ms-popup-contents">
         <div class="ms-container ms-navbar-bg">
-            <a class="ms-navbar-brand" href="/Home/Index">拾穗者</a>
+            <a class="ms-navbar-brand" href="/Home/Index">@System.Configuration.ConfigurationManager.AppSettings["WebsiteTitle"]</a>
             <ul class="ms-nav ms-navbar-nav">
                 <li class="nav-home">@Html.ActionLink("首页", "Index", "Home")</li>
                 <li class="nav-movie">@Html.ActionLink("电影", "List", "Movie")</li>
@@ -54,18 +54,18 @@
 
     <style>
         .ms-footer-sub {
-            margin-top:20px;
+            margin-top: 20px;
             background-color: #252525;
             height: 20px;
-            line-height:20px;
+            line-height: 20px;
             text-align: center;
         }
 
         .ms-footer {
             background-color: #FF3300;
-            color:#FDFDFD;
+            color: #FDFDFD;
             text-align: center;
-            overflow:hidden;
+            overflow: hidden;
         }
     </style>
     <footer>
@@ -73,7 +73,7 @@
 
         </div>
         <div class="ms-footer">
-            <p style="margin:30px 0;">&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+            <p style="margin:30px 0;">&copy; @DateTime.Now.Year - @System.Configuration.ConfigurationManager.AppSettings["WebsiteTitle"] - @System.Configuration.ConfigurationManager.AppSettings["WebsiteSubTitle"]</p>
         </div>
     </footer>
 </body>

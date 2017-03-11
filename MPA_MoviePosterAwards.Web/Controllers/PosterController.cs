@@ -16,7 +16,21 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         // GET: Poster
         public ActionResult Index(string id)
         {
-            return View();
+            var poster = Basic_Poster_BLL.GetSingle(Guid.Parse(id));
+
+            var model = Basic_Poster_BLL.GetList(poster.Movie).Select(p => new PosterViewModel
+            {
+                Id = p.Id.ToString(),
+                Movie = p.Movie.ToString(),
+                Poster = p.Poster,
+                Poster_M = p.Poster_M,
+                Poster_S = p.Poster_S,
+                Poster_XS = p.Poster_XS,
+                Time = p.Time.ToString("yyyy年MM月dd日 hh:mm:ss"),
+                Active = p.Id == poster.Id
+            }).ToList();
+
+            return View(model);
         }
 
         // GET: Poster/Create/
@@ -40,17 +54,20 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             {
                 string filename = PosterManager.GetPosterName(model.Movie);
                 var poster = Path.Combine(Request.MapPath("~/Resources/Poster/"), filename + Path.GetExtension(file.FileName));
-                var poster_s = Path.Combine(Request.MapPath("~/Resources/Poster_s/"), filename + "_s.jpg");
-                var poster_xs = Path.Combine(Request.MapPath("~/Resources/Poster_xs/"), filename + "_xs.jpg");
+                var poster_m = Path.Combine(Request.MapPath("~/Resources/Poster_M/"), filename + "_M" + Path.GetExtension(file.FileName));
+                var poster_s = Path.Combine(Request.MapPath("~/Resources/Poster_S/"), filename + "_S" + Path.GetExtension(file.FileName));
+                var poster_xs = Path.Combine(Request.MapPath("~/Resources/Poster_XS/"), filename + "_XS" + Path.GetExtension(file.FileName));
                 file.SaveAs(poster);
                 model.Poster = Path.GetFileName(poster);
+                model.Poster_M = Path.GetFileName(poster_m);
                 model.Poster_S = Path.GetFileName(poster_s);
                 model.Poster_XS = Path.GetFileName(poster_xs);
 
                 Bitmap bmpSrc = new Bitmap(poster);
+                Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 800), 800, poster_m);
                 Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 400), 400, poster_s);
                 Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 200), 200, poster_xs);
-                PosterManager.Create(model.Movie, model.Poster, model.Poster_S, model.Poster_XS);
+                PosterManager.Create(model.Movie, model.Poster, model.Poster_M, model.Poster_S, model.Poster_XS);
             }
             else
             {
