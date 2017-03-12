@@ -15,16 +15,16 @@ namespace MPA_MoviePosterAwards.Web.Models
         public string Poster_XS { get; set; }
         public string Time { get; set; }
         public bool Active { get; set; } = false;
+        public int Height { get; set; }
+        public int Width { get; set; }
     }
 
-    public class PosterCreateViewModel
+    public class PosterIndexViewModel
     {
-        public string Id { get; set; }
-        public string Movie { get; set; }
-        public string Poster { get; set; }
-        public string Poster_M { get; set; }
-        public string Poster_S { get; set; }
-        public string Poster_XS { get; set; }
+        public List<PosterViewModel> Posters { get; set; }
+        public PosterViewModel ActivePoster { get; set; }
+        public MovieViewModel Movie { get; set; }
+        public UserViewModel User { get; set; }
     }
 
     public class NewestPosterViewModel

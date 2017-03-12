@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPA_MoviePosterAwards.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,33 @@ using System.Web;
 
 namespace MPA_MoviePosterAwards.Web.Models
 {
+    public class UserViewModel
+    {
+        public string ID { get; set; }
+        public string Account { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Avatar { get; set; }
+        public string Cover { get; set; }
+        public bool Limit { get; set; }
+        public string CreateTime { get; set; }
+        public string ChangeTime { get; set; }
+
+        public UserViewModel(Basic_User_Info user)
+        {
+            ID = user.Id.ToString();
+            Account = user.Account;
+            Password = user.Password;
+            Email = user.Email;
+            PhoneNumber = user.Phone_Number;
+            Avatar = user.Avatar;
+            Cover = user.Cover;
+            Limit = user.Limit;
+            CreateTime = user.Create_Time.ToString("yyyy年MM月dd日 hh:mm:ss");
+            ChangeTime = user.Change_Time.ToString("yyyy年MM月dd日 hh:mm:ss");
+        }
+    }
     public class LoginViewModel
     {
         [Required(ErrorMessage = "请输入 用户名。")]

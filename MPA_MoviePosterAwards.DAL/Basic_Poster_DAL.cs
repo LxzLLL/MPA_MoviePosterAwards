@@ -107,6 +107,8 @@ namespace MPA_MoviePosterAwards.DAL
             info.Poster_S = poster.Poster_S;
             info.Poster_XS = poster.Poster_XS;
             info.Time = (DateTime)poster.Time;
+            info.Height = (int)poster.Height;
+            info.Width = (int)poster.Width;
 
             return info;
         }
@@ -123,6 +125,8 @@ namespace MPA_MoviePosterAwards.DAL
             poster.Poster_S = info.Poster_S;
             poster.Poster_XS = info.Poster_XS;
             poster.Time = info.Time;
+            poster.Height = info.Height;
+            poster.Width = info.Width;
 
             return poster;
         }

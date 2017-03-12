@@ -10,7 +10,7 @@ namespace MPA_MoviePosterAwards.BLL
 {
     public class PosterManager
     {
-        public static void Create(string movie, string poster, string posterm, string posters, string posterxs)
+        public static void Create(string movie, string poster, string posterm, string posters, string posterxs, int height, int width)
         {
             Basic_Poster_Info _basic_poster = new Basic_Poster_Info();
             _basic_poster.Movie = Guid.Parse(movie);
@@ -18,6 +18,8 @@ namespace MPA_MoviePosterAwards.BLL
             _basic_poster.Poster_M = posterm;
             _basic_poster.Poster_S = posters;
             _basic_poster.Poster_XS = posterxs;
+            _basic_poster.Height = height;
+            _basic_poster.Width = width;
             _basic_poster.Id = Guid.NewGuid();
             _basic_poster.User = Guid.Parse(CookieHelper.GetCookie("userid"));
             Basic_Poster_BLL.Insert(_basic_poster);

@@ -16,5 +16,7 @@ namespace MPA_MoviePosterAwards.Model
         public string Poster_S { get; set; }
         public string Poster_XS { get; set; }
         public DateTime Time { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
     }
 }

@@ -23,10 +23,10 @@
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" />
         <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Avatar" Width="1.5" PointX="6" PointY="1.75" />
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Poster" Width="1.5" PointX="9" PointY="4.875" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Poster" Width="1.5" PointX="9" PointY="4.625" />
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" />
         <AssociationConnector Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

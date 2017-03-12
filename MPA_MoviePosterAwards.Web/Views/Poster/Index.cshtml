@@ -1,7 +1,7 @@
-﻿@model List<MPA_MoviePosterAwards.Web.Models.PosterViewModel>
+﻿@model MPA_MoviePosterAwards.Web.Models.PosterIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.ActivePoster.Poster;
 }
 
 <style>
@@ -103,15 +103,13 @@
                     }
 </style>
 
-
-
 <div class="ms-container" style="padding:0px;">
     <div>
 
     </div>
     <div class="ms-pic">
         <div class="ms-pic-display">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Posters)
             {
                 if (item.Active)
                 {
@@ -124,7 +122,7 @@
         </div>
         <div class="ms-pic-prev">
             <ul>
-                @foreach (var item in Model)
+                @foreach (var item in Model.Posters)
                 {
                     if (item.Active)
                     {
@@ -141,53 +139,5 @@
                 }
             </ul>
         </div>
-        @*@foreach (var item in Model)
-            {
-                <img src="~/Resources/Poster_M/@item.Poster_M" style="display:none;" />
-            }*@
     </div>
 </div>
-
-
-@*<script>
-        $(document).ready(function () {
-            resetDisplay();
-        });
-
-        $('.ms-pic-prev > ul li').click(function () {
-            $('.ms-pic-display img').css('margin', '0');
-            $('.ms-pic-display img').removeClass('wide');//初始都是‘高’图片
-            $('.ms-pic-prev > ul li').removeClass('selected');
-            $(this).addClass('selected');
-            var display = $(this).children('img').attr('src').toString();
-            var filename = display.substr(display.lastIndexOf('/') + 1, display.indexOf('.') - display.lastIndexOf('/') - 3);
-            var fileextension = display.substr(display.indexOf('.'), display.length - display.indexOf('.'));
-            //console.log(filename);
-            //console.log(fileextension);
-            $('.ms-pic-display img').attr('src', display);
-            $('.ms-pic-display a').attr('href', '/Resources/Poster/' + filename + fileextension);
-            resetDisplay();
-        });
-
-        function resetDisplay() {
-            // 先缓存 图片， 保证不会因为网速跟不上，图片没有加载出来而导致 column 的高度计算错误
-            // 同时保证图片按顺序一张张加载
-            var imgtemp = new Image();//创建一个image对象
-            //display区域的图片size为M
-            var previmg = $('.ms-pic-display img').attr('src').toString();
-            var filename = previmg.substr(previmg.lastIndexOf('/') + 1, previmg.indexOf('.') - previmg.lastIndexOf('/') - 3) + '_M';
-            var fileextension = previmg.substr(previmg.indexOf('.'), previmg.length - previmg.indexOf('.'));
-            imgtemp.src = '/Resources/Poster_M/' + filename + fileextension;
-            console.log(imgtemp.src);
-            $('.ms-pic-display img').attr('src', '');
-
-            imgtemp.onload = function () {
-                $('.ms-pic-display img').attr('src', imgtemp.src);
-                var width = $('.ms-pic-display img').css('width').replace('px', '');
-                var displaywidth = $('.ms-pic-display').css('width').replace('px', '');
-                if (width - displaywidth > 0) {
-                    $('.ms-pic-display img').addClass('wide');
-                }
-            }
-        }
-    </script>*@

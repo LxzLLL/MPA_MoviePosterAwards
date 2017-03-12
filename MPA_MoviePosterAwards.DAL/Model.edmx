@@ -55,6 +55,8 @@
           <Property Name="Poster_S" Type="nvarchar" MaxLength="200" />
           <Property Name="Poster_XS" Type="nvarchar" MaxLength="200" />
           <Property Name="Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Width" Type="int" />
         </EntityType>
         <EntityType Name="Basic_User">
           <Key>
@@ -68,8 +70,8 @@
           <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
           <Property Name="Cover" Type="nvarchar" MaxLength="200" />
           <Property Name="Limit" Type="bit" />
-          <Property Name="Create_Time" Type="datetime2" Precision="7"  StoreGeneratedPattern="Identity"/>
-          <Property Name="Change_Time" Type="datetime2" Precision="7"  StoreGeneratedPattern="Identity"/>
+          <Property Name="Create_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
+          <Property Name="Change_Time" Type="datetime2" Precision="7" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Step_Celeb_Avatar">
           <Key>
@@ -613,12 +615,14 @@
           <Property Name="Movie" Type="Guid" Nullable="false" />
           <Property Name="User" Type="Guid" Nullable="false" />
           <Property Name="Poster" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Poster_M" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Poster_S" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Poster_XS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="DateTime" Precision="7" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
           <NavigationProperty Name="Basic_Movie" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" FromRole="Basic_Poster" ToRole="Basic_Movie" />
           <NavigationProperty Name="Basic_User" Relationship="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" FromRole="Basic_Poster" ToRole="Basic_User" />
-          <Property Name="Poster_M" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Basic_Poster_Basic_Movie">
           <End Type="MoviePosterAwardsModel.Basic_Movie" Role="Basic_Movie" Multiplicity="1" />
@@ -784,10 +788,12 @@
           <EntitySetMapping Name="Basic_Poster">
             <EntityTypeMapping TypeName="MoviePosterAwardsModel.Basic_Poster">
               <MappingFragment StoreEntitySet="Basic_Poster">
-                <ScalarProperty Name="Poster_M" ColumnName="Poster_M" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Poster_XS" ColumnName="Poster_XS" />
                 <ScalarProperty Name="Poster_S" ColumnName="Poster_S" />
+                <ScalarProperty Name="Poster_M" ColumnName="Poster_M" />
                 <ScalarProperty Name="Poster" ColumnName="Poster" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Movie" ColumnName="Movie" />
