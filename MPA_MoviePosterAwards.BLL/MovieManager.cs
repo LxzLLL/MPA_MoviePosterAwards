@@ -15,14 +15,17 @@ namespace MPA_MoviePosterAwards.BLL
     {
         #region 获取电影
 
-        public static Basic_Movie_Info GetMovie(string douban)
+        public static Basic_Movie_Info GetMovie(string douban, Guid movie)
         {
             Basic_Movie_Info _basic_movie = new Basic_Movie_Info();
 
             //List<Step_Celeb_Movie_Info> _step_celeb_movies = new List<Step_Celeb_Movie_Info>();
 
             _basic_movie.Douban = douban;
-            _basic_movie.Id = Guid.NewGuid();
+            if (movie == Guid.Empty)
+                _basic_movie.Id = Guid.NewGuid();
+            else
+                _basic_movie.Id = movie;
             GetMovieFromJson(ref _basic_movie);
 
             string strhtml = HtmlHelper.GetHtmlCode(string.Format("https://movie.douban.com/subject/{0}/", douban));
@@ -538,7 +541,7 @@ namespace MPA_MoviePosterAwards.BLL
         //    return new RequestResult() { Error = douban + "添加成功", Succeeded = true };
         //}
 
-        public static RequestResult InsertMovie(string douban)
+        public static RequestResult InsertMovie(string douban,Guid movie)
         {
             if (Basic_Movie_BLL.Exist(douban))
             {
@@ -547,30 +550,7 @@ namespace MPA_MoviePosterAwards.BLL
 
             try
             {
-                Basic_Movie_Info movie = GetMovie(douban);
-                Basic_Movie_BLL.Insert(movie);
-                Step_Celeb_Movie_BLL.DeleteList(Basic_Movie_BLL.GetSingle(douban).Id);
-                Step_Celeb_Movie_BLL.Insert(movie.Celebs);
-                return new RequestResult() { Error = douban + "添加成功", Succeeded = true };
-            }
-            catch (System.IO.InvalidDataException dataExp)
-            {
-                return new RequestResult() { Error = dataExp.Message, Succeeded = false };
-                //Console.WriteLine(dataExp.Message);
-            }
-            catch (Exception)
-            {
-                return new RequestResult() { Error = douban + "电影源代码解析失败", Succeeded = false };
-                //Console.WriteLine(_basic_movie.Douban + "电影源代码解析失败");
-            }
-        }
-
-        public static RequestResult InsertMovie(string douban, Guid movie)
-        {
-            try
-            {
-                Basic_Movie_Info _basic_movie = GetMovie(douban);
-                _basic_movie.Id = movie;
+                Basic_Movie_Info _basic_movie = GetMovie(douban, movie);
                 Basic_Movie_BLL.Insert(_basic_movie);
                 Step_Celeb_Movie_BLL.DeleteList(Basic_Movie_BLL.GetSingle(douban).Id);
                 Step_Celeb_Movie_BLL.Insert(_basic_movie.Celebs);
@@ -587,6 +567,29 @@ namespace MPA_MoviePosterAwards.BLL
                 //Console.WriteLine(_basic_movie.Douban + "电影源代码解析失败");
             }
         }
+
+        //public static RequestResult InsertMovie(string douban, Guid movie)
+        //{
+        //    try
+        //    {
+        //        Basic_Movie_Info _basic_movie = GetMovie(douban);
+        //        _basic_movie.Id = movie;
+        //        Basic_Movie_BLL.Insert(_basic_movie);
+        //        Step_Celeb_Movie_BLL.DeleteList(movie);
+        //        Step_Celeb_Movie_BLL.Insert(_basic_movie.Celebs);
+        //        return new RequestResult() { Error = douban + "添加成功", Succeeded = true };
+        //    }
+        //    catch (System.IO.InvalidDataException dataExp)
+        //    {
+        //        return new RequestResult() { Error = dataExp.Message, Succeeded = false };
+        //        //Console.WriteLine(dataExp.Message);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return new RequestResult() { Error = douban + "电影源代码解析失败", Succeeded = false };
+        //        //Console.WriteLine(_basic_movie.Douban + "电影源代码解析失败");
+        //    }
+        //}
 
         public static void GetMovieFromJson(ref Basic_Movie_Info _basic_movie)
         {

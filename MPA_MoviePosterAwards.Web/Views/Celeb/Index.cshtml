@@ -4,72 +4,115 @@
 @{
     ViewBag.Title = Model.Name;
 }
-<style type="text/css">
-    img {
-        width: 99px;
-    }
 
-    div > span {
-        font-size: 0.8em;
-        color: #666666;
-    }
-</style>
-<div class="ms-container">
-    <h2>@Model.Name</h2>
+<div style="height: 360px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
+    <div class="ms-movie-background" style="background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(@Model.Avatar);"></div>
+    <div class="ms-container ms-movie-content">
+        <div>
+            <table style="margin:0 auto; width:720px; min-width:720px;">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            <span style="font-family:'古典明朝体'; font-size:2.5em;">@Model.Name</span>
+                            <span style="font-size:2.0em;">@Model.Name_En</span>
+                        </td>
+                    </tr>
+                    @if (!Model.Gender.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">性别:</td>
+                            <td>@Model.Gender</td>
+                        </tr>
+                    }
+                    @if (!Model.Death_Date.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">生卒日期:</td>
+                            <td>@Model.Birth_Date - @Model.Death_Date</td>
+                        </tr>
+                    }
+                    else if (!Model.Birth_Date.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">出生日期:</td>
+                            <td>@Model.Birth_Date</td>
+                        </tr>
+                    }
+                    @if (!Model.Born_Place.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">出生地:</td>
+                            <td>@Model.Born_Place</td>
+                        </tr>
+                    }
+                    @if (!Model.Profession.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">职业:</td>
+                            <td>@Model.Profession</td>
+                        </tr>
+                    }
+                    @if (!Model.Aka.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">更多中文名:</td>
+                            <td>@Model.Aka</td>
+                        </tr>
+                    }
+                    @if (!Model.Aka_En.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">更多外文名:</td>
+                            <td>@Model.Aka_En</td>
+                        </tr>
+                    }
+                    @if (!Model.Douban.IsBlank())
+                    {
+                        <tr>
+                            <td style="text-align:right; padding-right:1em;">出生日期:</td>
+                            <td>
+                                <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-    <div>
-        <img src="@Model.Avatar" />
     </div>
-    <div><span>姓名:</span> @Model.Name</div>
-    @if (!Model.Name_En.IsBlank())
-    {
-        <div><span>原名:</span> @Model.Name_En</div>
-    }
-    <div><span>性别:</span> @Model.Gender</div>
-    @if (!Model.Birth_Date.IsBlank())
-    {
-        <div><span>出生日期:</span> @Model.Birth_Date</div>
-    }
-    @if (!Model.Death_Date.IsBlank())
-    {
-        <div><span>去世日期:</span> @Model.Death_Date</div>
-    }
-    @if (!Model.Born_Place.IsBlank())
-    {
-        <div><span>出生地:</span> @Model.Born_Place</div>
-    }
-    @if (!Model.Profession.IsBlank())
-    {
-        <div><span>职业:</span> @Model.Profession</div>
-    }
-    @if (!Model.Aka.IsBlank())
-    {
-        <div><span>更多中文名:</span> @Model.Aka</div>
-    }
-    @if (!Model.Aka_En.IsBlank())
-    {
-        <div><span>更多外文名:</span> @Model.Aka_En</div>
-    }
-    @if (!Model.Family.IsBlank())
-    {
-        <div><span>家庭成员:</span> @Model.Family</div>
-    }
-    @if (!Model.Douban.IsBlank())
-    {
-        <div>
-            <span>豆瓣编号:</span>
-            <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
-        </div>
-    }
-    @if (!Model.IMDb.IsBlank())
-    {
-        <div>
-            <span>IMDb编号:</span>
-            <a href="http://www.imdb.com/name/@Model.IMDb" target="_blank">@Model.IMDb</a>
-        </div>
-    }
-    @if (!Model.Summary.IsBlank())
-    {
-        <div><span>影人简介:</span> @Model.Summary</div>
-    }
+
 </div>
+
+<style>
+    .ms-movie-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(../../Resources/Pictures/9531d480c27f04d916d70201f5b59dac.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+
+    .ms-movie-content {
+        position: relative;
+        height: 100%;
+        clear: both;
+        color: #FFFFFF;
+        /*子元素垂直居中*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .ms-movie-content a {
+            color: #FF3300;
+            transition: 0.2s all ease;
+        }
+
+            .ms-movie-content a:hover {
+                color: #F1F1F1;
+                background-color: #FF3300;
+            }
+</style>

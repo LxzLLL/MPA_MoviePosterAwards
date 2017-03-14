@@ -16,7 +16,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         public ActionResult Index(string id)
         {
             if (id.IsBlank())
-                return null;
+                return RedirectToAction("Index", "Home");
             if (!Basic_Movie_BLL.Exist(Guid.Parse(id)))
             {
                 return HttpNotFound();
@@ -30,7 +30,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         public ActionResult List()
         {
             List<MovieViewModel> movies = new List<MovieViewModel>();
-            foreach (var item in Basic_Movie_BLL.GetList(string.Empty))
+            foreach (var item in Basic_Movie_BLL.GetList(string.Empty).OrderBy(p => p.Title))
             {
                 MovieViewModel movie = new MovieViewModel(item);
                 movies.Add(movie);
@@ -50,7 +50,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         {
             foreach (var item in douban.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ").Split(' '))
             {
-                var result = MovieManager.InsertMovie(item);
+                var result = MovieManager.InsertMovie(item, Guid.Empty);
 
                 ModelState.AddModelError("", result.Error);
             }
@@ -72,6 +72,23 @@ namespace MPA_MoviePosterAwards.Web.Controllers
             Basic_Movie_Info movie = Basic_Movie_BLL.GetSingle(Guid.Parse(id));
             Basic_Movie_BLL.Delete(movie.Id);
             return Redirect(returnurl);
+        }
+
+        // POST: /Movie/GetPosters
+        [HttpPost]
+        public JsonResult GetPosters(string id)
+        {
+            JsonResult json = new JsonResult();
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            var posters = Basic_Poster_BLL.GetList(Guid.Parse(id));
+            json.Data = posters.Select(p => new
+            {
+                id = p.Id.ToString(),
+                url = p.Poster_M,
+                title = p.Poster
+            });
+
+            return json;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace MPA_MoviePosterAwards.Web.Models
         public string Summary { get; set; }
         public string Avatar { get; set; }
 
-        public List<string> Posters { get; set; }
+        //public List<string> Posters { get; set; }
 
         public MovieViewModel(Basic_Movie_Info movie)
         {
@@ -71,7 +71,7 @@ namespace MPA_MoviePosterAwards.Web.Models
             }
             Countries = Countries.Substring(0, Countries.Length - 2);
 
-            Rating = movie.Rating.Score.ToString();
+            Rating = movie.Rating.Score.ToString().Length == 1 ? movie.Rating.Score.ToString() + ".0" : movie.Rating.Score.ToString();
             //RatingCount = movie.Rating.Rated_Num.ToString();
             Avatar = !movie.Poster.Large.IsBlank() ? movie.Poster.Large : !movie.Poster.Medium.IsBlank() ? movie.Poster.Medium : !movie.Poster.Small.IsBlank() ? movie.Poster.Small : string.Empty;
             Summary = movie.Summary.IsBlank() ? string.Empty : movie.Summary;
@@ -99,12 +99,12 @@ namespace MPA_MoviePosterAwards.Web.Models
                 Casts.Add(new LinkItem() { Url = "/Celeb/Index?id=" + item.Id, Title = item.Name });
             }
 
-            Posters = new List<string>();
-            var posters = Basic_Poster_BLL.GetList(Guid.Parse(Id));
-            foreach (var item in posters)
-            {
-                Posters.Add(item.Poster);
-            }
+            //Posters = new List<string>();
+            //var posters = Basic_Poster_BLL.GetList(Guid.Parse(Id));
+            //foreach (var item in posters)
+            //{
+            //    Posters.Add(item.Poster);
+            //}
         }
     }
 

@@ -272,7 +272,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\" />
+    <Folder Include="Resources\Poster\" />
+    <Folder Include="Resources\Poster_M\" />
+    <Folder Include="Resources\Poster_S\" />
+    <Folder Include="Resources\Poster_XS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

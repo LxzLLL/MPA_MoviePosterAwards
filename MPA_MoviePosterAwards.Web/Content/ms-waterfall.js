@@ -20,21 +20,20 @@
                 var columnheight = 0;
                 $('.ms-waterfall-column.column-' + j + ' img').each(function () {
                     columnheight += $(this).height() + 15;
-                })
+                });
                 if (columnheight - minheight < 0) {
                     minheight = columnheight;
                     mincolumn = j;
                 }
             }
 
-            var elename = waterfallpics[index].substr(waterfallpics[index].lastIndexOf('/') + 1, waterfallpics[index].lastIndexOf('.') - waterfallpics[index].lastIndexOf('/') - 1);
-            var elewaterfall = '<div><img src="' + waterfallpics[index] + '" title="' + elename + '" /><div>' + elename + '</div></div>';
+            var elewaterfall = '<div><a href="/Poster/Index?id=' + waterfallpics[index].id + '"><img src="' + waterfallpics[index].url + '" title="' + waterfallpics[index].title + '" /><div>' + waterfallpics[index].title + '</div></a></div>';
 
             // 先缓存 图片， 保证不会因为网速跟不上，图片没有加载出来而导致 column 的高度计算错误
             // 同时保证图片按顺序一张张加载
             var imgtemp = new Image();//创建一个image对象
-            imgtemp.src = waterfallpics[index];
-
+            imgtemp.src = waterfallpics[index].url;
+            
             imgtemp.onload = function () {
                 $('.ms-waterfall-column.column-' + mincolumn).append(elewaterfall);
 

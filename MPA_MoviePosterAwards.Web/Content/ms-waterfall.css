@@ -24,7 +24,7 @@
         height: auto;
         text-align: center;
         box-shadow: 0 1px 3px rgba(0,0,0,.3);
-        background-color:#FFFFFF;
+        background-color: #FFFFFF;
         margin-top: 15px;
         overflow: hidden;
         transition: all 0.25s ease;
@@ -39,12 +39,16 @@
             transform: translateY(-10px);
         }
 
-        .ms-waterfall-column > div > img {
+        .ms-waterfall-column > div > a {
             width: 100%;
         }
 
-        .ms-waterfall-column > div > div {
-            display: inline-block;
-            font-size: 1.1em;
-            margin: 0.5em 0;
-        }
+            .ms-waterfall-column > div > a > img {
+                width: 100%;
+            }
+
+            .ms-waterfall-column > div > a > div {
+                display: inline-block;
+                font-size: 1.1em;
+                margin: 0.5em 0;
+            }
