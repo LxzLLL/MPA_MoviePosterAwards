@@ -57,7 +57,6 @@ namespace MPA_MoviePosterAwards.DAL
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
             {
-                //System.Diagnostics.Debug.WriteLine(database.Basic_User.FirstOrDefault(p => p.Id == id).Account);
                 return database.Basic_User.FirstOrDefault(p => p.Id == id) != null ? true : false;
             }
         }

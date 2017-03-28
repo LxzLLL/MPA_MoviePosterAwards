@@ -10,7 +10,6 @@ namespace MPA_MoviePosterAwards.Web.Controllers
 {
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
             var topPosters = Basic_Poster_BLL.GetList(string.Empty).OrderByDescending(p => p.Time).Take(20);
@@ -23,20 +22,6 @@ namespace MPA_MoviePosterAwards.Web.Controllers
                 MovieTite = Basic_Movie_BLL.GetSingle(p.Movie).Title
             }).ToList();
             return View(model);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

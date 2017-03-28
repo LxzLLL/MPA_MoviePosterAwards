@@ -24,8 +24,5 @@ namespace MPA_MoviePosterAwards.DAL
         public Nullable<System.DateTime> Time { get; set; }
         public Nullable<int> Height { get; set; }
         public Nullable<int> Width { get; set; }
-    
-        public virtual Basic_Movie Basic_Movie { get; set; }
-        public virtual Basic_User Basic_User { get; set; }
     }
 }

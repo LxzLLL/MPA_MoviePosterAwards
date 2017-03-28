@@ -5,8 +5,9 @@
     ViewBag.Title = Model.Name;
 }
 
-<div style="height: 360px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
+<div style="height: 436px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
     <div class="ms-movie-background" style="background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(@Model.Avatar);"></div>
+    
     <div class="ms-container ms-movie-content">
         <div>
             <table style="margin:0 auto; width:720px; min-width:720px;">
@@ -19,66 +20,65 @@
                     </tr>
                     @if (!Model.Gender.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">性别:</td>
-                            <td>@Model.Gender</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">性别:</td>
+                        <td>@Model.Gender</td>
+                    </tr>
                     }
                     @if (!Model.Death_Date.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">生卒日期:</td>
-                            <td>@Model.Birth_Date - @Model.Death_Date</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">生卒日期:</td>
+                        <td>@Model.Birth_Date - @Model.Death_Date</td>
+                    </tr>
                     }
                     else if (!Model.Birth_Date.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">出生日期:</td>
-                            <td>@Model.Birth_Date</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">出生日期:</td>
+                        <td>@Model.Birth_Date</td>
+                    </tr>
                     }
                     @if (!Model.Born_Place.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">出生地:</td>
-                            <td>@Model.Born_Place</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">出生地:</td>
+                        <td>@Model.Born_Place</td>
+                    </tr>
                     }
                     @if (!Model.Profession.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">职业:</td>
-                            <td>@Model.Profession</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">职业:</td>
+                        <td>@Model.Profession</td>
+                    </tr>
                     }
                     @if (!Model.Aka.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">更多中文名:</td>
-                            <td>@Model.Aka</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">更多中文名:</td>
+                        <td>@Model.Aka</td>
+                    </tr>
                     }
                     @if (!Model.Aka_En.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">更多外文名:</td>
-                            <td>@Model.Aka_En</td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">更多外文名:</td>
+                        <td>@Model.Aka_En</td>
+                    </tr>
                     }
                     @if (!Model.Douban.IsBlank())
                     {
-                        <tr>
-                            <td style="text-align:right; padding-right:1em;">出生日期:</td>
-                            <td>
-                                <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td style="text-align:right; padding-right:1em;">豆瓣:</td>
+                        <td>
+                            <a href="https://movie.douban.com/celebrity/@Model.Douban" target="_blank">@Model.Douban</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
         </div>
-
     </div>
 
 </div>

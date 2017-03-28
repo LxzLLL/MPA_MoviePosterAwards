@@ -18,7 +18,6 @@ namespace MPA_MoviePosterAwards.DAL
         public Basic_Celebrity()
         {
             this.Step_Celeb_Movie = new HashSet<Step_Celeb_Movie>();
-            this.Step_Celeb_Avatar = new HashSet<Step_Celeb_Avatar>();
         }
     
         public System.Guid Id { get; set; }
@@ -35,10 +34,11 @@ namespace MPA_MoviePosterAwards.DAL
         public string Douban { get; set; }
         public string IMDb { get; set; }
         public string Summary { get; set; }
+        public string Avatar_Large { get; set; }
+        public string Avatar_Medium { get; set; }
+        public string Avatar_Small { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Step_Celeb_Movie> Step_Celeb_Movie { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Step_Celeb_Avatar> Step_Celeb_Avatar { get; set; }
     }
 }

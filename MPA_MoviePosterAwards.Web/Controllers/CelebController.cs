@@ -16,7 +16,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         public ActionResult Index(string id)
         {
             if (id.IsBlank())
-                return null;
+                return RedirectToAction("Index", "Home");
             if (!Basic_Celebrity_BLL.Exist(Guid.Parse(id)))
             {
                 return HttpNotFound();
@@ -43,7 +43,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         {
             Basic_Celebrity_Info celeb = Basic_Celebrity_BLL.GetSingle(Guid.Parse(id));
             Basic_Celebrity_BLL.Delete(celeb.Id);
-            MovieManager.InsertCeleb(celeb.Douban, celeb.Id);
+            CelebManager.InsertCeleb(celeb.Douban, celeb.Id);
             return Redirect(returnurl);
         }
 

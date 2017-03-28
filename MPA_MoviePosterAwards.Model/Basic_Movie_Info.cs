@@ -13,6 +13,9 @@ namespace MPA_MoviePosterAwards.Model
         public string Title_En { get; set; }
         public string Aka { get; set; }
         public short Year { get; set; }
+        public string Country { get; set; }
+        public string Genre { get; set; }
+        public string Language { get; set; }
         public string Website { get; set; }
         public short Current_Season { get; set; }
         public short Season_Count { get; set; }
@@ -22,22 +25,16 @@ namespace MPA_MoviePosterAwards.Model
         public string Douban { get; set; }
         public string IMDb { get; set; }
         public string Summary { get; set; }
-
-        public ICollection<Step_Movie_Country_Info> Countries { get; set; }
-        public ICollection<Step_Movie_Genre_Info> Genres { get; set; }
-        public ICollection<Step_Movie_Lang_Info> Langs { get; set; }
-        public Step_Movie_Rating_Info Rating { get; set; }
-        public Step_Movie_Poster_Info Poster { get; set; }
-        public List<Step_Celeb_Movie_Info> Celebs { get; set; }
-
-        public Basic_Movie_Info()
-        {
-            Countries = new List<Step_Movie_Country_Info>();
-            Genres = new List<Step_Movie_Genre_Info>();
-            Langs = new List<Step_Movie_Lang_Info>();
-            Rating = new Step_Movie_Rating_Info();
-            Poster = new Step_Movie_Poster_Info();
-            Celebs = new List<Step_Celeb_Movie_Info>();
-        }
+        public string Avatar_Large { get; set; }
+        public string Avatar_Medium { get; set; }
+        public string Avatar_Small { get; set; }
+        public double Rating_Score { get; set; }
+        public int Rating_Count { get; set; }
+        public string Rating_Star5 { get; set; }
+        public string Rating_Star4 { get; set; }
+        public string Rating_Star3 { get; set; }
+        public string Rating_Star2 { get; set; }
+        public string Rating_Star1 { get; set; }
+        public List<Step_Celeb_Movie_Info> Celebs { get; set; } = new List<Step_Celeb_Movie_Info>();
     }
 }

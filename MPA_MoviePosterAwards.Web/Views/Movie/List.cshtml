@@ -14,7 +14,7 @@
             <td>年份</td>
             <td>类型</td>
             <td>制片国家/地区</td>
-            <td>语言</td>
+            @*<td>语言</td>*@
             <td>上映日期</td>
             <td>时长</td>
             <td>豆瓣编号</td>
@@ -28,18 +28,18 @@
                     <a href="/Movie/Index?id=@item.Id">@item.Title</a>
                 </td>
                 <td>@item.Year</td>
-                <td>@item.Genres</td>
-                <td>@item.Countries</td>
-                <td>@item.Languages</td>
+                <td>@item.Genre</td>
+                <td>@item.Country</td>
+                @*<td>@item.Language</td>*@
                 <td>@item.Pubdates</td>
                 <td>@item.Durations</td>
                 <td>
                     <a href="https://movie.douban.com/subject/@item.Douban">@item.Douban</a>
                 </td>
                 <td>
-                    <a href="/Poster/Create?movie=@item.Id"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                    <a href="/Movie/Delete?id=@item.Id&returnurl=@Request.Url.ToString()"><span class="glyphicon glyphicon-trash"></span></a>
-                    <a href="/Movie/Update?id=@item.Id&returnurl=@Request.Url.ToString()"><span class="glyphicon glyphicon-refresh"></span></a>
+                    <a href="/Poster/Create?movie=@item.Id"><i class="fa fa-plus-circle"></i></a>
+                    <a href="/Movie/Delete?id=@item.Id&returnurl=@Request.Url.ToString()"><i class="fa fa-trash-o"></i></a>
+                    <a href="/Movie/Update?id=@item.Id&returnurl=@Request.Url.ToString()"><i class="fa fa-refresh"></i></a>
                 </td>
             </tr>
         }
@@ -48,7 +48,6 @@
 
 <script>
     $(document).ready(function () {
-        console.log('===-=-=-=-==-=-=-=-=-=-=-');
         $('.nav-movie').addClass('active');
     });
 </script>

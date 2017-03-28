@@ -60,9 +60,7 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         // GET: Movie/Update/
         public ActionResult Update(string id, string returnurl)
         {
-            Basic_Movie_Info movie = Basic_Movie_BLL.GetSingle(Guid.Parse(id));
-            Basic_Movie_BLL.Delete(movie.Id);
-            MovieManager.InsertMovie(movie.Douban, movie.Id);
+            MovieManager.UpdateMovie(Guid.Parse(id));
             return Redirect(returnurl);
         }
 

@@ -59,14 +59,6 @@ namespace MPA_MoviePosterAwards.BLL
             return _Basic_Celeb.Insert(info);
         }
 
-        //public static bool Update(Guid id, Dictionary<string, object> changes)
-        //{
-        //    Basic_Celebrity_DAL _Basic_Celeb = new Basic_Celebrity_DAL();
-        //    if (!_Basic_Celeb.HasItem(id))
-        //        return false;
-        //    return _Basic_Celeb.Update(id, changes);
-        //}
-
         public static bool Delete(Guid id)
         {
             Basic_Celebrity_DAL _Basic_Celeb = new Basic_Celebrity_DAL();

@@ -83,34 +83,10 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Step_Celeb_Avatar.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Celeb_Avatar_DAL.cs" />
     <Compile Include="Step_Celeb_Movie.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Step_Celeb_Movie_DAL.cs" />
-    <Compile Include="Step_Movie_Country.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Movie_Country_DAL.cs" />
-    <Compile Include="Step_Movie_Genre.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Movie_Genre_DAL.cs" />
-    <Compile Include="Step_Movie_Lang.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Movie_Lang_DAL.cs" />
-    <Compile Include="Step_Movie_Poster.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Movie_Poster_DAL.cs" />
-    <Compile Include="Step_Movie_Rating.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Step_Movie_Rating_DAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model.edmx">

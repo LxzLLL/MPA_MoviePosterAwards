@@ -5,28 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7c696d9a8873409b9b675416dc7f8f4c" Name="Diagram1">
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Celebrity" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Movie" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Movie" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Country" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Genre" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Lang" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Rating" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Celebrity" ManuallyRouted="false" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Country_Basic_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Genre_Basic_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Lang_Basic_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Rating_Basic_Movie" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Movie_Poster" Width="1.5" PointX="3" PointY="18.875" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Movie_Poster_Basic_Movie" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Avatar" Width="1.5" PointX="6" PointY="1.75" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Avatar_Basic_Celebrity" />
-        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Poster" Width="1.5" PointX="9" PointY="4.625" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_Movie" />
-        <AssociationConnector Association="MoviePosterAwardsModel.FK_Basic_Poster_Basic_User" />
-        </Diagram>
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Celebrity" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Movie" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_Poster" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Basic_User" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MoviePosterAwardsModel.Step_Celeb_Movie" Width="1.5" PointX="3" PointY="3.375" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Celebrity" />
+        <AssociationConnector Association="MoviePosterAwardsModel.FK_Step_Celeb_Movie_Basic_Movie" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

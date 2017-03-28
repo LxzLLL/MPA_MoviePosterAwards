@@ -24,17 +24,15 @@ namespace MPA_MoviePosterAwards.Web.Models
         public int Season_Count { get; set; }
         public string Durations { get; set; }
         public string Website { get; set; }
-        public string Genres { get; set; }
-        public string Languages { get; set; }
-        public string Countries { get; set; }
+        public string Genre { get; set; }
+        public string Language { get; set; }
+        public string Country { get; set; }
         public string Rating { get; set; }
-        //public string RatingCount { get; set; }
         public string Douban { get; set; }
         public string IMDb { get; set; }
         public string Summary { get; set; }
         public string Avatar { get; set; }
-
-        //public List<string> Posters { get; set; }
+        public int PosterCount { get; set; }
 
         public MovieViewModel(Basic_Movie_Info movie)
         {
@@ -49,31 +47,12 @@ namespace MPA_MoviePosterAwards.Web.Models
             Episode_Count = movie.Episode_Count;
             Current_Season = movie.Current_Season;
             Season_Count = movie.Season_Count;
+            Genre = movie.Genre;
+            Country = movie.Country;
+            Language = movie.Language;
 
-            Genres = string.Empty;
-            foreach (var item in movie.Genres)
-            {
-                Genres += item.Genre + " / ";
-            }
-            Genres = Genres.Substring(0, Genres.Length - 2);
-
-            Languages = string.Empty;
-            foreach (var item in movie.Langs)
-            {
-                Languages += item.Lang + " / ";
-            }
-            Languages = Languages.Substring(0, Languages.Length - 2);
-
-            Countries = string.Empty;
-            foreach (var item in movie.Countries)
-            {
-                Countries += item.Country + " / ";
-            }
-            Countries = Countries.Substring(0, Countries.Length - 2);
-
-            Rating = movie.Rating.Score.ToString().Length == 1 ? movie.Rating.Score.ToString() + ".0" : movie.Rating.Score.ToString();
-            //RatingCount = movie.Rating.Rated_Num.ToString();
-            Avatar = !movie.Poster.Large.IsBlank() ? movie.Poster.Large : !movie.Poster.Medium.IsBlank() ? movie.Poster.Medium : !movie.Poster.Small.IsBlank() ? movie.Poster.Small : string.Empty;
+            Rating = movie.Rating_Score.ToString().Length == 1 ? movie.Rating_Score.ToString() + ".0" : movie.Rating_Score.ToString();
+            Avatar = !movie.Avatar_Large.IsBlank() ? movie.Avatar_Large : !movie.Avatar_Medium.IsBlank() ? movie.Avatar_Medium : !movie.Avatar_Small.IsBlank() ? movie.Avatar_Small : string.Empty;
             Summary = movie.Summary.IsBlank() ? string.Empty : movie.Summary;
             Douban = movie.Douban.IsBlank() ? string.Empty : movie.Douban;
             IMDb = movie.IMDb.IsBlank() ? string.Empty : movie.IMDb;
@@ -99,6 +78,7 @@ namespace MPA_MoviePosterAwards.Web.Models
                 Casts.Add(new LinkItem() { Url = "/Celeb/Index?id=" + item.Id, Title = item.Name });
             }
 
+            PosterCount = Basic_Poster_BLL.GetList(Guid.Parse(Id)).Count;
             //Posters = new List<string>();
             //var posters = Basic_Poster_BLL.GetList(Guid.Parse(Id));
             //foreach (var item in posters)

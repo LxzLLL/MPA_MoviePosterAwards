@@ -29,15 +29,13 @@ namespace MPA_MoviePosterAwards.Common
                 req.Method = "GET";
                 SetHeaderValue(req.Headers, "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                 SetHeaderValue(req.Headers, "Accept-Language", "zh-CN,zh;q=0.8");
-                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=hrf76zZ0qZY; ps=y; ct=y; ap=1; ue=\"390266249@qq.com\"; dbcl2=\"63063997:jl / SIxJurKY\"; ck=Bmj6; push_noty_num=0; push_doumail_num=0; __utma=30149280.1685418604.1480697741.1481436383.1481438476.30; __utmb=30149280.0.10.1481438476; __utmc=30149280; __utmz=30149280.1480746573.4.2.utmcsr=subhd.com|utmccn=(referral)|utmcmd=referral|utmcct=/a/328513; __utmv=30149280.6306; __utma=223695111.1104703353.1481436506.1481436506.1481438476.2; __utmb=223695111.0.10.1481438476; __utmc=223695111; __utmz=223695111.1481436506.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _pk_id.100001.4cf6=46c660172a6d11a7.1481436505.2.1481438478.1481436505.; _pk_ses.100001.4cf6=*; _vwo_uuid_v2=893DB0C4FED41ADA954E3859037B57F8|aeb1a7d0e2a6165da60b078d0dd2e3f4");
+                SetHeaderValue(req.Headers, "Cookie:", "ll=\"118318\"; bid=TSiEsQchHUg; ct=y; ps=y; ue=\"390266249@qq.com\"; dbcl2=\"63063997:owWyc7DpvBQ\"; ap=1; ck=BUfv; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1490621541%2C%22https%3A%2F%2Fwww.douban.com%2Fmisc%2Fsorry%3Foriginal-url%3Dhttps%253A%252F%252Fmovie.douban.com%252F%22%5D; _pk_id.100001.4cf6=c14bd24a056ce7d7.1490613648.3.1490624954.1490616919.; _pk_ses.100001.4cf6=*; __utma=30149280.1569080576.1489412160.1490616756.1490621541.69; __utmb=30149280.0.10.1490621541; __utmc=30149280; __utmz=30149280.1490376199.55.6.utmcsr=douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/group/topic/23218805/; __utmv=30149280.6306; __utma=223695111.895826094.1490613648.1490616756.1490621541.3; __utmb=223695111.0.10.1490621541; __utmc=223695111; __utmz=223695111.1490613648.1.1.utmcsr=douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/misc/sorry; push_noty_num=0; push_doumail_num=0; _vwo_uuid_v2=B616606DF0403988AB6EA86550AC94B3|fafff5cfcd82a35b68e7d14e86e12838");
                 SetHeaderValue(req.Headers, "Host", "movie.douban.com");
                 SetHeaderValue(req.Headers, "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                 if (resp.StatusCode != HttpStatusCode.OK)
                     GetHtmlCode(url);
                 StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8);
-                //System.Diagnostics.Debug.WriteLine(System.Web.HttpUtility.HtmlDecode("&#39;&#34;&quot;"));
-                //string fullhtml = sr.ReadToEnd().Replace("&#39;", "'").Replace("&#34;", "\"").Replace("&quot;", "\"").Replace("&lt;", "<").Replace("&gt;", ">").Trim();
                 string fullhtml = System.Web.HttpUtility.HtmlDecode(sr.ReadToEnd());
                 resp.Close();
                 sr.Close();
@@ -65,6 +63,10 @@ namespace MPA_MoviePosterAwards.Common
                     Console.WriteLine(url + "获取源码失败");
                     return string.Empty;
                 }
+            }
+            finally
+            {
+                System.Threading.Thread.Sleep(1200);
             }
         }
     }

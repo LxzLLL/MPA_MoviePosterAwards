@@ -4,10 +4,42 @@
 @{
     ViewBag.Title = Model.Title;
 }
-<link href="~/Content/ms-waterfall.css" rel="stylesheet" />
-<script src="~/Content/ms-waterfall.js"></script>
 
-<div style="height: 360px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
+<style>
+    .ms-movie-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(../../Resources/Pictures/9531d480c27f04d916d70201f5b59dac.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+
+    .ms-movie-content {
+        position: relative;
+        height: 100%;
+        clear: both;
+        color: #FFFFFF;
+        /*子元素垂直居中*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .ms-movie-content a {
+            color: #FF3300;
+            transition: 0.2s all ease;
+        }
+
+            .ms-movie-content a:hover {
+                color: #F1F1F1;
+                background-color: #FF3300;
+            }
+</style>
+
+<div style="height: 436px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
     <div class="ms-movie-background" style="background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(@Model.Avatar);"></div>
     <div class="ms-container ms-movie-content">
         <div>
@@ -69,25 +101,25 @@
                             </td>
                         </tr>
                     }
-                    @if (!Model.Genres.IsBlank())
+                    @if (!Model.Genre.IsBlank())
                     {
                         <tr>
                             <td style="text-align:right; padding-right:1em;">类型:</td>
-                            <td>@Model.Genres</td>
+                            <td>@Model.Genre</td>
                         </tr>
                     }
-                    @if (!Model.Countries.IsBlank())
+                    @if (!Model.Country.IsBlank())
                     {
                         <tr>
                             <td style="text-align:right; padding-right:1em;">制片国家/地区:</td>
-                            <td>@Model.Countries</td>
+                            <td>@Model.Country</td>
                         </tr>
                     }
-                    @if (!Model.Languages.IsBlank())
+                    @if (!Model.Language.IsBlank())
                     {
                         <tr>
                             <td style="text-align:right; padding-right:1em;">语言:</td>
-                            <td>@Model.Languages</td>
+                            <td>@Model.Language</td>
                         </tr>
                     }
                     @if (!Model.Pubdates.IsBlank())
@@ -129,54 +161,106 @@
 </div>
 
 <style>
-    .ms-movie-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(../../Resources/Pictures/9531d480c27f04d916d70201f5b59dac.jpg);
-        background-position: center;
-        background-size: cover;
-    }
-
-    .ms-movie-content {
-        position: relative;
-        height: 100%;
+    .ms-waterfall {
+        padding: 0;
+        margin: 0 -10px;
+        /*float: left;*/
+        overflow: hidden;
         clear: both;
-        color: #FFFFFF;
-        /*子元素垂直居中*/
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
-        .ms-movie-content a {
-            color: #FF3300;
-            transition: 0.2s all ease;
+        .ms-waterfall .ms-waterfall-item {
+            padding: 0;
+            height: auto;
+            display: inline-block;
+            margin: 0;
+            float: left;
+            height: 375px;
+            width: 256.6666666666667px;
+            padding: 10px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            /*background-color: aqua;*/
         }
 
-            .ms-movie-content a:hover {
-                color: #F1F1F1;
-                background-color: #FF3300;
+            .ms-waterfall .ms-waterfall-item > a {
+                height: 355px;
+                width: 236.6666666666667px;
+                overflow: hidden;
+                transition: inherit;
+                display: block;
+                background-size: cover;
+                background-position: center;
             }
-</style>
 
-<div class="ms-container" style="background-color: #DDDDDD; padding:15px 0 0 0; min-height:720px;">
+                .ms-waterfall .ms-waterfall-item > a:hover {
+                    box-shadow: 0 5px 10px #000000;
+                    transform: translateY(-10px);
+                }
+
+    @@media (min-width:767px) {
+        .ms-waterfall .ms-waterfall-item {
+            height: 256.6666666666667px;
+            width: 256.6666666666667px;
+        }
+
+            .ms-waterfall .ms-waterfall-item > a {
+                height: 236.6666666666667px;
+                width: 236.6666666666667px;
+            }
+    }
+
+    @@media (min-width:995px) {
+        .ms-waterfall .ms-waterfall-item {
+            height: 247.5px;
+            width: 247.5px;
+        }
+
+            .ms-waterfall .ms-waterfall-item > a {
+                height: 227.5px;
+                width: 227.5px;
+            }
+    }
+
+    @@media (min-width:1199px) {
+        .ms-waterfall .ms-waterfall-item {
+            height: 285px;
+            width: 285px;
+        }
+
+            .ms-waterfall .ms-waterfall-item > a {
+                height: 265px;
+                width: 265px;
+            }
+    }
+
+    @@media (min-width:1439px) {
+        .ms-waterfall .ms-waterfall-item {
+            height: 260px;
+            width: 260px;
+        }
+
+            .ms-waterfall .ms-waterfall-item > a {
+                height: 240px;
+                width: 240px;
+            }
+    }
+</style>
+<div class="ms-container" style="padding:0; margin:0 auto; min-height:720px;">
+    <div style="margin:20px 0; font-size:2em;">@Model.Title 的海报 (共 @Model.PosterCount 张)</div>
     <div class="ms-waterfall">
-        <div class="ms-waterfall-column column-1"></div>
-        <div class="ms-waterfall-column column-2"></div>
-        <div class="ms-waterfall-column column-3"></div>
-        <div class="ms-waterfall-column column-4"></div>
-        <div class="ms-waterfall-column column-5"></div>
-        <div class="ms-waterfall-column column-6"></div>
+        @*<div class="ms-waterfall-item">
+                <a>
+                    <img src="~/Resources/Poster/Hacksaw_Ridge_1_4baa193f96804f9bb872d346be5e69e8.jpg" />
+                    <hi>ssss</hi>
+                </a>
+            </div>*@
     </div>
 </div>
 
 <script>
+    var posterData;
     $(document).ready(function () {
-        $('.ms-waterfall').msWaterfall('init');
-
         $.ajax({
             cache: true,
             type: "POST",
@@ -190,16 +274,8 @@
             success: function (data) {
                 console.log("success");
 
-                var waterfallpics = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    waterfallpics.push({
-                        url: '../../Resources/Poster_M/' + data[i].url,
-                        title: data[i].title,
-                        id: data[i].id
-                    });
-                }
-                if (waterfallpics.length > 0)
-                    $('.ms-waterfall').msWaterfall('appendlist', waterfallpics);
+                posterData = data;
+                refreshPoster();
             },
             complete: function (data) {
                 console.log("complete");
@@ -209,4 +285,10 @@
 
     });
 
+    function refreshPoster() {
+        console.log($('.ms-waterfall').width());
+        for (var i = 0; i < posterData.length; i++) {
+            $('.ms-waterfall').append('<div class="ms-waterfall-item"><a href="/Poster/Index?id=' + posterData[i].id + '" title="' + posterData[i].title + '" style="background-image:url(\'../../Resources/Poster_M/' + posterData[i].url+'\');"></a></div>');
+        }
+    }
 </script>

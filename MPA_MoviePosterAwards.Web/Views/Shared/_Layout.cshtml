@@ -21,40 +21,15 @@
                 <li class="nav-home">@Html.ActionLink("首页", "Index", "Home")</li>
                 <li class="nav-movie">@Html.ActionLink("电影", "List", "Movie")</li>
                 <li class="nav-celeb">@Html.ActionLink("影人", "List", "Celeb")</li>
-                <li class="nav-about">@Html.ActionLink("关于", "About", "Home")</li>
-                <li class="nav-contact">@Html.ActionLink("联系方式", "Contact", "Home")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                        <li>@Html.ActionLink("电影", "List", "Movie")</li>
-                        <li>@Html.ActionLink("影人", "List", "Celeb")</li>
-                        <li>@Html.ActionLink("关于", "About", "Home")</li>
-                        <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                        <li class="divider" role="separator"></li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>*@
+
     @RenderBody()
 
     <style>
         .ms-footer-sub {
-            /*margin-top: 20px;*/
             background-color: #252525;
             height: 20px;
             line-height: 20px;
@@ -66,6 +41,10 @@
             color: #FDFDFD;
             text-align: center;
             overflow: hidden;
+        }
+
+        footer {
+            clear: both;
         }
     </style>
     <footer>

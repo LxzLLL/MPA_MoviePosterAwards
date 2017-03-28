@@ -93,78 +93,6 @@ namespace MPA_MoviePosterAwards.DAL
             }
         }
 
-        //public bool Update(Guid id, Dictionary<string, object> changes)
-        //{
-        //    using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
-        //    {
-        //        try
-        //        {
-        //            var celeb = database.Basic_Celebrity.FirstOrDefault(p => p.Id == id);
-
-        //            foreach (var item in changes)
-        //            {
-        //                switch (item.Key)
-        //                {
-        //                    case "name":
-        //                        celeb.Name = (string)item.Value;
-        //                        break;
-        //                    case "nameen":
-        //                        celeb.Name_En = (string)item.Value;
-        //                        break;
-        //                    case "aka":
-        //                        celeb.Aka = (string)item.Value;
-        //                        break;
-        //                    case "akaen":
-        //                        celeb.Aka_En = (string)item.Value;
-        //                        break;
-        //                    case "gender":
-        //                        celeb.Gender = (bool)item.Value;
-        //                        break;
-        //                    case "profession":
-        //                        celeb.Profession = (string)item.Value;
-        //                        break;
-        //                    case "birthdate":
-        //                        celeb.Birth_Date = (string)item.Value;
-        //                        break;
-        //                    case "deathdate":
-        //                        celeb.Death_Date = (string)item.Value;
-        //                        break;
-        //                    case "bornplace":
-        //                        celeb.Profession = (string)item.Value;
-        //                        break;
-        //                    case "family":
-        //                        celeb.Family = (string)item.Value;
-        //                        break;
-        //                    case "douban":
-        //                        celeb.Douban = (string)item.Value;
-        //                        break;
-        //                    case "imdb":
-        //                        celeb.IMDb = (string)item.Value;
-        //                        break;
-        //                    case "summary":
-        //                        celeb.Summary = (string)item.Value;
-        //                        break;
-        //                    case "altertime":
-        //                        celeb.Alter_Time = (DateTime)item.Value;
-        //                        break;
-        //                    case "avatar":
-        //                        celeb.Step_Celeb_Avatar.FirstOrDefault().Large = ((Step_Celeb_Avatar_Info)item.Value).Large;
-        //                        celeb.Step_Celeb_Avatar.FirstOrDefault().Small = ((Step_Celeb_Avatar_Info)item.Value).Small;
-        //                        celeb.Step_Celeb_Avatar.FirstOrDefault().Medium = ((Step_Celeb_Avatar_Info)item.Value).Medium;
-        //                        break;
-        //                    default: break;
-        //                }
-        //            }
-        //            database.SaveChanges();
-        //            return true;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //}
-
         public bool Delete(Guid id)
         {
             using (MoviePosterAwardsEntities database = new MoviePosterAwardsEntities())
@@ -172,9 +100,6 @@ namespace MPA_MoviePosterAwards.DAL
                 try
                 {
                     Basic_Celebrity celeb = database.Basic_Celebrity.FirstOrDefault(p => p.Id == id);
-                    Step_Celeb_Avatar avatar = database.Step_Celeb_Avatar.FirstOrDefault(p => p.Celeb == id);
-                    database.Basic_Celebrity.Remove(celeb);
-                    database.Step_Celeb_Avatar.Remove(avatar);
                     database.SaveChanges();
                     return true;
                 }
@@ -204,7 +129,9 @@ namespace MPA_MoviePosterAwards.DAL
             info.Douban = celeb.Douban;
             info.IMDb = celeb.IMDb;
             info.Summary = celeb.Summary;
-            info.Avatar = Step_Celeb_Avatar_DAL.ToModel(celeb.Step_Celeb_Avatar.FirstOrDefault());
+            info.Avatar_Large = celeb.Avatar_Large;
+            info.Avatar_Medium = celeb.Avatar_Medium;
+            info.Avatar_Small = celeb.Avatar_Small;
 
             return info;
         }
@@ -227,17 +154,9 @@ namespace MPA_MoviePosterAwards.DAL
             celeb.Douban = info.Douban;
             celeb.IMDb = info.IMDb;
             celeb.Summary = info.Summary;
-
-            List<Step_Celeb_Avatar> avatar = new List<Step_Celeb_Avatar>();
-            avatar.Add(new Step_Celeb_Avatar()
-            {
-                Id = info.Avatar.Id,
-                Celeb = info.Avatar.Celeb,
-                Large = info.Avatar.Large,
-                Medium = info.Avatar.Medium,
-                Small = info.Avatar.Small
-            });
-            celeb.Step_Celeb_Avatar = avatar;
+            celeb.Avatar_Large = info.Avatar_Large;
+            celeb.Avatar_Medium = info.Avatar_Medium;
+            celeb.Avatar_Small = info.Avatar_Small;
 
             return celeb;
         }

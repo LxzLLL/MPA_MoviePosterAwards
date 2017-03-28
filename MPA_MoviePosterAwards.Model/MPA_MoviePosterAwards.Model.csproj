@@ -45,13 +45,7 @@
     <Compile Include="Basic_Poster_Info.cs" />
     <Compile Include="Basic_User_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Step_Celeb_Avatar_Info.cs" />
     <Compile Include="Step_Celeb_Movie_Info.cs" />
-    <Compile Include="Step_Movie_Country_Info.cs" />
-    <Compile Include="Step_Movie_Genre_Info.cs" />
-    <Compile Include="Step_Movie_Lang_Info.cs" />
-    <Compile Include="Step_Movie_Poster_Info.cs" />
-    <Compile Include="Step_Movie_Rating_Info.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

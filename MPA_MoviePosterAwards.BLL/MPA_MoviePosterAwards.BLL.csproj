@@ -64,6 +64,8 @@
     <Compile Include="Basic_Movie_BLL.cs" />
     <Compile Include="Basic_Poster_BLL.cs" />
     <Compile Include="Basic_User_BLL.cs" />
+    <Compile Include="CelebManager.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="MovieManager.cs" />
     <Compile Include="PosterManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

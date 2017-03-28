@@ -41,7 +41,7 @@ namespace MPA_MoviePosterAwards.Web.Models
             Douban = celeb.Douban;
             IMDb = celeb.IMDb;
             Summary = celeb.Summary;
-            Avatar = celeb.Avatar.Large;
+            Avatar = celeb.Avatar_Large;
         }
     }
 }

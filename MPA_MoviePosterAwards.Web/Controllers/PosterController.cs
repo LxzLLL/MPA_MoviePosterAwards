@@ -1,4 +1,5 @@
 ﻿using MPA_MoviePosterAwards.BLL;
+using MPA_MoviePosterAwards.Model;
 using MPA_MoviePosterAwards.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,20 @@ namespace MPA_MoviePosterAwards.Web.Controllers
                 Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 800), 800, poster_m);
                 Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 400), 400, poster_s);
                 Compress(bmpSrc, (int)((double)bmpSrc.Width / bmpSrc.Height * 200), 200, poster_xs);
-                PosterManager.Create(model.Movie, model.Poster, model.Poster_M, model.Poster_S, model.Poster_XS, bmpSrc.Height, bmpSrc.Width);
+                Basic_Poster_Info _basic_poster = new Basic_Poster_Info
+                {
+                    Id = Guid.NewGuid(),
+                    Movie = Guid.Parse(model.Movie),
+                    User = Guid.Parse(Common.CookieHelper.GetCookie("userid")),
+                    Poster = model.Poster,
+                    Poster_M = model.Poster_M,
+                    Poster_S = model.Poster_S,
+                    Poster_XS = model.Poster_XS,
+                    Height = bmpSrc.Height,
+                    Width = bmpSrc.Width,
+                    Time = DateTime.Now
+                };
+                Basic_Poster_BLL.Insert(_basic_poster);
             }
             else
             {
