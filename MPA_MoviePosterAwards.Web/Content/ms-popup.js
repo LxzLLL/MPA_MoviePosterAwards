@@ -1,9 +1,7 @@
 ﻿
 (function ($) {
 
-    var $popup,
-        $cover = $('.ms-popup-cover'),
-        $container = $('.ms-popup-contents');
+    var $popup;
 
     //弹出层居中
     $(document).ready(function () {
@@ -17,36 +15,40 @@
 
     var methods = {
         dockeyup:
-            // 按 Esc 键时关闭 popup
-            function onDocumentKeyUp(event) {
-                if (event.keyCode === 27) {
-                    methods.deactivate();
-                }
-            },
+        // 按 Esc 键时关闭 popup
+        function onDocumentKeyUp(event) {
+            if (event.keyCode === 27) {
+                methods.deactivate();
+            }
+        },
         docclick:
-            // 鼠标单击 popup 外区域时关闭 popup
-            function onDocumentClick(event) {
-                if ($(event.target).hasClass('ms-popup-cover')) {
-                    methods.deactivate();
-                }
-            },
+        // 鼠标单击 popup 外区域时关闭 popup
+        function onDocumentClick(event) {
+            if ($(event.target).hasClass('ms-popup-cover')) {
+                methods.deactivate();
+            }
+        },
         activate:
-            function activate() {
-                $(document).bind('keyup', methods.dockeyup);
-                $(document).bind('click', methods.docclick);
-                $container.addClass('active');
-                $cover.addClass('active');
-                $popup.addClass('active');
-            },
+        function activate() {
+            var $container = $('.ms-popup-contents'),
+                $cover = $('.ms-popup-cover');
+            $(document).bind('keyup', methods.dockeyup);
+            $(document).bind('click', methods.docclick);
+            $container.addClass('active');
+            $cover.addClass('active');
+            $popup.addClass('active');
+        },
         deactivate:
-            function deactivate() {
-                $(document).unbind('keyup', methods.dockeyup);
-                $(document).unbind('click', methods.docclick);
+        function deactivate() {
+            var $container = $('.ms-popup-contents'),
+                $cover = $('.ms-popup-cover');
+            $(document).unbind('keyup', methods.dockeyup);
+            $(document).unbind('click', methods.docclick);
 
-                $container.removeClass('active');
-                $cover.removeClass('active');
-                $popup.removeClass('active');
-            },
+            $container.removeClass('active');
+            $cover.removeClass('active');
+            $popup.removeClass('active');
+        },
         show: function () {
             $popup = this;
             methods.activate($(this));

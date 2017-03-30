@@ -1,0 +1,27 @@
+﻿@model MPA_MoviePosterAwards.Web.Models.PopupViewModel
+
+<link href="~/Content/ms-popup.css" rel="stylesheet" />
+<div class="ms-popup-body" style="height: @Model.Height; width: @Model.Width; padding:0; overflow: hidden; font-size: 16px; font-family: Helvetica Neue,Helvetica,Arial,Hiragino Sans GB,STHeiti,Microsoft YaHei,Wenquanyi Micro Hei,sans-serif; color: #FFFFFF;">
+    <div style="display:block; background-color:#FF3300; height:40px;">
+        <span style="padding:10px 0px 10px 20px; font-weight:bold; font-size:20px; line-height:20px; display:inline-block;">@Model.Title</span>
+        <button class="ms-popup-close" onclick="closeDialog();"><i class="fa fa-close"></i></button>
+    </div>
+    <iframe id="uploadFrame" src="@Model.Url"></iframe>
+</div>
+<div class="ms-popup-cover"></div>
+<script src="~/Content/ms-popup.js"></script>
+<script type="text/javascript">
+    function openDialog() {
+        $('.ms-popup-body').msPopup('show');
+        $('.ms-popup-body iframe').attr('src', $('.ms-popup-body iframe').attr('src'));
+    }
+    function closeDialog() {
+        $('.ms-popup-body').msPopup('hide');
+    }
+    $(document).ready(function () {
+        $('nav').addClass('ms-popup-contents');
+        $('footer').addClass('ms-popup-contents');
+        $('.ms-popup-body iframe').width($('.ms-popup-body')[0].clientWidth);
+        $('.ms-popup-body iframe').height($('.ms-popup-body')[0].clientHeight - 40);
+    });
+</script>

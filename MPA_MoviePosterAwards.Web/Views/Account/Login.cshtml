@@ -34,9 +34,11 @@
             z-index: -1;
             -webkit-filter: blur(2px);
             filter: blur(2px);
-            background: url('../../Content/imgs/back竖直.jpg');
-            background-position: center;
-            background-size: cover;
+            /*background: url('../../Content/imgs/back竖直.jpg');*/
+            background: url('../../Content/Images/Curtain.png');
+            /*background: url('https://img1.doubanio.com/view/movie_poster_cover/lpst/public/p2436030518.webp');*/
+            /*background-position: center;*/
+            /*background-size: contain;*/
             transition: all 0.15s ease-in-out;
             animation: signinback 30s ease-in-out;
         }
@@ -83,7 +85,8 @@
             top: 0;
             height: 400px;
             width: 267px;
-            background-image: url('../../Content/imgs/p2363503306.jpg');
+            border-right: 1px solid #223344;
+            background-image: url('../../Content/Images/Subjects/p1425458092.jpg');
             background-position: center;
             background-size: cover;
         }
@@ -131,6 +134,7 @@
         .ms-signin-title {
             height: 70px;
             border-bottom: 1px solid #223344;
+            border-left: 1px solid #223344;
             padding: 20px;
             background-color: rgba(255,255,255,0.5);
         }
@@ -321,6 +325,18 @@
                 else
                     $('.ms-signin-back').css('top', ($bodyheight - $height) + 'px');
 
+            });
+        });
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Account/GetRandomImage',
+                type: 'get',
+                success: function (data) {
+                    console.log(data)
+                    $('.ms-signin-lines').css('background-image', 'url(\'../../Content/Images/Subjects/' + data + '\')');
+                    console.log($('.ms-signin-lines').css('background-image'));
+                }
             });
         });
     </script>

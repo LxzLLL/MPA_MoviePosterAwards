@@ -51,6 +51,10 @@
         transform: scale(1.0);
     }
 
+    .ms-popup-body iframe {
+        border: none;
+    }
+
 /*所有变化加上过渡效果*/
 .ms-popup-contents,
 .ms-popup-body,
@@ -58,3 +62,21 @@
     transform-origin: 50% 50%;
     transition: 0.2s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
+
+
+.ms-popup-close {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 20px;
+    background-color: transparent;
+    border: none;
+    transition: all 0.6666666667s ease;
+    float: right;
+}
+
+    .ms-popup-close:hover {
+        transform: rotate(720deg);
+        background-color: transparent;
+        border: none;
+    }

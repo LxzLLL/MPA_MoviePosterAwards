@@ -1,4 +1,5 @@
 ﻿@using MPA_MoviePosterAwards.Common
+@using MPA_MoviePosterAwards.Web.Models
 @model MPA_MoviePosterAwards.Web.Models.MovieViewModel
 
 @{
@@ -39,7 +40,7 @@
             }
 </style>
 
-<div style="height: 436px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
+<div class="ms-popup-contents" style="height: 436px; width: 100%; background-color: #EEEEEE; overflow: hidden; position: relative;">
     <div class="ms-movie-background" style="background: linear-gradient(90deg,rgba(0,0,0,0), rgba(0,0,0,0.5) 33.3%,rgba(33,33,33,1.0) 66.67%,rgba(33,33,33,1.0) 100%), url(@Model.Avatar);"></div>
     <div class="ms-container ms-movie-content">
         <div>
@@ -155,9 +156,10 @@
                 </tbody>
             </table>
         </div>
-
+        <div style="display:inline;">
+            <button class="ms-button" onclick="openDialog();" type="button">Open Avgrund</button>
+        </div>
     </div>
-
 </div>
 
 <style>
@@ -246,7 +248,7 @@
             }
     }
 </style>
-<div class="ms-container" style="padding:0; margin:0 auto; min-height:720px;">
+<div class="ms-container ms-popup-contents" style="padding:0; margin:0 auto; min-height:720px;">
     <div style="margin:20px 0; font-size:2em;">@Model.Title 的海报 (共 @Model.PosterCount 张)</div>
     <div class="ms-waterfall">
         @*<div class="ms-waterfall-item">
@@ -292,3 +294,5 @@
         }
     }
 </script>
+
+@Html.Partial("Popup", new PopupViewModel { Width = "720px", Height = "480px", Title = "新增海报", Url = "/Poster/Create?movie=" + Model.Id })

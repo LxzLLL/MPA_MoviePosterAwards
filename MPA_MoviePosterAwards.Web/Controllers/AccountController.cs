@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MPA_MoviePosterAwards.Web.Filters;
+using System.IO;
 
 namespace MPA_MoviePosterAwards.Web.Controllers
 {
@@ -161,7 +162,6 @@ namespace MPA_MoviePosterAwards.Web.Controllers
         }
         #endregion
 
-
         #region 忘记密码
         //
         // GET: Account/ForgotPwd/
@@ -243,6 +243,22 @@ namespace MPA_MoviePosterAwards.Web.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Account/GetRandomImage/
+        [HttpGet]
+        [AllowAnonymous]
+        public string GetRandomImage()
+        {
+            string picUrl = string.Empty;
+
+            DirectoryInfo dirFolder = new DirectoryInfo(Server.MapPath("../Content/Images/Subjects"));
+            var files = dirFolder.GetFiles();
+            int index = new Random(Guid.NewGuid().ToByteArray().GetHashCode()).Next() % files.Length;
+            //var fileinfo = files[index];
+            picUrl = files[index].Name;
+
+            return picUrl;
         }
         #endregion
     }

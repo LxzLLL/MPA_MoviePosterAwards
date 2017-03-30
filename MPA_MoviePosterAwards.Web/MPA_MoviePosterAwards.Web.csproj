@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CelebViewModel.cs" />
+    <Compile Include="Models\CommonViewModel.cs" />
     <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Models\PosterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -179,9 +180,42 @@
     <Content Include="Content\Common.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\imgs\6045e9965505b85837ddcd619833f7faeb88e9e8101dfa.jpg" />
-    <Content Include="Content\imgs\back竖直.jpg" />
-    <Content Include="Content\imgs\p2363503306.jpg" />
+    <Content Include="Content\Images\6045e9965505b85837ddcd619833f7faeb88e9e8101dfa.jpg" />
+    <Content Include="Content\Images\Curtain.png" />
+    <Content Include="Content\Images\Curtain.psd" />
+    <Content Include="Content\Images\Subjects\p1341276735.jpg" />
+    <Content Include="Content\Images\Subjects\p1425458092.jpg" />
+    <Content Include="Content\Images\Subjects\p1755446834.jpg" />
+    <Content Include="Content\Images\Subjects\p1755867083.jpg" />
+    <Content Include="Content\Images\Subjects\p1784592701.jpg" />
+    <Content Include="Content\Images\Subjects\p1820782724.jpg" />
+    <Content Include="Content\Images\Subjects\p2077963022.jpg" />
+    <Content Include="Content\Images\Subjects\p2154180997.jpg" />
+    <Content Include="Content\Images\Subjects\p2160254162.jpg" />
+    <Content Include="Content\Images\Subjects\p2166160837.jpg" />
+    <Content Include="Content\Images\Subjects\p2167964789.jpg" />
+    <Content Include="Content\Images\Subjects\p2178872593.jpg" />
+    <Content Include="Content\Images\Subjects\p2187391526.jpg" />
+    <Content Include="Content\Images\Subjects\p2189835254.jpg" />
+    <Content Include="Content\Images\Subjects\p2203481530.jpg" />
+    <Content Include="Content\Images\Subjects\p2203838902.jpg" />
+    <Content Include="Content\Images\Subjects\p2210832820.jpg" />
+    <Content Include="Content\Images\Subjects\p2211264233.jpg" />
+    <Content Include="Content\Images\Subjects\p2220776342.jpg" />
+    <Content Include="Content\Images\Subjects\p2236181653.jpg" />
+    <Content Include="Content\Images\Subjects\p2255040492.jpg" />
+    <Content Include="Content\Images\Subjects\p2259715855.jpg" />
+    <Content Include="Content\Images\Subjects\p2263822658.jpg" />
+    <Content Include="Content\Images\Subjects\p2264778990.jpg" />
+    <Content Include="Content\Images\Subjects\p2363503306.jpg" />
+    <Content Include="Content\Images\Subjects\p2373594741.jpg" />
+    <Content Include="Content\Images\Subjects\p2395520389.jpg" />
+    <Content Include="Content\Images\Subjects\p2421855655.jpg" />
+    <Content Include="Content\Images\Subjects\p2430004473.jpg" />
+    <Content Include="Content\Images\Subjects\p2450663953.jpg" />
+    <Content Include="Content\Images\Subjects\p513344864.jpg" />
+    <Content Include="Content\Images\Subjects\p768879237.jpg" />
+    <Content Include="Content\Images\Subjects\p771684494.jpg" />
     <Content Include="Content\jquery.js" />
     <Content Include="Content\js-plugin.js" />
     <Content Include="Content\ms-banner.css" />
@@ -267,6 +301,7 @@
     <Content Include="Views\Poster\Create.cshtml" />
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Account\ChangePwd.cshtml" />
+    <Content Include="Views\Shared\Popup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
